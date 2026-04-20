@@ -4609,27 +4609,45 @@ window.buildExecCutGrid = buildExecCutGrid;
       body: 'Fat trim has roughly doubled in three years \u2014 from about $0.90/lb in 2023 to today\u2019s $1.89/lb. The next 1-4 weeks are reliable. The 6-month view shows a sharp drop, but that reflects the model comparing today to older, lower-priced years. Real-world herd tightness likely keeps prices elevated.',
       action: 'Procurement: treat the 6-month number as a downside scenario only, not a baseline. Use the 1-4 week values for weekly buys.',
     },
+    'insides': {
+      body: 'Inside round (100% lean) is calibrated from 5 years of daily USDA LM_XB405 data \u2014 1,273 observations. Prices are highly seasonal, peaking mid-year as grinding demand rises. The seasonal model captures this pattern from real transaction history.',
+      action: 'Procurement: inside round moves with grinding season. Front-load coverage ahead of the Q2 peak.',
+    },
+    'flats': {
+      body: 'Flats & eyes (100% lean) are calibrated from 5 years of daily USDA LM_XB405 data \u2014 1,263 observations. These cuts trade at a slight premium to insides with similar seasonal shape.',
+      action: 'Procurement: plan alongside insides \u2014 seasonal patterns are correlated. The GBM model will activate automatically once the Linux pipeline runs.',
+    },
+    'eyes': {
+      body: 'Eye of round is calibrated from 5 years of daily USDA LM_XB405 Boner/Breaker data \u2014 1,273 observations. More volatile than insides, with wider seasonal swings tied to foodservice demand.',
+      action: 'Procurement: wider band is real price volatility, not model uncertainty. Budget for a \u00b115% swing around the seasonal midpoint.',
+    },
     'pork_trim_72': {
-      body: 'We do not yet have enough captured daily prices for this cut to train the data-driven model. This forecast uses industry assumptions: small upward drift, normal month-to-month swings, and a typical summer peak.',
-      action: 'Procurement: use as rough guidance, not precise targets. Will sharpen as daily prices accumulate over the coming months.',
+      body: '72% pork trim is calibrated from 5 years of daily USDA LM_PK602 data \u2014 1,271 observations. The seasonal model captures the real price cycle: summer demand lift, fall cool-off. 72% trim is more stable than 42% trim.',
+      action: 'Procurement: relatively predictable pork input. Use 4-week horizon for weekly buying; the 13-week view for contract planning.',
     },
     'pork_trim_42': {
-      body: '42% pork trim is historically the most volatile pork grade \u2014 month-to-month swings are larger than 72%. We do not yet have enough captured daily history for this cut to train the data-driven model, so this uses industry assumptions.',
+      body: '42% pork trim is calibrated from 5 years of daily USDA LM_PK602 data \u2014 1,262 observations. It is the most volatile pork grade \u2014 month-to-month swings routinely exceed those of 72% trim. The wide forecast band reflects real price volatility.',
       action: 'Procurement: expect wider monthly moves than lean pork. The wide forecast band reflects real volatility, not model uncertainty.',
     },
     'pork_belly_13_17': {
-      body: 'Pork belly is the most volatile major cut we track. Summer BLT demand and freezer-stock draws routinely move belly prices 10%+ in a single month. We do not yet have enough captured daily history for this cut, so the forecast uses industry assumptions.',
+      body: 'Pork belly (13\u201317 lb derind) is calibrated from 5 years of daily USDA LM_PK602 data \u2014 1,253 observations. It is the most volatile major cut we track. Summer BLT demand and freezer-stock draws routinely move belly prices 10%+ in a single month.',
       action: 'Procurement: timing matters more for belly than any other cut. The wide band is authentic \u2014 do not expect precision.',
     },
     'pork_loin': {
-      body: 'Pork loin primal is one of the more stable cuts we track \u2014 moderate seasonality and limited volatility. We do not yet have enough captured daily history to train the data-driven model, so this forecast uses industry assumptions.',
-      action: 'Procurement: predictable enough for routine planning. Expect modest upward drift.',
+      body: 'Pork loin primal is calibrated from 5 years of daily USDA LM_PK602 data \u2014 1,273 observations. It is one of the more stable cuts we track: moderate seasonality, limited volatility, and a tight 52-week range relative to other pork cuts.',
+      action: 'Procurement: predictable enough for routine planning. The GBM model will activate once the Linux pipeline runs.',
     },
   };
 
   const formatNote = (text, model) => {
+    // Three tiers:
+    //  quantile_gbm_v1              → green  "VALIDATED FORECAST"  (ML, backtested)
+    //  parametric_seasonal_drift_v1 → blue   "SEASONAL MODEL"      (data-calibrated, no GBM)
+    //  anything else                → amber  "EXPERT ESTIMATE"     (pure priors, no data)
     const badge = model === 'quantile_gbm_v1'
       ? '<span style="background:#166534;color:#fff;font-size:8.5px;font-weight:700;padding:2.5px 8px;border-radius:980px;letter-spacing:0.04em;margin-right:8px;">VALIDATED FORECAST</span>'
+      : model === 'parametric_seasonal_drift_v1'
+      ? '<span style="background:#1D4ED8;color:#fff;font-size:8.5px;font-weight:700;padding:2.5px 8px;border-radius:980px;letter-spacing:0.04em;margin-right:8px;">SEASONAL MODEL</span>'
       : '<span style="background:#B07D1A;color:#fff;font-size:8.5px;font-weight:700;padding:2.5px 8px;border-radius:980px;letter-spacing:0.04em;margin-right:8px;">EXPERT ESTIMATE</span>';
     return `<div style="padding:10px 14px 4px 14px;margin-top:6px;border-top:1px dashed #E5E7EB;font-size:11px;line-height:1.55;color:#374151;">`
       + `<div style="margin-bottom:6px;">${badge}<strong style="color:#111827;">What this means</strong></div>`

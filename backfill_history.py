@@ -81,20 +81,25 @@ REPORTS = {
     'LM_XB405': {
         'slug': '2455',
         'cuts': {
-            'insides':   [(r'100.*Lean.*Item|Lean Item', r'(100% lean inside|inside round)')],
-            'flats':     [(r'100.*Lean.*Item|Lean Item', r'(flats and eyes|flats & eyes)')],
-            'eyes':      [(r'Boner|Breaker|BONER', r'(eye of round|171C)')],
-            'lean_90':   [(r'100.*Lean.*Item|Lean Item', r'^90% lean$')],
-            'spb':       [(r'100.*Lean.*Item|Lean Item', r'(S\.P\.B|SPB)')],
+            # Section is "100% LEAN" (no "Item/Items" suffix) — use broad match
+            'insides':   [(r'100.*Lean|Lean Item|Items', r'(100% lean inside|inside round|inside)')],
+            'flats':     [(r'100.*Lean|Lean Item|Items', r'(flats and eyes|flats\s*&\s*eyes|flats)')],
+            'eyes':      [(r'Boner|Breaker|BONER',       r'(eye of round|171C)')],
+            'lean_90':   [(r'100.*Lean|Lean Item|Items', r'90%\s*lean')],
+            'spb':       [(r'100.*Lean|Lean Item|Items', r'(S\.P\.B|SPB)')],
         },
     },
     'LM_PK602': {
         'slug': '2498',
         'cuts': {
-            'pork_trim_72':     [(r'.*', r'72%\s*Trim\s*Combo|72%\s*Combo')],
-            'pork_trim_42':     [(r'.*', r'42%\s*Trim\s*Combo|42%\s*Combo')],
-            'pork_belly_13_17': [(r'Bell|Derind|.*', r'(Derind Belly 13-?17|Belly.*13-?17)')],
-            'pork_loin':        [(r'Primal|Cutout|.*',  r'^Loin$')],   # primal-cutout loin value
+            # Trim Cuts section: field is "Item_Description", price is "weighted_average"
+            'pork_trim_72':     [(r'Trim',  r'72%\s*Trim\s*Combo')],
+            'pork_trim_42':     [(r'Trim',  r'42%\s*Trim\s*Combo')],
+            # Belly Cuts section: same field names
+            'pork_belly_13_17': [(r'Bell',  r'Derind\s*Belly\s*13-?17#?')],
+            # "Cutout and Primal Values" is wide-format — price is in column 'pork_loin'
+            # 3-tuple (sec_re, None, col_name) triggers wide-column mode
+            'pork_loin':        [(r'Cutout and Primal', None, 'pork_loin')],
         },
     },
     'LM_XB403': {
@@ -218,11 +223,13 @@ def _discover_sections(key: str, slug: str, verbose: bool) -> list:
 
 
 def _section_matches_cut(section: str, patterns: list) -> list:
-    """Return list of item_desc_regex for patterns whose section_filter matches."""
+    """Return full pattern tuples whose section_filter matches this section.
+    Tuples are either (sec_re, item_re) or (sec_re, None, col_name) for wide-col mode.
+    """
     matched = []
-    for sec_re, item_re in patterns:
-        if re.search(sec_re, section, re.IGNORECASE):
-            matched.append(item_re)
+    for p in patterns:
+        if re.search(p[0], section, re.IGNORECASE):
+            matched.append(p)
     return matched
 
 
@@ -266,9 +273,9 @@ def backfill_report(key: str, report_code: str, cfg: dict, years: int, verbose: 
         # Which cuts might this section serve?
         relevant_cuts = {}
         for cut_key, patterns in cuts.items():
-            item_regexes = _section_matches_cut(section, patterns)
-            if item_regexes:
-                relevant_cuts[cut_key] = item_regexes
+            matched = _section_matches_cut(section, patterns)
+            if matched:
+                relevant_cuts[cut_key] = matched
         if not relevant_cuts:
             if verbose:
                 print(f'  (skip {section!r} — no cuts match)')
@@ -287,17 +294,43 @@ def backfill_report(key: str, report_code: str, cfg: dict, years: int, verbose: 
             dt = time.time() - t0
             print(f'    chunk {chunk_start.isoformat()}→{chunk_end.isoformat()}  {len(rows):>5} rows ({dt:.1f}s)')
 
+            # Separate wide-col cuts (3-tuple with None item_re) from regular cuts
+            wide_cuts = {k: v for k, v in relevant_cuts.items()
+                         if any(len(p) == 3 and p[1] is None for p in v)}
+            regular_cuts = {k: v for k, v in relevant_cuts.items() if k not in wide_cuts}
+
             matched_count = 0
             for row in rows:
-                item_desc = (row.get('item_desc') or '').strip()
+                # Field names differ by report: item_desc (XB*) vs Item_Description (PK*)
+                item_desc = (row.get('item_desc') or row.get('Item_Description') or '').strip()
                 iso = _parse_date(row.get('report_date', ''))
                 if not iso:
                     continue
-                wa = _to_float(row.get('price_range_avg')) or _to_float(row.get('weighted_avg'))
-                if wa is None or wa <= 0:
+
+                # ── Wide-column cuts (e.g. pork_loin from Cutout and Primal Values) ──
+                for cut_key, matched_pats in wide_cuts.items():
+                    for p in matched_pats:
+                        if len(p) == 3 and p[1] is None:
+                            col_val = _to_float(row.get(p[2]))
+                            if col_val and col_val > 0:
+                                collected[cut_key][iso] = {
+                                    'date': iso, 'price_cwt': col_val,
+                                    'range_low': None, 'range_high': None,
+                                    'trades': None, 'pounds': None,
+                                }
+                                matched_count += 1
+
+                # ── Regular item_desc cuts ──
+                # Price field differs: weighted_avg (XB*) vs weighted_average (PK*)
+                wa = (_to_float(row.get('price_range_avg'))
+                      or _to_float(row.get('weighted_avg'))
+                      or _to_float(row.get('weighted_average')))
+                if not item_desc or wa is None or wa <= 0:
                     continue
-                for cut_key, item_patterns in relevant_cuts.items():
-                    if _match_any(item_desc, item_patterns):
+                for cut_key, matched_pats in regular_cuts.items():
+                    item_regexes = [p[1] for p in matched_pats
+                                    if len(p) >= 2 and p[1] is not None]
+                    if _match_any(item_desc, item_regexes):
                         collected[cut_key][iso] = {
                             'date': iso,
                             'price_cwt': wa,
