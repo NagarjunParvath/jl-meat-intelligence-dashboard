@@ -9,6 +9,12 @@
   publish = "."
   command = "echo 'Static site — no build step required'"
 
+# ── Root redirect: / → dashboard ─────────────────────────────────────
+[[redirects]]
+  from   = "/"
+  to     = "/remixed-8840b12b"
+  status = 200
+
 # ── Cache control: force browser to always fetch fresh JSON ──────────
 [[headers]]
   for = "/data/latest.json"
