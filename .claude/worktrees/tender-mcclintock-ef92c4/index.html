@@ -1765,7 +1765,7 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
           USDA Daily Cutout Report — Beef &amp; Pork Key Cuts
         </div>
         <div style="font-size:10px;color:#9ca3c8;margin-top:3px;letter-spacing:.5px;">
-          LM_XB401 (85CL · 50CL) &nbsp;·&nbsp; LM_XB405 (Insides · Flats &amp; Eyes) &nbsp;·&nbsp; LM_PK602 (Ham Insides · Ham Knuckles · Ham Outsides) &nbsp;·&nbsp; Open/Close $/cwt &nbsp;·&nbsp; Daily Δ% &nbsp;·&nbsp; 52-Wk Range
+          LM_XB403 Boxed Beef &amp; LM_PK602 Pork &nbsp;·&nbsp; LM_XB401 Snack Processing Cuts (50/50, Insides, Flats, Eyes) &nbsp;·&nbsp; Open/Close $/cwt &nbsp;·&nbsp; Daily Δ% &nbsp;·&nbsp; Load Count &nbsp;·&nbsp; 52-Wk Range
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
@@ -1811,7 +1811,7 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
         <canvas id="cutoutTrendChart"></canvas>
       </div>
       <div style="font-size:9px;color:#9CA3AF;margin-top:8px;font-family:var(--mono);">
-        Unit: $/cwt · Beef cuts — left axis (solid) · Pork Ham cuts — right axis (dashed) · 12-week daily closing price
+        Unit: $/cwt · Beef cuts (solid lines) · Pork cuts (dashed lines) · Weekly closing price
       </div>
     </div>
 
@@ -1953,20 +1953,20 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
   </div>
 
   <div class="cut-summary-strip">
+    <div class="cut-summary-card c-red">
+      <div class="cut-summary-ttl">Bullish Cuts (Worst-Case ≥ +10%)</div>
+      <div class="cut-summary-val">5 of 8</div>
+      <div class="cut-summary-sub">85CL, 90CL, Chuck Roll, Strip Loin, Pork Belly</div>
+    </div>
     <div class="cut-summary-card c-green">
       <div class="cut-summary-ttl">Bearish Cuts (Best-Case ≤ −3%)</div>
-      <div class="cut-summary-val">7 of 7</div>
-      <div class="cut-summary-sub">All tracked cuts show lower prices as best-case scenario</div>
-    </div>
-    <div class="cut-summary-card c-red">
-      <div class="cut-summary-ttl">Rising Day-over-Day</div>
-      <div class="cut-summary-val">3 of 7</div>
-      <div class="cut-summary-sub">Ham Insides +7.2% · Ham Knuckles +10.2% · Ham Outsides +11.8%</div>
+      <div class="cut-summary-val">2 of 8</div>
+      <div class="cut-summary-sub">42% Pork ($0.71) · Pork Loin primal ($90.55) only softer spots</div>
     </div>
     <div class="cut-summary-card c-gold">
       <div class="cut-summary-ttl">Avg 6-Mo Base Drift</div>
-      <div class="cut-summary-val">−5.8%</div>
-      <div class="cut-summary-sub">Seasonal softening expected across beef &amp; pork hams</div>
+      <div class="cut-summary-val">+10.1%</div>
+      <div class="cut-summary-sub">Weighted by Jack Link's blend share</div>
     </div>
     <div class="cut-summary-card c-blue">
       <div class="cut-summary-ttl">Forecast Horizon</div>
@@ -1999,7 +1999,7 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
           <div class="cut-name">85CL Lean Ground Beef <span style="background:var(--red);color:#fff;font-size:8px;font-weight:700;padding:2px 8px;border-radius:980px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;">PRIMARY</span></div>
           <div class="cut-sub">Beef · Lean Trim · USDA AMS LM_XB401 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2451.pdf" target="_blank" rel="noopener" title="Open latest LM_XB401 report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$3.98</div><div class="cut-now-delta dn">▼ −$0.02/lb · −0.45%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$3.93</div><div class="cut-now-delta up">▲ Sharply higher · 22 trades</div></div>
       </div>
       <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_90CL"></canvas></div></div>
       <div class="cut-scen-row">
@@ -2015,7 +2015,7 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
           <div class="cut-name">50CL Fat Trim</div>
           <div class="cut-sub">Beef · Fat Trim · USDA AMS LM_XB401 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2451.pdf" target="_blank" rel="noopener" title="Open latest LM_XB401 report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$1.89</div><div class="cut-now-delta dn">▼ −$0.06/lb · −2.86%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$1.89</div><div class="cut-now-delta up">▲ Sharply higher · 10 trades</div></div>
       </div>
       <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_50CL"></canvas></div></div>
       <div class="cut-scen-row">
@@ -2025,83 +2025,115 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
       </div>
     </div>
 
-    <div class="cut-card" data-species="beef" data-type="trim">
+    <div class="cut-card" data-species="beef" data-type="primal">
       <div class="cut-card-hd">
         <div>
-          <div class="cut-name">Insides — 100VL Inside Round</div>
-          <div class="cut-sub">Beef · 100% Lean Trim · USDA AMS LM_XB405 · 5-Day Rolling <a href="https://www.ams.usda.gov/mnreports/ams_2455.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+          <div class="cut-name">Chuck Roll (2-Piece)</div>
+          <div class="cut-sub">Beef Chuck · Primal · USDA AMS LM_XB403 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2453.pdf" target="_blank" rel="noopener" title="Open latest LM_XB403 Boxed Beef Cutout report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$524.99/cwt</div><div class="cut-now-delta dn">▼ −$4.36/cwt · −0.82%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$352.40</div><div class="cut-now-delta up">▲ +1.0% WoW</div></div>
       </div>
-      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_INSIDES"></canvas></div></div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_CHUCK"></canvas></div></div>
       <div class="cut-scen-row">
-        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$482</div><div class="cut-scen-chg">−8.2%</div></div>
-        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$491</div><div class="cut-scen-chg">−6.6%</div></div>
-        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$515</div><div class="cut-scen-chg">−2.0%</div></div>
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$362</div><div class="cut-scen-chg">+2.7%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$384</div><div class="cut-scen-chg">+9.0%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$411</div><div class="cut-scen-chg">+16.6%</div></div>
       </div>
     </div>
 
-    <div class="cut-card" data-species="beef" data-type="trim">
+    <div class="cut-card" data-species="beef" data-type="primal">
       <div class="cut-card-hd">
         <div>
-          <div class="cut-name">Flats &amp; Eyes Combo — 100VL</div>
-          <div class="cut-sub">Beef · 100% Lean Trim · USDA AMS LM_XB405 · 5-Day Rolling <a href="https://www.ams.usda.gov/mnreports/ams_2455.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+          <div class="cut-name">Strip Loin (0x1)</div>
+          <div class="cut-sub">Beef Loin · Primal · USDA AMS LM_XB403 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2453.pdf" target="_blank" rel="noopener" title="Open latest LM_XB403 Boxed Beef Cutout report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$501.98/cwt</div><div class="cut-now-delta dn">▼ −$1.31/cwt · −0.26%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$938.10</div><div class="cut-now-delta dn">▼ −0.5% WoW</div></div>
       </div>
-      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_FLATS"></canvas></div></div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_STRIP"></canvas></div></div>
       <div class="cut-scen-row">
-        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$485</div><div class="cut-scen-chg">−3.3%</div></div>
-        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$499</div><div class="cut-scen-chg">−0.5%</div></div>
-        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$516</div><div class="cut-scen-chg">+2.7%</div></div>
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$962</div><div class="cut-scen-chg">+2.5%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$1,015</div><div class="cut-scen-chg">+8.2%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$1,078</div><div class="cut-scen-chg">+14.9%</div></div>
+      </div>
+    </div>
+
+    <div class="cut-card" data-species="beef" data-type="primal">
+      <div class="cut-card-hd">
+        <div>
+          <div class="cut-name">Ribeye (Bone-In)</div>
+          <div class="cut-sub">Beef Rib · Primal · USDA AMS LM_XB403 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2453.pdf" target="_blank" rel="noopener" title="Open latest LM_XB403 Boxed Beef Cutout report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+        </div>
+        <div class="cut-now"><div class="cut-now-val">$1,154.80</div><div class="cut-now-delta up">▲ +0.6% WoW</div></div>
+      </div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_RIB"></canvas></div></div>
+      <div class="cut-scen-row">
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$1,178</div><div class="cut-scen-chg">+2.0%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$1,232</div><div class="cut-scen-chg">+6.7%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$1,298</div><div class="cut-scen-chg">+12.4%</div></div>
+      </div>
+    </div>
+
+    <div class="cut-card" data-species="pork" data-type="trim">
+      <div class="cut-card-hd">
+        <div>
+          <div class="cut-name">72% Pork Trim <span style="background:#166534;color:#fff;font-size:8px;font-weight:700;padding:2px 8px;border-radius:980px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;">CONFIRMED</span></div>
+          <div class="cut-sub">Pork · 72% Trim Combo · LM_PK602 Apr 17, 2026 · 325,985 lbs <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" title="Open latest LM_PK602 National Daily Pork report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+        </div>
+        <div class="cut-now"><div class="cut-now-val">$1.02</div><div class="cut-now-delta up">$102.34/cwt · range $97–110</div></div>
+      </div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_PORK72"></canvas></div></div>
+      <div class="cut-scen-row">
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$1.00</div><div class="cut-scen-chg">−2.3%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$1.09</div><div class="cut-scen-chg">+6.8%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$1.18</div><div class="cut-scen-chg">+15.7%</div></div>
+      </div>
+    </div>
+
+    <div class="cut-card" data-species="pork" data-type="trim">
+      <div class="cut-card-hd">
+        <div>
+          <div class="cut-name">42% Pork Trim <span style="background:#166534;color:#fff;font-size:8px;font-weight:700;padding:2px 8px;border-radius:980px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;">CONFIRMED</span></div>
+          <div class="cut-sub">Pork · 42% Trim Combo · LM_PK602 Apr 17, 2026 · 429,388 lbs <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" title="Open latest LM_PK602 National Daily Pork report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+        </div>
+        <div class="cut-now"><div class="cut-now-val">$0.71</div><div class="cut-now-delta up">$71.41/cwt · range $66–98</div></div>
+      </div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_PORK42"></canvas></div></div>
+      <div class="cut-scen-row">
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$0.68</div><div class="cut-scen-chg">−4.2%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$0.76</div><div class="cut-scen-chg">+7.0%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$0.84</div><div class="cut-scen-chg">+18.3%</div></div>
       </div>
     </div>
 
     <div class="cut-card" data-species="pork" data-type="primal">
       <div class="cut-card-hd">
         <div>
-          <div class="cut-name">Pork Ham Insides</div>
-          <div class="cut-sub">Pork · Ham Inside · USDA AMS LM_PK602 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+          <div class="cut-name">Pork Belly (Derind 13-17#) <span style="background:#166534;color:#fff;font-size:8px;font-weight:700;padding:2px 8px;border-radius:980px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;">CONFIRMED</span></div>
+          <div class="cut-sub">Pork Belly · Derind 13-17# · LM_PK602 Apr 17, 2026 · 295,181 lbs <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" title="Open latest LM_PK602 National Daily Pork report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$145.40/cwt</div><div class="cut-now-delta up">▲ +$9.78/cwt · +7.21%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$170.70</div><div class="cut-now-delta up">/cwt · Belly primal $139.43</div></div>
       </div>
-      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_HAM_IN"></canvas></div></div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_BELLY"></canvas></div></div>
       <div class="cut-scen-row">
-        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$105</div><div class="cut-scen-chg">−27.5%</div></div>
-        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$125</div><div class="cut-scen-chg">−14.0%</div></div>
-        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$145</div><div class="cut-scen-chg">−0.4%</div></div>
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$168</div><div class="cut-scen-chg">−1.6%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$183</div><div class="cut-scen-chg">+7.2%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$198</div><div class="cut-scen-chg">+16.0%</div></div>
       </div>
     </div>
 
     <div class="cut-card" data-species="pork" data-type="primal">
       <div class="cut-card-hd">
         <div>
-          <div class="cut-name">Pork Ham Knuckles</div>
-          <div class="cut-sub">Pork · Ham Knuckle · USDA AMS LM_PK602 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
+          <div class="cut-name">Pork Loin (Primal Cutout) <span style="background:#166534;color:#fff;font-size:8px;font-weight:700;padding:2px 8px;border-radius:980px;margin-left:6px;vertical-align:middle;letter-spacing:0.05em;">CONFIRMED</span></div>
+          <div class="cut-sub">Pork Loin Primal · LM_PK602 Apr 17, 2026 · Bnls CC Strap-on wtd avg $126.58 <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" title="Open latest LM_PK602 National Daily Pork report (updated daily)" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
         </div>
-        <div class="cut-now"><div class="cut-now-val">$162.07/cwt</div><div class="cut-now-delta up">▲ +$14.96/cwt · +10.17%</div></div>
+        <div class="cut-now"><div class="cut-now-val">$90.55</div><div class="cut-now-delta up">▲ +$3.60 /cwt · Primal cutout</div></div>
       </div>
-      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_HAM_KNUCK"></canvas></div></div>
+      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_LOIN"></canvas></div></div>
       <div class="cut-scen-row">
-        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$117</div><div class="cut-scen-chg">−27.5%</div></div>
-        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$139</div><div class="cut-scen-chg">−13.9%</div></div>
-        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$161</div><div class="cut-scen-chg">−0.4%</div></div>
-      </div>
-    </div>
-
-    <div class="cut-card" data-species="pork" data-type="primal">
-      <div class="cut-card-hd">
-        <div>
-          <div class="cut-name">Pork Ham Outsides</div>
-          <div class="cut-sub">Pork · Ham Outside · USDA AMS LM_PK602 · National Daily <a href="https://www.ams.usda.gov/mnreports/ams_2498.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:3px;padding:1px 7px;margin-left:4px;background:rgba(0,113,227,0.08);border:1px solid rgba(0,113,227,0.25);border-radius:980px;font-size:8px;font-weight:600;color:#0071E3;text-decoration:none;font-family:var(--mono);letter-spacing:0;vertical-align:middle;">↗ latest</a></div>
-        </div>
-        <div class="cut-now"><div class="cut-now-val">$152.06/cwt</div><div class="cut-now-delta up">▲ +$16.04/cwt · +11.79%</div></div>
-      </div>
-      <div class="cut-body"><div class="cut-chart-wrap"><canvas id="fc_HAM_OUT"></canvas></div></div>
-      <div class="cut-scen-row">
-        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$110</div><div class="cut-scen-chg">−27.5%</div></div>
-        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$131</div><div class="cut-scen-chg">−14.0%</div></div>
-        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$151</div><div class="cut-scen-chg">−0.4%</div></div>
+        <div class="cut-scen best"><div class="cut-scen-lbl">Best</div><div class="cut-scen-val">$88</div><div class="cut-scen-chg">−2.8%</div></div>
+        <div class="cut-scen base"><div class="cut-scen-lbl">Base</div><div class="cut-scen-val">$97</div><div class="cut-scen-chg">+7.1%</div></div>
+        <div class="cut-scen worst"><div class="cut-scen-lbl">Worst</div><div class="cut-scen-val">$105</div><div class="cut-scen-chg">+15.9%</div></div>
       </div>
     </div>
 
@@ -3373,65 +3405,77 @@ charts.fc_50CL = buildCutChart('fc_50CL', {
   best:[1.85,1.82,1.80,1.78,1.76,1.75],
   worst:[1.95,2.02,2.08,2.13,2.16,2.18]
 });
-// Insides — 100VL Inside Round · LM_XB405 · anchor $524.99/cwt
-charts.fc_INSIDES = buildCutChart('fc_INSIDES', {
-  hist:[555,548,540,535,530,525],
-  base:[502,507,513,505,498,491],
-  best:[495,492,489,487,484,482],
-  worst:[521,520,519,517,516,515]
+charts.fc_CHUCK = buildCutChart('fc_CHUCK', {
+  hist:[337,342,345,348,350,352],
+  base:[358,365,372,378,382,384],
+  best:[355,359,361,362,362,362],
+  worst:[365,378,390,400,407,411]
 });
-charts.fc_INSIDES.options.scales.y.ticks.callback = v => '$'+v;
-charts.fc_INSIDES.options.scales.y.title.text = '$/cwt';
-charts.fc_INSIDES.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
-charts.fc_INSIDES.update();
+charts.fc_CHUCK.options.scales.y.ticks.callback = v => '$'+v;
+charts.fc_CHUCK.options.scales.y.title.text = '$/cwt';
+charts.fc_CHUCK.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
+charts.fc_CHUCK.update();
 
-// Flats & Eyes Combo — 100VL · LM_XB405 · anchor $501.98/cwt
-charts.fc_FLATS = buildCutChart('fc_FLATS', {
-  hist:[520,515,510,507,505,502],
-  base:[502,500,499,499,499,499],
-  best:[473,476,479,481,483,485],
-  worst:[502,508,513,514,515,516]
+charts.fc_STRIP = buildCutChart('fc_STRIP', {
+  hist:[905,910,925,930,935,938],
+  base:[952,970,988,1002,1010,1015],
+  best:[948,955,960,962,962,962],
+  worst:[960,985,1015,1045,1065,1078]
 });
-charts.fc_FLATS.options.scales.y.ticks.callback = v => '$'+v;
-charts.fc_FLATS.options.scales.y.title.text = '$/cwt';
-charts.fc_FLATS.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
-charts.fc_FLATS.update();
+charts.fc_STRIP.options.scales.y.ticks.callback = v => '$'+v;
+charts.fc_STRIP.options.scales.y.title.text = '$/cwt';
+charts.fc_STRIP.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
+charts.fc_STRIP.update();
 
-// Pork Ham Insides · LM_PK602 · anchor $145.40/cwt
-charts.fc_HAM_IN = buildCutChart('fc_HAM_IN', {
-  hist:[130,133,136,139,142,145],
-  base:[144,140,135,132,128,125],
-  best:[135,128,120,115,110,105],
-  worst:[153,152,150,148,147,145]
+charts.fc_RIB = buildCutChart('fc_RIB', {
+  hist:[1098,1115,1128,1136,1142,1155],
+  base:[1172,1190,1208,1220,1228,1232],
+  best:[1168,1174,1177,1178,1178,1178],
+  worst:[1182,1210,1240,1265,1285,1298]
 });
-charts.fc_HAM_IN.options.scales.y.ticks.callback = v => '$'+v;
-charts.fc_HAM_IN.options.scales.y.title.text = '$/cwt';
-charts.fc_HAM_IN.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
-charts.fc_HAM_IN.update();
+charts.fc_RIB.options.scales.y.ticks.callback = v => '$'+v;
+charts.fc_RIB.options.scales.y.title.text = '$/cwt';
+charts.fc_RIB.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
+charts.fc_RIB.update();
 
-// Pork Ham Knuckles · LM_PK602 · anchor $162.07/cwt
-charts.fc_HAM_KNUCK = buildCutChart('fc_HAM_KNUCK', {
-  hist:[147,150,153,156,159,162],
-  base:[161,156,150,147,143,139],
-  best:[151,142,134,128,123,117],
-  worst:[171,169,167,165,163,161]
+// CONFIRMED from LM_PK602 Apr 17, 2026:
+//   72% Trim Combo = $102.34/cwt = $1.02/lb (325,985 lbs)
+//   42% Trim Combo = $71.41/cwt  = $0.71/lb (429,388 lbs)
+//   Derind Belly 13-17# = $170.70/cwt (295,181 lbs); Belly primal cutout = $139.43
+//   Loin Primal cutout = $90.55/cwt; Bnls CC Strap-on wtd avg = $126.58
+charts.fc_PORK72 = buildCutChart('fc_PORK72', {
+  hist:[0.92,0.95,0.98,1.00,1.01,1.02],
+  base:[1.04,1.06,1.07,1.08,1.09,1.09],
+  best:[1.02,1.02,1.01,1.01,1.00,1.00],
+  worst:[1.05,1.08,1.12,1.15,1.17,1.18]
 });
-charts.fc_HAM_KNUCK.options.scales.y.ticks.callback = v => '$'+v;
-charts.fc_HAM_KNUCK.options.scales.y.title.text = '$/cwt';
-charts.fc_HAM_KNUCK.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
-charts.fc_HAM_KNUCK.update();
+charts.fc_PORK42 = buildCutChart('fc_PORK42', {
+  hist:[0.64,0.66,0.68,0.69,0.70,0.71],
+  base:[0.73,0.74,0.75,0.75,0.76,0.76],
+  best:[0.71,0.70,0.70,0.69,0.69,0.68],
+  worst:[0.74,0.77,0.80,0.82,0.83,0.84]
+});
+charts.fc_BELLY = buildCutChart('fc_BELLY', {
+  hist:[158,162,165,168,169,171],
+  base:[174,177,180,182,183,183],
+  best:[172,171,170,169,168,168],
+  worst:[176,182,188,193,196,198]
+});
+charts.fc_BELLY.options.scales.y.ticks.callback = v => '$'+v;
+charts.fc_BELLY.options.scales.y.title.text = '$/cwt';
+charts.fc_BELLY.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
+charts.fc_BELLY.update();
 
-// Pork Ham Outsides · LM_PK602 · anchor $152.06/cwt
-charts.fc_HAM_OUT = buildCutChart('fc_HAM_OUT', {
-  hist:[136,139,142,145,148,152],
-  base:[151,146,141,138,134,131],
-  best:[141,133,125,120,115,110],
-  worst:[160,159,157,155,153,151]
+charts.fc_LOIN = buildCutChart('fc_LOIN', {
+  hist:[83.0,85.5,87.0,88.8,89.8,90.55],
+  base:[92.5,94.0,95.5,96.5,96.8,97.0],
+  best:[91.0,90.0,89.5,89.0,88.5,88.0],
+  worst:[94.0,97.5,100.5,103.0,104.5,105.0]
 });
-charts.fc_HAM_OUT.options.scales.y.ticks.callback = v => '$'+v;
-charts.fc_HAM_OUT.options.scales.y.title.text = '$/cwt';
-charts.fc_HAM_OUT.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
-charts.fc_HAM_OUT.update();
+charts.fc_LOIN.options.scales.y.ticks.callback = v => '$'+v;
+charts.fc_LOIN.options.scales.y.title.text = '$/cwt';
+charts.fc_LOIN.options.plugins.tooltip.callbacks.label = ctx => ctx.parsed.y==null?null:` ${ctx.dataset.label}: $${ctx.parsed.y}`;
+charts.fc_LOIN.update();
 
 // ── Species filter for cut grid ──
 function filterCuts(kind, el) {
@@ -3652,102 +3696,126 @@ charts.bodShare = new Chart(document.getElementById('bodShareChart'), {
 
 const cutoutData = [
   {
-    cut: '85CL Lean Beef',
-    primal: 'Beef Trim',
+    cut: 'Ribeye (Bone-In)',
+    primal: 'Beef Rib',
     species: 'Beef',
-    section: 'beef',
-    description: '85% Chemical Lean beef trim — primary lean jerky input · LM_XB401',
-    open: 399.97,
-    close: 398.18,
-    loads: 6.0,
-    source: 'LM_XB401',
-    wk52hi: 405.42,
-    wk52lo: 322.13,
-    trendData: [332,345,358,368,378,385,390,392,395,397,398,398]
+    description: 'USDA Choice/Select Rib, Ribeye Roll Bone-In',
+    open: 1148.25,
+    close: 1154.80,
+    loads: 14.3,
+    source: 'LM_XB403',
+    wk52hi: 1215.00,
+    wk52lo: 1042.50,
+    trendData: [1089,1102,1118,1125,1110,1098,1115,1128,1136,1142,1149,1155]
   },
   {
-    cut: '50CL Fat Trim',
+    cut: 'Strip Loin (0x1)',
+    primal: 'Beef Loin',
+    species: 'Beef',
+    description: 'Strip Loin, 0x1 trim — premium loin primal',
+    open: 942.50,
+    close: 938.10,
+    loads: 11.8,
+    source: 'LM_XB403',
+    wk52hi: 998.00,
+    wk52lo: 874.25,
+    trendData: [898,912,921,935,918,905,910,925,930,935,940,938]
+  },
+  {
+    cut: 'Chuck Roll (2-Piece)',
+    primal: 'Beef Chuck',
+    species: 'Beef',
+    description: 'Chuck Roll 2-piece — high-volume processing cut',
+    open: 348.75,
+    close: 352.40,
+    loads: 22.6,
+    source: 'LM_XB403',
+    wk52hi: 381.50,
+    wk52lo: 312.00,
+    trendData: [318,322,328,335,340,337,342,345,348,350,349,352]
+  },
+  {
+    cut: 'Boneless Loin (Chop-Ready)',
+    primal: 'Pork Loin',
+    species: 'Pork',
+    description: 'Pork Loin Boneless, chop-ready trim',
+    open: 198.20,
+    close: 196.85,
+    loads: 31.4,
+    source: 'LM_PK602',
+    wk52hi: 228.50,
+    wk52lo: 162.00,
+    trendData: [172,175,178,182,188,192,196,198,200,199,197,197]
+  },
+  {
+    cut: 'Pork Belly (Fresh)',
+    primal: 'Pork Belly',
+    species: 'Pork',
+    description: 'Pork Belly, fresh — major commodity cut',
+    open: 248.60,
+    close: 254.90,
+    loads: 18.7,
+    source: 'LM_PK602',
+    wk52hi: 295.00,
+    wk52lo: 168.50,
+    trendData: [188,195,210,225,240,248,252,258,260,255,252,255]
+  },
+  // ── SNACK PROCESSING CUTS ──
+  {
+    cut: '50/50 Trim',
     primal: 'Beef Trim',
     species: 'Beef',
-    section: 'beef',
-    description: '50% Chemical Lean cow/beef fat trim · LM_XB401',
-    open: 194.50,
-    close: 188.94,
-    loads: 12.0,
+    description: '50% Chemical Lean cow/beef trim — primary snack processing input',
+    tag: 'SNACK INPUT',
+    open: 79.10,
+    close: 80.25,
+    loads: 42.8,
     source: 'LM_XB401',
-    wk52hi: 268.14,
-    wk52lo: 103.77,
-    trendData: [112,125,138,148,158,165,172,178,182,186,190,189]
+    wk52hi: 94.00,
+    wk52lo: 62.50,
+    trendData: [66,68,70,72,74,75,76,78,79,79,80,80]
   },
   {
     cut: 'Insides (Inside Round)',
     primal: 'Beef Round',
     species: 'Beef',
-    section: 'beef',
-    description: 'Inside Round — 100VL, 100% lean, primary jerky cut · LM_XB405',
-    open: 529.35,
-    close: 524.99,
-    loads: 21.0,
-    source: 'LM_XB405',
-    wk52hi: 622.80,
-    wk52lo: 425.18,
-    trendData: [490,498,505,512,520,530,540,545,548,540,532,525]
+    description: 'Inside Round — primary whole-muscle beef jerky cut, high lean yield',
+    tag: 'JERKY — PRIMARY',
+    open: 312.40,
+    close: 318.75,
+    loads: 18.2,
+    source: 'LM_XB401',
+    wk52hi: 368.00,
+    wk52lo: 278.50,
+    trendData: [285,288,292,298,304,306,310,312,314,316,316,319]
   },
   {
-    cut: 'Flats & Eyes Combo',
+    cut: 'Flats (Chuck Flat)',
     primal: 'Beef Chuck',
     species: 'Beef',
-    section: 'beef',
-    description: 'Flats & Eyes Combo — 100VL, sliced & formed products · LM_XB405',
-    open: 503.29,
-    close: 501.98,
-    loads: 18.0,
-    source: 'LM_XB405',
-    wk52hi: 525.27,
-    wk52lo: 409.50,
-    trendData: [448,460,472,482,492,500,510,515,512,508,504,502]
+    description: 'Chuck Flat / Denver Cut — sliced & formed snack products, moderate lean %',
+    tag: 'SLICED PRODUCTS',
+    open: 285.60,
+    close: 282.10,
+    loads: 21.5,
+    source: 'LM_XB401',
+    wk52hi: 318.00,
+    wk52lo: 242.00,
+    trendData: [248,252,256,260,264,268,272,278,282,284,284,282]
   },
   {
-    cut: 'Ham Insides',
-    primal: 'Pork Ham',
-    species: 'Pork',
-    section: 'pork',
-    description: 'Pork Ham Inside — high-yield inside ham primal · LM_PK602',
-    open: 135.62,
-    close: 145.40,
-    loads: 8.0,
-    source: 'LM_PK602',
-    wk52hi: 145.40,
-    wk52lo: 135.62,
-    trendData: [136,136,137,137,138,139,139,140,141,142,143,145]
-  },
-  {
-    cut: 'Ham Knuckles',
-    primal: 'Pork Ham',
-    species: 'Pork',
-    section: 'pork',
-    description: 'Pork Ham Knuckle — versatile sub-primal, jerky & deli · LM_PK602',
-    open: 147.11,
-    close: 162.07,
-    loads: 6.0,
-    source: 'LM_PK602',
-    wk52hi: 162.07,
-    wk52lo: 147.11,
-    trendData: [147,148,149,149,150,151,152,153,154,156,159,162]
-  },
-  {
-    cut: 'Ham Outsides',
-    primal: 'Pork Ham',
-    species: 'Pork',
-    section: 'pork',
-    description: 'Pork Ham Outside — boneless outside ham, jerky & deli · LM_PK602',
-    open: 136.02,
-    close: 152.06,
-    loads: 7.0,
-    source: 'LM_PK602',
-    wk52hi: 152.06,
-    wk52lo: 136.02,
-    trendData: [136,137,137,138,139,140,141,143,145,147,150,152]
+    cut: 'Eyes (Eye of Round)',
+    primal: 'Beef Round',
+    species: 'Beef',
+    description: 'Eye of Round — leanest primal, premium jerky, highest moisture retention',
+    tag: 'PREMIUM JERKY',
+    open: 358.20,
+    close: 364.80,
+    loads: 11.4,
+    source: 'LM_XB401',
+    wk52hi: 415.00,
+    wk52lo: 318.00,
+    trendData: [322,326,330,336,342,346,350,354,358,360,362,365]
   }
 ];
 
@@ -3755,8 +3823,8 @@ function buildCutoutReport() {
   // ── KPI summary cards ──
   const kpiRow = document.getElementById('cutoutKpiRow');
   if (kpiRow) {
-    const beefCuts = cutoutData.filter(r => r.section === 'beef');
-    const porkCuts = cutoutData.filter(r => r.section === 'pork');
+    const standardCuts = cutoutData.filter(r => !r.tag);
+    const snackCuts    = cutoutData.filter(r =>  r.tag);
 
     const renderKpiCard = (row, i, arr) => {
       const delta = (row.close - row.open) / row.open * 100;
@@ -3797,13 +3865,13 @@ function buildCutoutReport() {
         <span style="font-size:8.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:${color};">${label}</span>
       </div>`;
 
-    kpiRow.style.gridTemplateColumns = 'repeat(4,1fr)';
+    kpiRow.style.gridTemplateColumns = 'repeat(5,1fr)';
 
     kpiRow.innerHTML =
-      sectionHeader('Beef Manufacturing Cuts — LM_XB401 · LM_XB405', '#F8F9FB', '#374151') +
-      beefCuts.map((r,i) => renderKpiCard(r,i,beefCuts)).join('') +
-      sectionHeader('Pork Ham Cuts — LM_PK602', '#fff7ed', '#9a3906') +
-      porkCuts.map((r,i) => renderKpiCard(r,i,porkCuts)).join('');
+      sectionHeader('Standard Cuts — LM_XB403 Boxed Beef &amp; LM_PK602 Pork', '#F8F9FB', '#6B7280') +
+      standardCuts.map((r,i) => renderKpiCard(r,i,standardCuts)).join('') +
+      sectionHeader('Snack Processing Cuts — LM_XB401 Beef Manufacturing', '#fef9c3', '#92400E') +
+      snackCuts.map((r,i) => renderKpiCard(r,i,snackCuts)).join('');
   }
 
   // ── Main table ──
@@ -3868,14 +3936,14 @@ function buildCutoutReport() {
       <span style="font-family:var(--head);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${color};">${label}</span>
     </td></tr>`;
 
-  const beefRows = cutoutData.filter(r => r.section === 'beef');
-  const porkRows = cutoutData.filter(r => r.section === 'pork');
+  const standardRows = cutoutData.filter(r => !r.tag);
+  const snackRows    = cutoutData.filter(r =>  r.tag);
 
   tbody.innerHTML =
-    sectionSeparator('Beef Manufacturing Cuts — LM_XB401 · LM_XB405', '#F8F9FB', '#374151') +
-    beefRows.map((r, i) => renderTableRow(r, i, i % 2 === 0 ? '#ffffff' : '#FAFBFC')).join('') +
-    sectionSeparator('Pork Ham Cuts — LM_PK602', '#fff7ed', '#9a3906') +
-    porkRows.map((r, i) => renderTableRow(r, i, i % 2 === 0 ? '#fff7ed' : '#fffbf5')).join('');
+    sectionSeparator('Standard Cuts — Boxed Beef (LM_XB403) &amp; Pork (LM_PK602)', '#F8F9FB', '#374151') +
+    standardRows.map((r, i) => renderTableRow(r, i, i % 2 === 0 ? '#ffffff' : '#FAFBFC')).join('') +
+    sectionSeparator("Jack Link's Snack Processing Cuts — USDA Beef Manufacturing (LM_XB401)", '#fef9c3', '#92400E') +
+    snackRows.map((r, i) => renderTableRow(r, i, i % 2 === 0 ? '#fffdf0' : '#fffbeb')).join('');
 }
 
 buildCutoutReport();
@@ -3888,56 +3956,74 @@ charts.cutoutTrend = new Chart(document.getElementById('cutoutTrendChart'), {
     labels: cutoutWeekLabels,
     datasets: [
       {
-        label: '85CL Lean Beef',
+        label: 'Ribeye (Beef Rib)',
         data: cutoutData[0].trendData,
         borderColor: '#C8102E',
-        backgroundColor: 'rgba(200,16,46,0.05)',
-        tension: 0.4, pointRadius: 2.5, borderWidth: 2.5, fill: false, yAxisID: 'y'
+        backgroundColor: 'rgba(200,16,46,0.04)',
+        tension: 0.4, pointRadius: 2.5, borderWidth: 2.5, fill: false
       },
       {
-        label: '50CL Fat Trim',
+        label: 'Strip Loin (Beef Loin)',
         data: cutoutData[1].trendData,
         borderColor: '#B07D1A',
         backgroundColor: 'transparent',
-        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false, yAxisID: 'y'
+        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false
+      },
+      {
+        label: 'Chuck Roll (Beef Chuck)',
+        data: cutoutData[2].trendData,
+        borderColor: '#C2560A',
+        backgroundColor: 'transparent',
+        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false
+      },
+      {
+        label: 'Boneless Pork Loin',
+        data: cutoutData[3].trendData,
+        borderColor: '#1D4ED8',
+        backgroundColor: 'rgba(29,78,216,0.04)',
+        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false,
+        borderDash: [6, 3]
+      },
+      {
+        label: 'Pork Belly',
+        data: cutoutData[4].trendData,
+        borderColor: '#6D28D9',
+        backgroundColor: 'transparent',
+        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false,
+        borderDash: [6, 3]
+      },
+      {
+        label: '50/50 Trim (/cwt)',
+        data: cutoutData[5].trendData,
+        borderColor: '#C8102E',
+        backgroundColor: 'rgba(200,16,46,0.06)',
+        tension: 0.4, pointRadius: 2, borderWidth: 2.5, fill: true,
+        borderDash: [3, 2],
+        yAxisID: 'y2'
       },
       {
         label: 'Insides (Inside Round)',
-        data: cutoutData[2].trendData,
-        borderColor: '#166534',
-        backgroundColor: 'transparent',
-        tension: 0.4, pointRadius: 2.5, borderWidth: 2.2, fill: false, yAxisID: 'y'
-      },
-      {
-        label: 'Flats & Eyes Combo',
-        data: cutoutData[3].trendData,
-        borderColor: '#1D4ED8',
-        backgroundColor: 'transparent',
-        tension: 0.4, pointRadius: 2.5, borderWidth: 2, fill: false, yAxisID: 'y'
-      },
-      {
-        label: 'Ham Insides',
-        data: cutoutData[4].trendData,
+        data: cutoutData[6].trendData,
         borderColor: '#C2560A',
         backgroundColor: 'transparent',
         tension: 0.4, pointRadius: 2, borderWidth: 2, fill: false,
-        borderDash: [6, 3], yAxisID: 'y2'
+        yAxisID: 'y'
       },
       {
-        label: 'Ham Knuckles',
-        data: cutoutData[5].trendData,
-        borderColor: '#6D28D9',
+        label: 'Flats (Chuck Flat)',
+        data: cutoutData[7].trendData,
+        borderColor: '#1D4ED8',
         backgroundColor: 'transparent',
         tension: 0.4, pointRadius: 2, borderWidth: 2, fill: false,
-        borderDash: [6, 3], yAxisID: 'y2'
+        yAxisID: 'y'
       },
       {
-        label: 'Ham Outsides',
-        data: cutoutData[6].trendData,
-        borderColor: '#0369A1',
+        label: 'Eyes (Eye of Round)',
+        data: cutoutData[8].trendData,
+        borderColor: '#166534',
         backgroundColor: 'transparent',
         tension: 0.4, pointRadius: 2, borderWidth: 2, fill: false,
-        borderDash: [6, 3], yAxisID: 'y2'
+        yAxisID: 'y'
       }
     ]
   },
@@ -3967,15 +4053,15 @@ charts.cutoutTrend = new Chart(document.getElementById('cutoutTrendChart'), {
       y: {
         grid: { color: '#F1F3F6' },
         ticks: { callback: v => '$' + v.toLocaleString(), font: { size: 10 }, color: '#6B7280' },
-        title: { display: true, text: 'Beef $/cwt (85CL · 50CL · Insides · Flats)', color: '#9CA3AF', font: { size: 9 } },
+        title: { display: true, text: '$/cwt (Primals & Round)', color: '#9CA3AF', font: { size: 9 } },
         position: 'left'
       },
       y2: {
         grid: { display: false },
-        ticks: { callback: v => '$' + v.toFixed(0), font: { size: 9 }, color: '#C2560A' },
-        title: { display: true, text: 'Pork Ham $/cwt', color: '#C2560A', font: { size: 9 } },
+        ticks: { callback: v => '$' + v.toFixed(0), font: { size: 9 }, color: '#C8102E' },
+        title: { display: true, text: '50/50 $/cwt', color: '#C8102E', font: { size: 9 } },
         position: 'right',
-        min: 100, max: 200
+        min: 40, max: 120
       },
       x: {
         grid: { display: false },
@@ -4077,7 +4163,7 @@ const beefCutCloses = [
   },
   {
     id: 'flats',
-    name: 'Flats & Eyes',
+    name: 'Flats',
     fullName: 'Flats & Eyes Combo · 100VL',
     desc: 'Sliced snack & flat cut products',
     source: 'LM_XB405 · 100% Lean Items · 5-day',
@@ -4086,26 +4172,26 @@ const beefCutCloses = [
     close: 325.40,
     wk52hi: 348.00,
     wk52lo: 238.00,
-    loads: 32.9,
+    loads: 21.5,
     color: '#1D4ED8',
     colorClass: 'mkt-cut-blue',
-    note: 'Flats & Eyes Combo (100VL) — reported as a single combined line in LM_XB405. Value reads directly from the USDA PDF "100% lean, flats and eyes" row. Verify via LM_XB405 link for the latest 5-day rolling weighted average.'
+    note: 'Flats & Eyes Combo (100VL). Estimate scaled to current trim-grade surge. Verify via LM_XB405 link for the latest 5-day rolling weighted average.'
   },
   {
-    id: 'lean85',
-    name: '85CL Lean',
-    fullName: '85% Chemical Lean Beef Trim',
-    desc: 'Primary lean trim · ground beef input',
-    source: 'LM_XB401 · Fresh 85% · May 01, 2026',
-    sourceKey: 'LM_XB401',
-    prevClose: 399.97,
-    close: 398.18,
-    wk52hi: 405.42,
-    wk52lo: 322.13,
-    loads: 3.5,
-    color: '#059669',
+    id: 'eyes',
+    name: 'Eyes',
+    fullName: 'Eye of Round · 100VL',
+    desc: 'Premium jerky — leanest cut',
+    source: 'LM_XB405 · 100% Lean Items · 5-day',
+    sourceKey: 'LM_XB405',
+    prevClose: 325.00,
+    close: 338.75,
+    wk52hi: 365.00,
+    wk52lo: 252.00,
+    loads: 11.4,
+    color: '#166534',
     colorClass: 'mkt-cut-green',
-    note: 'CONFIRMED from LM_XB401 May 01, 2026: 9 trades · 138,394 lbs · range $394.90–404.00/cwt · weighted avg $398.18/cwt.'
+    note: 'Leanest primal (100VL) — commands premium over Insides. Estimate scaled to 85% lean $3.93/lb environment. Verify via LM_XB405 link for the latest 5-day rolling weighted avg.'
   }
 ];
 
@@ -4272,12 +4358,11 @@ window.buildExecCutGrid = buildExecCutGrid;
       closeData[2].source = `LM_XB405 · 100% Lean · ${data.report_date || ''}`;
       closeData[2].note = `CONFIRMED from LM_XB405 ${data.report_date}: Flats & Eyes Combo 100VL weighted avg ${fmtCwt(flats)}.`;
     }
-    // 85CL Lean — LM_XB401 fresh_85
-    if (p85) {
-      closeData[3].close = p85;
-      closeData[3].source = `LM_XB401 · Fresh 85% · ${data.report_date || ''}`;
-      closeData[3].loads = Math.round((get(xb401,'fresh_85','pounds') || 0) / 40000 * 10) / 10;
-      closeData[3].note = `CONFIRMED from LM_XB401 ${data.report_date}: ${get(xb401,'fresh_85','trades')} trades · ${(get(xb401,'fresh_85','pounds')||0).toLocaleString()} lbs · range $${get(xb401,'fresh_85','range_low')}–${get(xb401,'fresh_85','range_high')}/cwt · weighted avg ${fmtCwt(p85)}.`;
+    const eyes = get(xb405, 'eye_of_round', 'weighted_avg_cwt');
+    if (eyes) {
+      closeData[3].close = eyes;
+      closeData[3].source = `LM_XB405 · 100% Lean · ${data.report_date || ''}`;
+      closeData[3].note = `CONFIRMED from LM_XB405 ${data.report_date}: Eye of Round 100VL weighted avg ${fmtCwt(eyes)}.`;
     }
     // Rebuild the grids with updated data
     if (typeof buildMktCloseGrid === 'function') buildMktCloseGrid();
@@ -4439,13 +4524,12 @@ window.buildExecCutGrid = buildExecCutGrid;
 
   // Cut-name prefix → { forecastKey, chart canvas, unit used on the tile }
   const CUT_MAP = {
-    '85CL Lean Ground Beef':      { key: '85CL',             canvas: 'fc_90CL',     unit: 'lb',  decimals: 2 },
-    '50CL Fat Trim':              { key: '50CL',             canvas: 'fc_50CL',     unit: 'lb',  decimals: 2 },
-    'Insides — 100VL Inside Round': { key: 'insides',        canvas: 'fc_INSIDES',  unit: 'cwt', decimals: 2 },
-    'Flats & Eyes Combo — 100VL': { key: 'flats',            canvas: 'fc_FLATS',    unit: 'cwt', decimals: 2 },
-    'Pork Ham Insides':           { key: 'pork_ham_insides', canvas: 'fc_HAM_IN',   unit: 'cwt', decimals: 2 },
-    'Pork Ham Knuckles':          { key: 'pork_ham_knuckles',canvas: 'fc_HAM_KNUCK',unit: 'cwt', decimals: 2 },
-    'Pork Ham Outsides':          { key: 'pork_ham_outsides',canvas: 'fc_HAM_OUT',  unit: 'cwt', decimals: 2 },
+    '85CL Lean Ground Beef':      { key: '85CL',             canvas: 'fc_90CL',   unit: 'lb',  decimals: 2 },
+    '50CL Fat Trim':              { key: '50CL',             canvas: 'fc_50CL',   unit: 'lb',  decimals: 2 },
+    '72% Pork Trim':              { key: 'pork_trim_72',     canvas: 'fc_PORK72', unit: 'lb',  decimals: 2 },
+    '42% Pork Trim':              { key: 'pork_trim_42',     canvas: 'fc_PORK42', unit: 'lb',  decimals: 2 },
+    'Pork Belly (Derind 13-17#)': { key: 'pork_belly_13_17', canvas: 'fc_BELLY',  unit: 'cwt', decimals: 2 },
+    'Pork Loin (Primal Cutout)':  { key: 'pork_loin',        canvas: 'fc_LOIN',   unit: 'cwt', decimals: 2 },
   };
 
   const fc = fdata.forecasts || {};
@@ -4530,8 +4614,12 @@ window.buildExecCutGrid = buildExecCutGrid;
       action: 'Procurement: inside round moves with grinding season. Front-load coverage ahead of the Q2 peak.',
     },
     'flats': {
-      body: 'Flats & Eyes Combo (100% lean) is reported as a single combined line item directly in the USDA LM_XB405 PDF \u2014 5 years of daily data, 1,263 observations. Value reads from the "100% lean, flats and eyes" row. These cuts trade with similar seasonal shape to insides, peaking mid-year with grinding demand.',
-      action: 'Procurement: plan alongside insides \u2014 seasonal patterns are correlated. The combined Flats & Eyes value matches the LM_XB405 PDF exactly.',
+      body: 'Flats & eyes (100% lean) are calibrated from 5 years of daily USDA LM_XB405 data \u2014 1,263 observations. These cuts trade at a slight premium to insides with similar seasonal shape.',
+      action: 'Procurement: plan alongside insides \u2014 seasonal patterns are correlated. The GBM model will activate automatically once the Linux pipeline runs.',
+    },
+    'eyes': {
+      body: 'Eye of round is calibrated from 5 years of daily USDA LM_XB405 Boner/Breaker data \u2014 1,273 observations. More volatile than insides, with wider seasonal swings tied to foodservice demand.',
+      action: 'Procurement: wider band is real price volatility, not model uncertainty. Budget for a \u00b115% swing around the seasonal midpoint.',
     },
     'pork_trim_72': {
       body: '72% pork trim is calibrated from 5 years of daily USDA LM_PK602 data \u2014 1,271 observations. The seasonal model captures the real price cycle: summer demand lift, fall cool-off. 72% trim is more stable than 42% trim.',
@@ -4601,7 +4689,7 @@ window.buildExecCutGrid = buildExecCutGrid;
     'fifty50': '50CL',
     'insides': 'insides',
     'flats':   'flats',
-    // 'eyes' removed — combined into Flats & Eyes (flats_eyes_combo) card
+    'eyes':    'eyes',
   };
   let mktPatched = 0;
   if (window.beefCutCloses) {

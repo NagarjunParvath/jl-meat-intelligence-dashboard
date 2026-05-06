@@ -1,0 +1,27 @@
+# ─────────────────────────────────────────────────────────────
+# Netlify configuration — Jack Link's Meat Intelligence Dashboard
+# ─────────────────────────────────────────────────────────────
+
+[build]
+  publish = "."
+  # No build command — pure static deploy
+
+# Serve the SPA at the root URL without showing the long filename
+[[redirects]]
+  from   = "/"
+  to     = "/remixed-8840b12b.html"
+  status = 200          # rewrite (URL stays as "/")
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options           = "SAMEORIGIN"
+    X-Content-Type-Options    = "nosniff"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+
+# Never cache data files — dashboard always needs the freshest numbers
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

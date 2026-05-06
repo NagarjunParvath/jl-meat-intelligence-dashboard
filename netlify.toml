@@ -1,27 +1,38 @@
-# ─────────────────────────────────────────────────────────────
-# Netlify configuration — Jack Link's Meat Intelligence Dashboard
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────
+# Jack Link's MIC — Netlify configuration
+# Publish: static HTML + pre-built JSON (no server-side build needed)
+# Data refresh: handled by GitHub Actions daily cron → commits JSON
+#              → triggers this Netlify deploy automatically
+# ─────────────────────────────────────────────────────────────────────
 
 [build]
   publish = "."
-  # No build command — pure static deploy
+  command = "echo 'Static site — no build step required'"
 
-# Serve the SPA at the root URL without showing the long filename
-[[redirects]]
-  from   = "/"
-  to     = "/remixed-8840b12b.html"
-  status = 200          # rewrite (URL stays as "/")
-
-# Security headers for all pages
+# ── Cache control: force browser to always fetch fresh JSON ──────────
 [[headers]]
-  for = "/*"
+  for = "/data/latest.json"
   [headers.values]
-    X-Frame-Options           = "SAMEORIGIN"
-    X-Content-Type-Options    = "nosniff"
-    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Cache-Control    = "no-cache, no-store, must-revalidate"
+    Pragma           = "no-cache"
+    Expires          = "0"
 
-# Never cache data files — dashboard always needs the freshest numbers
 [[headers]]
-  for = "/data/*.json"
+  for = "/data/forecasts.json"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control    = "no-cache, no-store, must-revalidate"
+    Pragma           = "no-cache"
+    Expires          = "0"
+
+[[headers]]
+  for = "/data/history.json"
+  [headers.values]
+    Cache-Control    = "max-age=3600"
+
+# ── Security headers ─────────────────────────────────────────────────
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"

@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
 """
-USDA MPR History Backfill — v3 (all seven reports)
-===================================================
+USDA MPR History Backfill — v2 (all four reports)
+==================================================
 
-Pulls multi-year price history from two USDA APIs for every cut the
-dashboard tracks, writes per-cut series to data/history.json.
+Pulls multi-year daily price history from USDA MPR DataMart for every
+cut the dashboard tracks, writes per-cut series to data/history.json.
 
-MPR DataMart (auth required — USDA_MPR_API_KEY):
+Reports covered:
     LM_XB401  Beef Trim                    → 85CL, 50CL, 65CL, 81CL
-    LM_XB405  Cow Cutout & 100VL           → insides, flats, eyes, lean_90, knuckle
-    LM_PK602  Pork FOB Plant               → 72%/42% trim, belly, loin, ham sub-primals
-    LM_PK610  Pork Weekly Summary          → frozen 72%/42% trim
+    LM_XB405  Cow Cutout & 100VL           → insides, flats, eyes, lean_90
+    LM_PK602  Pork FOB Plant               → 72% / 42% trim, belly 13-17#, loin primal
     LM_XB403  Boxed Beef Cutout            → Choice/Select cutout, primals
-
-MARS API (no auth — public AMS Market News):
-    AMS_3646  National Weekly Chicken      → breast B/S, thighs B/S, thighs bone-in,
-                                             leg quarters bulk, MSC 15-20%
-    AMS_3647  National Weekly Turkey       → breast B/S Tom, thigh meat B/S
 
 Section auto-discovery
 ----------------------
@@ -66,7 +60,6 @@ except ImportError:
 DATA_DIR = SCRIPT_DIR / 'data'
 HISTORY_PATH = DATA_DIR / 'history.json'
 API_BASE = 'https://mpr.datamart.ams.usda.gov/services/v1.1/reports'
-MARS_BASE = 'https://marsapi.ams.usda.gov/services/v1.2/reports'
 
 # ──────────────────────────────────────────────────────────────────────
 # REPORT & CUT CONFIG
@@ -89,37 +82,24 @@ REPORTS = {
         'slug': '2455',
         'cuts': {
             # Section is "100% LEAN" (no "Item/Items" suffix) — use broad match
-            'insides':          [(r'100.*Lean|Lean Item|Items', r'(100% lean inside|inside round|inside)')],
-            'flats':            [(r'100.*Lean|Lean Item|Items', r'(flats and eyes|flats\s*&\s*eyes|flats)')],
-            'eyes':             [(r'Boner|Breaker|BONER',       r'(eye of round|171C)')],
-            'lean_90':          [(r'100.*Lean|Lean Item|Items', r'90%\s*lean')],
-            'spb':              [(r'100.*Lean|Lean Item|Items', r'(S\.P\.B|SPB)')],
-            # Boner/Breaker sub-primals — used for beef knuckle peeled
-            'beef_knuckle':     [(r'Boner|Breaker|BONER',       r'knuckle.*peel|167A')],
+            'insides':   [(r'100.*Lean|Lean Item|Items', r'(100% lean inside|inside round|inside)')],
+            'flats':     [(r'100.*Lean|Lean Item|Items', r'(flats and eyes|flats\s*&\s*eyes|flats)')],
+            'eyes':      [(r'Boner|Breaker|BONER',       r'(eye of round|171C)')],
+            'lean_90':   [(r'100.*Lean|Lean Item|Items', r'90%\s*lean')],
+            'spb':       [(r'100.*Lean|Lean Item|Items', r'(S\.P\.B|SPB)')],
         },
     },
     'LM_PK602': {
         'slug': '2498',
         'cuts': {
-            # Trim Cuts section
+            # Trim Cuts section: field is "Item_Description", price is "weighted_average"
             'pork_trim_72':     [(r'Trim',  r'72%\s*Trim\s*Combo')],
             'pork_trim_42':     [(r'Trim',  r'42%\s*Trim\s*Combo')],
-            # Belly Cuts section
+            # Belly Cuts section: same field names
             'pork_belly_13_17': [(r'Bell',  r'Derind\s*Belly\s*13-?17#?')],
-            # Primal Values (wide-format)
+            # "Cutout and Primal Values" is wide-format — price is in column 'pork_loin'
+            # 3-tuple (sec_re, None, col_name) triggers wide-column mode
             'pork_loin':        [(r'Cutout and Primal', None, 'pork_loin')],
-            # Ham sub-primals
-            'pork_ham_insides':  [(r'Ham',  r'^Insides?$|Ham.*Insides?')],
-            'pork_ham_knuckles': [(r'Ham',  r'^Knuckles?$|Ham.*Knuckles?')],
-            'pork_ham_outsides': [(r'Ham',  r'^Outsides?$|Ham.*Outsides?')],
-        },
-    },
-    'LM_PK610': {
-        'slug': '2500',
-        'cuts': {
-            # Frozen trim — weekly
-            'pork_72_fzn': [(r'Trim|Frozen', r'72%.*Boxed.*FZN|72%.*Trim.*Frozen|Frozen.*72%')],
-            'pork_42_fzn': [(r'Trim|Frozen', r'42%.*Boxed.*FZN|42%.*Trim.*Frozen|Frozen.*42%')],
         },
     },
     'LM_XB403': {
@@ -185,37 +165,9 @@ SECTION_FALLBACK = {
     '2451': ['National', 'Central'],
     '2455': ['100% Lean Items', 'BONER/BREAKER', 'Boner/Breaker'],
     '2498': ['Daily National Carlot Pork Report', 'National Daily Pork Report - Afternoon',
-             'Bellies', 'Trimmings', 'Loins', 'Ham'],
-    '2500': ['Weekly Summary', 'Trim', 'Frozen Trim', 'Pork Trim'],
+             'Bellies', 'Trimmings', 'Loins'],
     '2453': ['Choice Cuts', 'Select Cuts', 'Current Cutout Values',
              'Composite Primal Values', 'Trimmings'],
-}
-
-# ──────────────────────────────────────────────────────────────────────
-# AMS MARKET NEWS REPORTS (MARS API — no auth required, public)
-# Reports: AMS_3646 (chicken parts), AMS_3647 (turkey parts)
-# MARS API: https://marsapi.ams.usda.gov/services/v1.2/reports/{slug}
-# Field names: report_date, item_description, wtd_avg (or weighted_avg)
-# ──────────────────────────────────────────────────────────────────────
-
-AMS_REPORTS = {
-    'AMS_3646': {
-        'slug': '3646',
-        'cuts': {
-            'breast_bs':         r'Breast\s*[-–]\s*B/?S|B/S\s+Breast|Breast.*Boneless.*Skinless',
-            'thigh_bs':          r'Thighs?\s*[-–]\s*B/?S|B/S\s+Thighs?|Thighs?.*Boneless.*Skinless',
-            'thigh_bonein':      r'Thighs?\s*[-–]\s*Bone.?in|Bone.?in\s+Thighs?',
-            'leg_quarters_bulk': r'Leg\s+Quarters?\s*[-–]?\s*Bulk',
-            'msc_15_20':         r'MSC[,\s]*15.?20|MSC.*Fat',
-        },
-    },
-    'AMS_3647': {
-        'slug': '3647',
-        'cuts': {
-            'breast_bs_tom': r'Breast.*B/?S.*Tom|Breasts?[,\s]*B/?S.*Tom|Tom.*Breast',
-            'thigh_meat_bs': r'Thigh\s+Meat[,\s]*Boneless\s+Skinless|Thigh\s+Meat[,\s]*B/?S',
-        },
-    },
 }
 
 
@@ -407,91 +359,6 @@ def backfill_report(key: str, report_code: str, cfg: dict, years: int, verbose: 
     return out
 
 
-def backfill_ams_report(report_code: str, cfg: dict, years: int, verbose: bool) -> dict:
-    """Backfill one AMS Market News report via the public MARS API (no auth).
-
-    MARS API: GET /services/v1.2/reports/{slug}?q=report_date=MM/DD/YYYY:MM/DD/YYYY
-    Returns JSON: {'results': [{report_date, item_description, wtd_avg, ...}, ...]}
-    Prices are in ¢/lb for poultry. Stored as price_cwt (numerically equal to ¢/lb).
-    """
-    slug = cfg['slug']
-    cuts = cfg['cuts']
-    print(f'\n== {report_code}  (MARS slug {slug}) ==')
-
-    today = date.today()
-    start = today.replace(year=today.year - years)
-    collected: dict[str, dict] = {k: {} for k in cuts}
-
-    chunk_start = start
-    while chunk_start < today:
-        chunk_end = chunk_start.replace(year=chunk_start.year + 1) - timedelta(days=1)
-        if chunk_end > today:
-            chunk_end = today
-
-        url = f'{MARS_BASE}/{slug}'
-        params = {
-            'q': f'report_date={chunk_start.strftime("%m/%d/%Y")}:{chunk_end.strftime("%m/%d/%Y")}',
-            'allSections': 'true',
-        }
-        t0 = time.time()
-        try:
-            r = requests.get(url, params=params, timeout=120,
-                             headers={'Accept': 'application/json',
-                                      'User-Agent': 'JL-MIC-Backfill/3.0'})
-            r.raise_for_status()
-            data = r.json()
-        except Exception as e:
-            print(f'    ✗ {chunk_start.isoformat()}→{chunk_end.isoformat()}  {e}')
-            chunk_start = chunk_end + timedelta(days=1)
-            continue
-
-        rows = data.get('results') or []
-        dt = time.time() - t0
-        print(f'    chunk {chunk_start.isoformat()}→{chunk_end.isoformat()}  {len(rows):>5} rows ({dt:.1f}s)')
-
-        for row in rows:
-            # Field names vary; try both conventions
-            item_desc = (row.get('item_description') or row.get('Item_Description') or
-                         row.get('commodity_desc') or '').strip()
-            iso = _parse_date(row.get('report_date', ''))
-            if not iso or not item_desc:
-                continue
-
-            # Price fields: wtd_avg, weighted_avg, price_range_avg, weighted_average
-            wa = (_to_float(row.get('wtd_avg'))
-                  or _to_float(row.get('weighted_avg'))
-                  or _to_float(row.get('weighted_average'))
-                  or _to_float(row.get('price_range_avg')))
-            if wa is None or wa <= 0:
-                continue
-
-            for cut_key, pat in cuts.items():
-                if re.search(pat, item_desc, re.IGNORECASE):
-                    collected[cut_key][iso] = {
-                        'date': iso,
-                        'price_cwt': wa,   # ¢/lb stored as price_cwt (numerically identical)
-                        'range_low': _to_float(row.get('price_range_low')),
-                        'range_high': _to_float(row.get('price_range_high')),
-                        'trades': None,
-                        'pounds': None,
-                    }
-                    break
-            if verbose:
-                print(f'      {iso}  {item_desc[:40]:40s}  {wa}')
-
-        chunk_start = chunk_end + timedelta(days=1)
-
-    out = {}
-    for k, by_date in collected.items():
-        series = sorted(by_date.values(), key=lambda x: x['date'])
-        out[k] = series
-        if series:
-            print(f'  {k:20s}  {len(series):>5} obs  {series[0]["date"]} → {series[-1]["date"]}')
-        else:
-            print(f'  {k:20s}  0 obs  (no matches — report may need section filter)')
-    return out
-
-
 def _merge(new: dict, history_path: Path) -> None:
     existing = {}
     if history_path.exists():
@@ -516,45 +383,26 @@ def _merge(new: dict, history_path: Path) -> None:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--years', type=int, default=5)
-    ap.add_argument('--only', type=str, default=None,
-                    help='restrict to one report code, e.g. XB405 or 3646')
+    ap.add_argument('--only', type=str, default=None, help='restrict to one report, e.g. XB405')
     ap.add_argument('--verbose', '-v', action='store_true')
-    ap.add_argument('--skip-ams', action='store_true',
-                    help='skip AMS MARS API (poultry) — use if network is restricted')
     args = ap.parse_args()
 
     load_env()
     key = os.environ.get('USDA_MPR_API_KEY', '').strip()
+    if not key:
+        print('✗ USDA_MPR_API_KEY missing')
+        sys.exit(1)
+    print(f'✓ Key loaded · {_mask(key)}\n  Pulling {args.years} years of USDA MPR history')
 
     all_new = {}
+    for code, cfg in REPORTS.items():
+        if args.only and args.only.upper() not in code.upper():
+            continue
+        report_data = backfill_report(key, code, cfg, args.years, args.verbose)
+        all_new.update(report_data)
 
-    # ── MPR DataMart (beef & pork mandatory reporting) ─────────────────
-    if not args.only or not any(c in args.only.upper() for c in ('3646', '3647', 'AMS')):
-        if not key:
-            print('✗ USDA_MPR_API_KEY missing — skipping MPR reports')
-            print('  Set USDA_MPR_API_KEY in .env or environment to backfill beef/pork history')
-        else:
-            print(f'✓ MPR key loaded · {_mask(key)}\n  Pulling {args.years} years of USDA MPR history')
-            for code, cfg in REPORTS.items():
-                if args.only and args.only.upper() not in code.upper():
-                    continue
-                report_data = backfill_report(key, code, cfg, args.years, args.verbose)
-                all_new.update(report_data)
-
-    # ── MARS API (AMS poultry market news — public, no auth) ───────────
-    if not args.skip_ams:
-        ams_filter = args.only.upper() if args.only else None
-        for code, cfg in AMS_REPORTS.items():
-            if ams_filter and ams_filter not in code.upper() and ams_filter not in cfg['slug']:
-                continue
-            report_data = backfill_ams_report(code, cfg, args.years, args.verbose)
-            all_new.update(report_data)
-
-    if all_new:
-        _merge(all_new, HISTORY_PATH)
-        print('\nNext: python forecast_cuts.py  (quantile-GBM auto-engages on cuts with ≥180 obs)')
-    else:
-        print('\n⚠ No data collected — check API keys and network access')
+    _merge(all_new, HISTORY_PATH)
+    print('\nNext: python forecast_cuts.py  (quantile-GBM auto-engages on cuts that passed backtest)')
 
 
 if __name__ == '__main__':

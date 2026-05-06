@@ -4,7 +4,7 @@ REM Jack Link's MIC — USDA Data Refresh Wrapper
 REM Runs update_usda_data.py daily, logs output to update.log
 REM ============================================================
 
-cd /d "C:\Users\nagar\Downloads\05_Jacklinks_Project\Meat Inteligence Dashboard 4172026\Meat Inteligence Dashboard"
+cd /d "C:\Users\nagar\Downloads\Meat Inteligence Dashboard"
 
 REM Force UTF-8 stdout so Python can write → ✓ ✗ etc. to the log
 set PYTHONIOENCODING=utf-8

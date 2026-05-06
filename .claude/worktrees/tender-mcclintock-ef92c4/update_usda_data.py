@@ -3,22 +3,15 @@
 Jack Link's Beef Market Intelligence — USDA Live Data Updater
 =============================================================
 
-Pulls 7 USDA AMS reports, parses the key prices, writes data/latest.json
+Pulls the 4 USDA AMS daily PDFs, parses the key prices, writes data/latest.json
 alongside the HTML dashboard. The dashboard reads this JSON on page load to
 override hardcoded values with live numbers — no manual editing required.
 
 Reports pulled:
-  LM_XB401  → National Daily Beef Trim        (https://www.ams.usda.gov/mnreports/ams_2451.pdf)
-  LM_XB403  → National Daily Boxed Beef       (https://www.ams.usda.gov/mnreports/ams_2453.pdf)
-  LM_XB405  → 5-Day Cow Cutout / 100VL        (https://www.ams.usda.gov/mnreports/ams_2455.pdf)
-  LM_PK602  → National Daily Pork             (https://www.ams.usda.gov/mnreports/ams_2498.pdf)
-  LM_PK610  → National Weekly Pork Summary    (https://www.ams.usda.gov/mnreports/ams_2500.pdf)
-  AMS_3646  → National Weekly Chicken Parts   (https://www.ams.usda.gov/mnreports/ams_3646.pdf)
-  AMS_3647  → National Weekly Turkey Report   (https://www.ams.usda.gov/mnreports/ams_3647.pdf)
-
-  LM_PK610 / AMS_3646 / AMS_3647 are weekly — price stays constant Mon–Fri,
-  then updates on the following Monday. The script downloads them every run;
-  the JSON simply reflects the current week's value.
+  LM_XB401 → National Daily Beef Trim        (https://www.ams.usda.gov/mnreports/ams_2451.pdf)
+  LM_XB403 → National Daily Boxed Beef       (https://www.ams.usda.gov/mnreports/ams_2453.pdf)
+  LM_XB405 → 5-Day Cow Cutout / 100VL        (https://www.ams.usda.gov/mnreports/ams_2455.pdf)
+  LM_PK602 → National Daily Pork             (https://www.ams.usda.gov/mnreports/ams_2498.pdf)
 
 Setup (one-time):
     python -m pip install pypdf requests
@@ -79,18 +72,6 @@ REPORTS = {
         'url': 'https://www.ams.usda.gov/mnreports/ams_2498.pdf',
         'name': 'National Daily Pork FOB Plant',
     },
-    'LM_PK610': {
-        'url': 'https://www.ams.usda.gov/mnreports/ams_2500.pdf',
-        'name': 'National Weekly Pork Summary (includes frozen trim)',
-    },
-    'AMS_3646': {
-        'url': 'https://www.ams.usda.gov/mnreports/ams_3646.pdf',
-        'name': 'National Weekly Chicken Parts Report',
-    },
-    'AMS_3647': {
-        'url': 'https://www.ams.usda.gov/mnreports/ams_3647.pdf',
-        'name': 'National Weekly Turkey Report',
-    },
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -103,25 +84,7 @@ def fetch_pdf(url: str, dest: Path) -> None:
     dest.write_bytes(r.content)
 
 
-def extract_text(pdf_path: Path, prefer_pdfplumber: bool = False) -> str:
-    """Extract text from a PDF.
-
-    AMS Market News reports (3646, 3647) lay out each data row as a single
-    flowing line in pdfplumber but get split across multiple lines in pypdf.
-    Pass prefer_pdfplumber=True for those reports to get the full-row layout
-    that flat-text regex parsers rely on.
-    """
-    if prefer_pdfplumber:
-        try:
-            import pdfplumber
-            with pdfplumber.open(str(pdf_path)) as pdf:
-                text = '\n'.join((p.extract_text() or '') for p in pdf.pages)
-            if text.strip():
-                return text
-        except ImportError:
-            pass  # pdfplumber not installed — fall through to pypdf
-        except Exception:
-            pass
+def extract_text(pdf_path: Path) -> str:
     reader = PdfReader(str(pdf_path))
     return '\n'.join((p.extract_text() or '') for p in reader.pages)
 
@@ -233,44 +196,6 @@ def parse_pk602(text: str) -> dict:
             'pounds': int(m.group(1).replace(',', '')),
             'weighted_avg_cwt': float(m.group(4)),
         }
-
-    # Ham sub-primals (Insides, Knuckles, Outsides)
-    # Format: ItemName   lbs   low - high   weighted_avg
-    for item_key, item_name in [
-        ('ham_insides',  'Insides'),
-        ('ham_knuckles', 'Knuckles'),
-        ('ham_outsides', 'Outsides'),
-    ]:
-        pat = rf'{item_name}\s+([\d,]+)\s+([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)'
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            result[item_key] = {
-                'pounds': int(m.group(1).replace(',', '')),
-                'range_low': float(m.group(2)),
-                'range_high': float(m.group(3)),
-                'weighted_avg_cwt': float(m.group(4)),
-                'price_lb': round(float(m.group(4)) / 100, 4),
-            }
-    # Line-based fallback for column-layout PDFs
-    if not any(k in result for k in ('ham_insides', 'ham_knuckles', 'ham_outsides')):
-        lines = _clean_lines(text)
-        for item_key, pat in [
-            ('ham_insides',  r'^Insides?$'),
-            ('ham_knuckles', r'^Knuckles?$'),
-            ('ham_outsides', r'^Outsides?$'),
-        ]:
-            i = _find_line(lines, pat)
-            if i >= 0:
-                nums = _collect_numbers(lines, i + 1, 4)
-                if len(nums) >= 4:
-                    result[item_key] = {
-                        'pounds': int(nums[0]),
-                        'range_low': nums[1],
-                        'range_high': nums[2],
-                        'weighted_avg_cwt': nums[3],
-                        'price_lb': round(nums[3] / 100, 4),
-                    }
-
     return result
 
 
@@ -443,7 +368,6 @@ def parse_xb405(text: str) -> dict:
         'bb_ribeye_8_10':       r'Rib,\s*ribeye roll,\s*8-10 lbs',
         'bb_ribeye_10up':       r'Rib,\s*ribeye roll,\s*10-up lbs',
         'bb_chuck_brisket':     r'Chuck,\s*brisket',
-        'bb_knuckle_peeled':    r'Round,\s*knuckle,\s*peeled',
         'bb_top_inside_10dn':   r'Round,\s*top inside,\s*10-dn lbs',
         'bb_top_inside_cap_off': r'Round,\s*top inside c-off,\s*10-14 lbs',
         'eye_of_round':         r'Round,\s*eye of round',
@@ -466,142 +390,11 @@ def parse_xb405(text: str) -> dict:
     return result
 
 
-def parse_pk610(text: str) -> dict:
-    """LM_PK610 — National Weekly Pork Summary. Pulls frozen trim grades.
-
-    LM_PK610 publishes Monday; price stays constant through Friday then refreshes.
-    Layout mirrors LM_PK602 but with 'Boxed FZN' qualifier on trim items.
-    Keys: trim_72_fzn, trim_42_fzn  ($/cwt)
-    """
-    result = {}
-
-    # Flat-text regex first (works when PDF extracts as flowing text)
-    for item_key, grade in [('trim_72_fzn', '72'), ('trim_42_fzn', '42')]:
-        # Pattern: "72% Trim   Boxed FZN  lbs  low - high  wa"
-        pat = rf'{grade}%\s*Trim\s*(?:Combo\s*)?(?:Boxed\s*)?FZN\s+([\d,]+)\s+([\d.]+)\s*[-–]\s*([\d.]+)\s+([\d.]+)'
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            result[item_key] = {
-                'pounds': int(m.group(1).replace(',', '')),
-                'range_low': float(m.group(2)),
-                'range_high': float(m.group(3)),
-                'weighted_avg_cwt': float(m.group(4)),
-                'price_lb': round(float(m.group(4)) / 100, 4),
-            }
-
-    # Line-based fallback for column-layout PDFs
-    lines = _clean_lines(text)
-    for item_key, line_pat in [
-        ('trim_72_fzn', r'72%.*(?:Boxed\s+)?FZN|72%.*Frozen.*Trim'),
-        ('trim_42_fzn', r'42%.*(?:Boxed\s+)?FZN|42%.*Frozen.*Trim'),
-    ]:
-        if item_key not in result:
-            i = _find_line(lines, line_pat)
-            if i >= 0:
-                nums = _collect_numbers(lines, i + 1, 5)
-                if len(nums) >= 4:
-                    result[item_key] = {
-                        'pounds': int(nums[0]) if nums[0] > 1000 else None,
-                        'range_low': nums[1],
-                        'range_high': nums[2],
-                        'weighted_avg_cwt': nums[3],
-                        'price_lb': round(nums[3] / 100, 4),
-                    }
-
-    return result
-
-
-def parse_ams3646(text: str) -> dict:
-    """AMS_3646 — National Weekly Chicken Parts Report.
-
-    Uses pdfplumber text (one full row per line), e.g.:
-      'Breast - B/S: 130.00 - 193.00 167.70 -4.71 2,068 172.41 1,839'
-    Captures: low, high, wtd_avg = groups 1, 2, 3.
-    Targets Domestic-Fresh section (first match = domestic; export comes later).
-    Prices in ¢/lb (numerically identical to $/cwt).
-    """
-    result = {}
-    # Format: "Description:  low - high  wtd_avg  change  ..."
-    items = {
-        'breast_bs':         r'Breast\s*-\s*B/S\s*:\s*([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-        'thigh_bs':          r'Thighs?\s*-\s*B/S\s*:\s*([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-        'thigh_bonein':      r'Thighs?\s*-\s*Bone-?in\s*:\s*([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-        'leg_quarters_bulk': r'Leg\s+quarters?\s*-\s*Bulk\s*:\s*([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-        # Stop before "Export" section so we don't grab the export MSC price
-        'msc_15_20':         r'MSC,\s*15-20%\s*Fat\s*Content\s*:\s*([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-    }
-
-    # Restrict MSC search to Domestic section (before first "Export" line)
-    domestic_text = text
-    export_idx = re.search(r'Export\s*-', text, re.IGNORECASE)
-    if export_idx:
-        domestic_text = text[:export_idx.start()]
-
-    for key, pat in items.items():
-        src = domestic_text if key == 'msc_15_20' else text
-        m = re.search(pat, src, re.IGNORECASE)
-        if m:
-            result[key] = {
-                'range_low': float(m.group(1)),
-                'range_high': float(m.group(2)),
-                'weighted_avg_cwt': float(m.group(3)),
-            }
-
-    return result
-
-
-def parse_ams3647(text: str) -> dict:
-    """AMS_3647 — National Weekly Turkey Report.
-
-    Uses pdfplumber text (one full row per line), e.g.:
-      'Breasts,Boneless/Skinless, No 530.00 - 540.00 537.50 77.20 160 460.30 50'
-      'Thigh Meat,Boneless No 290.00 - 292.00 291.00 -1.17 200 292.17 120'
-    Captures: low, high, wtd_avg = groups 1, 2, 3.
-    Prices in ¢/lb (numerically identical to $/cwt).
-
-    PDF structure:
-      Turkey, Whole ... Domestic-Fresh ... Domestic-Frozen ...
-      Turkey, Part  ... Domestic-Fresh (PARTS) ... Domestic-Frozen (PARTS) ...
-    We anchor to the "Turkey, Part" section and search within Domestic-Fresh there.
-    """
-    result = {}
-
-    # Anchor to "Turkey, Part" section — ignore the whole-bird sections above
-    part_m = re.search(r'Turkey,\s*Part', text, re.IGNORECASE)
-    search_text = text[part_m.start():] if part_m else text
-
-    # Within the parts section, restrict to before "Domestic - Frozen"
-    fzn_m = re.search(r'Domestic\s*-\s*Frozen', search_text, re.IGNORECASE)
-    if fzn_m:
-        search_text = search_text[:fzn_m.start()]
-
-    items = {
-        # "Breasts,Boneless/Skinless, No 530.00 - 540.00 537.50 ..."
-        'breast_bs_tom': r'Breasts?,\s*Boneless/Skinless.*?([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-        # "Thigh Meat,Boneless No 290.00 - 292.00 291.00 ..."
-        'thigh_meat_bs': r'Thigh\s+Meat,\s*Boneless.*?([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)',
-    }
-
-    for key, pat in items.items():
-        m = re.search(pat, search_text, re.IGNORECASE)
-        if m:
-            result[key] = {
-                'range_low': float(m.group(1)),
-                'range_high': float(m.group(2)),
-                'weighted_avg_cwt': float(m.group(3)),
-            }
-
-    return result
-
-
 PARSERS = {
     'LM_XB401': parse_xb401,
     'LM_XB403': parse_xb403,
     'LM_XB405': parse_xb405,
     'LM_PK602': parse_pk602,
-    'LM_PK610': parse_pk610,
-    'AMS_3646': parse_ams3646,
-    'AMS_3647': parse_ams3647,
 }
 
 
@@ -644,9 +437,7 @@ def main():
         print(f"  → {code:10s} {meta['name']}")
         try:
             fetch_pdf(url, pdf_path)
-            # AMS poultry reports need pdfplumber for full single-line row layout
-            use_plumber = code.startswith('AMS_')
-            text = extract_text(pdf_path, prefer_pdfplumber=use_plumber)
+            text = extract_text(pdf_path)
             if not data['report_date']:
                 data['report_date'] = extract_report_date(text)
             parsed = PARSERS[code](text)
