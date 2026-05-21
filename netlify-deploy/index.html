@@ -1091,41 +1091,18 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
       <div class="card-hd">
         <div class="card-hd-left">
           <div class="card-title"><span class="dot dot-gold"></span>Situation Assessment — Current Week</div>
-          <div class="card-def">Executive brief: what is changing, where, and why it matters to procurement. Updated to current USDA and USDM weekly releases.</div>
+          <div class="card-def" id="exec-narrative-meta">Executive brief — loading…</div>
         </div>
         <div class="card-badges"><span class="badge badge-alert">Action Required</span></div>
       </div>
       <div class="card-body">
-        <p style="font-size:12.5px;line-height:1.75;color:#374151;margin-bottom:12px;">
-          <strong style="color:#111827;">Southern Plains (TX/OK/KS)</strong> are experiencing severe drought — US Drought Monitor classifies <strong style="color:#991B1B;">38% of cattle-producing counties in D3–D4</strong> (Extreme–Exceptional). TX USDA NASS pasture ratings show only 23% Good/Excellent vs. a 5-year average of ~52%. Producers are selling cows they would normally retain: TX/OK feeder auction receipts are running <strong style="color:#C2560A;">+15–20% above 5-year averages</strong>.
-        </p>
-        <p style="font-size:12.5px;line-height:1.75;color:#374151;margin-bottom:12px;">
-          USDA AMS weekly cow+heifer slaughter is at a <strong style="color:#991B1B;">23-month high</strong>. This creates a pattern confirmed in 2011, 2012, and 2022: a short-term supply flush (briefly cheap fat trim) followed by a <strong style="color:#C2560A;">lean supply crunch 8–14 weeks out</strong> as the pipeline narrows and herd inventory depletes. Northern Plains remain normal — an active spot contracting opportunity.
-        </p>
+        <div id="exec-situation-paras" style="margin-bottom:12px;">
+          <p style="font-size:12.5px;color:#9CA3AF;font-style:italic;">Loading market narrative…</p>
+        </div>
         <div style="margin-top:14px;">
           <div style="font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#6B7280;margin-bottom:10px;">Procurement Actions by Time Horizon</div>
-          <div class="action-panel">
-            <div class="action-card ac-now">
-              <div class="ac-horizon">🔴 Immediate (0–4 Weeks)</div>
-              <div class="ac-item">Lock forward contracts on 85CL lean (LM_XB401) before anticipated +8–12% price move</div>
-              <div class="ac-item">Accelerate spot buys from Northern Plains — conditions normal, prices below trend</div>
-              <div class="ac-item">Activate "liquidation flush" buy window: 50CL fat trim temporarily below trend</div>
-              <div class="ac-item">Alert blending team: lean-to-fat cost ratio widening, review 85/15 substitution</div>
-            </div>
-            <div class="action-card ac-soon">
-              <div class="ac-horizon">🟠 Near-Term (4–12 Weeks)</div>
-              <div class="ac-item">Qualify backup suppliers in NE/IA before Southern Plains gaps materialize</div>
-              <div class="ac-item">Review blend formulations: 85/15 partial replacement viable in applicable SKUs?</div>
-              <div class="ac-item">Monitor USDA AMS receipts weekly for second-wave liquidation signals</div>
-              <div class="ac-item">Hedge via CME Feeder Cattle futures as price risk protection</div>
-            </div>
-            <div class="action-card ac-plan">
-              <div class="ac-horizon">🔵 Strategic (12+ Weeks)</div>
-              <div class="ac-item">Model 18–24 month herd rebuild timeline; structural lean supply constraint expected</div>
-              <div class="ac-item">Explore AUS/NZ 90CL landed pricing as international contingency</div>
-              <div class="ac-item">Build multi-year contracts with NE/SD/ND suppliers to lock capacity</div>
-              <div class="ac-item">Commission drought-resilient supplier development program</div>
-            </div>
+          <div class="action-panel" id="exec-actions-panel">
+            <div style="color:#9CA3AF;font-style:italic;font-size:12px;padding:16px;">Loading actions…</div>
           </div>
         </div>
       </div>
@@ -1143,11 +1120,9 @@ body > div[style*="position:fixed"][style*="bottom"]:not([data-usda-live-indicat
         <div class="card-body-np">
           <table class="tbl">
             <tr><th>Region</th><th>Drought</th><th>Liquidation</th><th>Lean Avail</th><th>Signal</th></tr>
-            <tr><td>Southern Plains</td><td class="risk-high">D3–D4</td><td class="risk-high">+18%</td><td class="risk-high">64</td><td class="act-avoid">AVOID LEAN / BUY FAT</td></tr>
-            <tr><td>Northern Plains</td><td class="risk-low">None</td><td class="risk-low">Normal</td><td class="risk-low">99</td><td class="act-buy">BUY FORWARD ✓</td></tr>
-            <tr><td>Corn Belt</td><td class="risk-low">None</td><td class="risk-low">Normal</td><td class="risk-low">97</td><td class="act-watch">MONITOR</td></tr>
-            <tr><td>Mountain West</td><td class="risk-med">D2</td><td class="risk-med">+8%</td><td class="risk-med">82</td><td class="act-hedge">HEDGE / WATCH</td></tr>
-            <tr><td>Southeast</td><td class="risk-low">D1</td><td class="risk-low">+3%</td><td>94</td><td class="act-watch">NORMAL</td></tr>
+            <tbody id="exec-regional-tbody">
+              <tr><td colspan="5" style="color:#9CA3AF;font-style:italic;text-align:center;padding:12px;">Loading…</td></tr>
+            </tbody>
           </table>
         </div>
         <div class="card-src">📡 Sources: USDA AMS Weekly Slaughter · USDM County Classifications · Composite model output</div>
@@ -4639,6 +4614,85 @@ window.buildExecCutGrid = buildExecCutGrid;
   }
 
   console.info('[Forecast loader] ✓ Applied forecasts to', applied.length, 'cards · market tiles patched:', mktPatched, '· chart hists patched:', chartHistPatched, '· model family:', fdata.model_family || 'mixed');
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// AI NARRATIVE LOADER — reads data/narrative.json and calls renderNarrative()
+// Generated daily by generate_narrative.py via Claude API.
+// Falls back gracefully if the file doesn't exist yet.
+// ══════════════════════════════════════════════════════════════════════════════
+
+function renderNarrative(n) {
+  if (!n) return;
+
+  // Subtitle with AI generation timestamp
+  const meta = document.getElementById('exec-narrative-meta');
+  if (meta) meta.textContent = 'AI-generated market brief · Based on USDA ' + n.report_date + ' · Generated ' + (n.generated_at ? n.generated_at.slice(0, 10) : 'today');
+
+  // Situation paragraphs
+  const paras = document.getElementById('exec-situation-paras');
+  if (paras && n.situation_paragraphs) {
+    paras.innerHTML = n.situation_paragraphs.map(function(p) {
+      return '<p style="font-size:12.5px;line-height:1.75;color:#374151;margin-bottom:12px;">' + p + '</p>';
+    }).join('');
+  }
+
+  // Action cards
+  const panel = document.getElementById('exec-actions-panel');
+  if (panel && n.actions) {
+    var horizons = [
+      { key: 'immediate', cls: 'ac-now',  label: '🔴 Immediate (0–4 Weeks)' },
+      { key: 'near_term', cls: 'ac-soon', label: '🟠 Near-Term (4–12 Weeks)' },
+      { key: 'strategic', cls: 'ac-plan', label: '🔵 Strategic (12+ Weeks)' }
+    ];
+    panel.innerHTML = horizons.map(function(h) {
+      return '<div class="action-card ' + h.cls + '">'
+        + '<div class="ac-horizon">' + h.label + '</div>'
+        + (n.actions[h.key] || []).map(function(a) { return '<div class="ac-item">' + a + '</div>'; }).join('')
+        + '</div>';
+    }).join('');
+  }
+
+  // Regional risk table
+  var tbody = document.getElementById('exec-regional-tbody');
+  if (tbody && n.regional_risk) {
+    tbody.innerHTML = n.regional_risk.map(function(r) {
+      var droughtClass = (r.drought.indexOf('D3') !== -1 || r.drought.indexOf('D4') !== -1) ? 'risk-high'
+        : (r.drought.indexOf('D2') !== -1 || r.drought.indexOf('D1') !== -1) ? 'risk-med' : 'risk-low';
+      var liqStr = String(r.liquidation);
+      var liqClass = (liqStr.indexOf('+1') !== -1 && liqStr.indexOf('+1%') === -1) || liqStr.indexOf('+2') !== -1 ? 'risk-high'
+        : (liqStr !== 'Normal' && liqStr !== '—') ? 'risk-med' : 'risk-low';
+      var leanClass = r.lean_avail < 75 ? 'risk-high' : r.lean_avail < 90 ? 'risk-med' : 'risk-low';
+      return '<tr>'
+        + '<td>' + r.region + '</td>'
+        + '<td class="' + droughtClass + '">' + r.drought + '</td>'
+        + '<td class="' + liqClass + '">' + r.liquidation + '</td>'
+        + '<td class="' + leanClass + '">' + r.lean_avail + '</td>'
+        + '<td class="' + r.signal_class + '">' + r.signal + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+}
+
+(async function loadNarrative() {
+  let ndata;
+  try {
+    const r = await fetch('./data/narrative.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    ndata = await r.json();
+  } catch (e) {
+    console.info('[Narrative loader] No narrative.json yet — showing placeholder. Run generate_narrative.py to generate.');
+    // Show a fallback message in the UI
+    var meta = document.getElementById('exec-narrative-meta');
+    if (meta) meta.textContent = 'AI narrative not yet generated — will update on next daily refresh.';
+    var paras = document.getElementById('exec-situation-paras');
+    if (paras) paras.innerHTML = '<p style="font-size:12.5px;color:#9CA3AF;font-style:italic;">Market narrative is auto-generated daily by AI after USDA data refresh. Current USDA price data is live in the KPI cards above.</p>';
+    var panel = document.getElementById('exec-actions-panel');
+    if (panel) panel.innerHTML = '<div style="color:#9CA3AF;font-style:italic;font-size:12px;padding:16px;">Actions will appear after next AI narrative refresh.</div>';
+    return;
+  }
+  renderNarrative(ndata);
+  console.info('[Narrative loader] ✓ Narrative rendered for', ndata.report_date, '| Generated:', ndata.generated_at);
 })();
 
 </script>
