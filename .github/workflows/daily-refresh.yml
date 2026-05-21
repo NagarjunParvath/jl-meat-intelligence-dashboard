@@ -32,11 +32,20 @@ jobs:
           USDA_API_KEY: ${{ secrets.USDA_API_KEY }}
         run: python update_usda_data.py
 
+      - name: Run forecast engine
+        run: python forecast_cuts.py
+
+      - name: Sync netlify-deploy data
+        run: |
+          cp data/latest.json    netlify-deploy/data/latest.json
+          cp data/forecasts.json netlify-deploy/data/forecasts.json
+
       - name: Commit & push updated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/latest.json data/forecasts.json
+          git add data/latest.json data/forecasts.json \
+                  netlify-deploy/data/latest.json netlify-deploy/data/forecasts.json
           # only commit if something changed
           git diff --cached --quiet || git commit -m "chore: daily USDA refresh $(date -u '+%Y-%m-%d')"
           git push
