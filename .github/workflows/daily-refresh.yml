@@ -36,6 +36,7 @@ jobs:
         run: python forecast_cuts.py
 
       - name: Generate AI narrative
+        continue-on-error: true   # narrative failure never blocks data refresh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_narrative.py
