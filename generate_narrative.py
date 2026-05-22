@@ -240,11 +240,15 @@ def call_claude(data_summary: str, api_key: str) -> dict:
 def main():
     # ── 1. Check for API key ──────────────────────────────────────────────────
     # Support loading from .env if python-dotenv is available
-    try:
-        from dotenv import load_dotenv
-        load_dotenv(ROOT / ".env")
-    except ImportError:
-        pass
+    # Load .env manually to avoid dotenv override issues on Windows
+    env_path = ROOT / ".env"
+    if env_path.exists():
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if "=" in line and not line.startswith("#"):
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip())
 
     api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
     if not api_key:
