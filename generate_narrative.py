@@ -203,12 +203,18 @@ def call_claude(data_summary: str, api_key: str) -> dict:
 
     user_prompt = USER_PROMPT_TEMPLATE.format(data_summary=data_summary)
 
-    message = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=1500,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+    try:
+        message = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=1500,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+    except Exception as exc:
+        print(f"ERROR: Claude API call failed: {type(exc).__name__}: {exc}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
 
     raw_text = message.content[0].text.strip()
 
@@ -285,4 +291,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        import traceback
+        print(f"FATAL: {type(exc).__name__}: {exc}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
