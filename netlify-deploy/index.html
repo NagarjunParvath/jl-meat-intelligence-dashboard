@@ -4695,6 +4695,225 @@ function renderNarrative(n) {
   console.info('[Narrative loader] ✓ Narrative rendered for', ndata.report_date, '| Generated:', ndata.generated_at);
 })();
 
+// ══════════════════════════════════════════════════════════════════════════════
+// DROUGHT LOADER — reads data/drought.json (produced by fetch_drought_data.py)
+// Patches Drought & Weather tab KPI cards, map region colors, and chart data.
+// Zero HTML structure changes — updates existing element IDs and chart instances.
+// ══════════════════════════════════════════════════════════════════════════════
+
+// Drought level → map fill color (matches legend)
+const DROUGHT_COLORS = {
+  'D4':     '#6b0013',
+  'D3-D4':  '#5a0813',
+  'D3':     '#a50026',
+  'D2':     '#2a1a08',
+  'D1':     '#1c1c08',
+  'D0':     '#1a2a1a',
+  'None':   '#0e1e12',
+};
+
+// Drought level → SVG label text and color
+const DROUGHT_LABELS = {
+  'D4':    { text: 'D4 EXCEPTIONAL', color: '#991B1B' },
+  'D3-D4': { text: 'D3–D4 CRITICAL', color: '#991B1B' },
+  'D3':    { text: 'D3 EXTREME',     color: '#C8102E' },
+  'D2':    { text: 'D2 SEVERE',      color: '#92400E' },
+  'D1':    { text: 'D1 MODERATE',    color: '#92400E' },
+  'D0':    { text: 'D0 ABNORMALLY DRY', color: '#4B5563' },
+  'None':  { text: 'No Drought ✓',   color: '#166534' },
+};
+
+// Map polygon data-region → drought.json region key
+const REGION_MAP = {
+  'Southern Plains (TX/OK/KS)':    'southern_plains',
+  'Northern Plains (NE/SD/ND/MT)': 'northern_plains',
+  'Corn Belt (IA/MN/MO/IL)':       'corn_belt',
+  'Mountain West':                  'mountain_west',
+  'Southeast (AL/GA/FL/MS)':       'southeast',
+  'Pacific Northwest':              'pacific_nw',
+};
+
+function pdsiLabel(val) {
+  if (val === null || val === undefined) return '—';
+  if (val <= -4) return 'Extreme drought (below −4.0)';
+  if (val <= -3) return 'Severe drought level (below −3.0)';
+  if (val <= -2) return 'Moderate drought';
+  if (val < 0)   return 'Mildly dry';
+  return 'Near normal';
+}
+
+function pdsiColor(val) {
+  if (val === null || val === undefined) return '#505050';
+  if (val <= -3) return '#B07D1A';
+  if (val <= -2) return '#C2560A';
+  return '#166534';
+}
+
+function precipColor(val) {
+  if (!val && val !== 0) return 'rgba(156,163,175,0.5)';
+  return val < 0 ? 'rgba(200,16,46,0.65)' : 'rgba(46,168,102,0.6)';
+}
+
+(async function loadDrought() {
+  let d;
+  try {
+    const r = await fetch('./data/drought.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    d = await r.json();
+  } catch (e) {
+    console.info('[Drought loader] No drought.json yet — using hardcoded values. Run fetch_drought_data.py to generate.');
+    return;
+  }
+
+  const kpis = d.kpis || {};
+
+  // ── KPI card values ────────────────────────────────────────────────────────
+  // D3+ Coverage
+  const d3Val = kpis.d3_plus_cattle_counties_pct;
+  const d3Avg = kpis.d3_plus_4wk_avg_pct;
+  if (d3Val !== null && d3Val !== undefined) {
+    var el = document.querySelector('#page-drought .kpi-strip .kpi-c-red .kpi-value');
+    if (el) el.textContent = d3Val + '%';
+    var delta = document.querySelector('#page-drought .kpi-strip .kpi-c-red .kpi-delta');
+    if (delta && d3Avg !== null && d3Avg !== undefined) {
+      var diff = Math.round(d3Val - d3Avg);
+      delta.textContent = (diff >= 0 ? '▲ +' : '▼ ') + Math.abs(diff) + 'pts vs 4-wk avg';
+      delta.className = 'kpi-delta ' + (diff > 0 ? 'bad' : 'good');
+    }
+  }
+
+  // TX Pasture Good/Excellent
+  const pastureVal = kpis.tx_pasture_good_excellent_pct;
+  const pasture5yr = kpis.tx_pasture_5yr_avg_pct || 52;
+  if (pastureVal !== null && pastureVal !== undefined) {
+    var el2 = document.getElementById('kpi-pasture');
+    if (el2) el2.textContent = pastureVal + '%';
+    var delta2 = document.querySelector('#page-drought .kpi-strip .kpi-c-orange .kpi-delta');
+    if (delta2) {
+      var diff2 = Math.round(pastureVal - pasture5yr);
+      delta2.textContent = (diff2 >= 0 ? '▲ +' : '▼ ') + Math.abs(diff2) + 'pts vs 5-yr avg (' + pasture5yr + '%)';
+      delta2.className = 'kpi-delta ' + (diff2 < -10 ? 'bad' : diff2 < 0 ? 'warn' : 'good');
+    }
+  }
+
+  // PDSI Southern Plains
+  const pdsiVal = kpis.pdsi_southern_plains;
+  if (pdsiVal !== null && pdsiVal !== undefined) {
+    var el3 = document.querySelector('#page-drought .kpi-strip .kpi-c-gold .kpi-value');
+    if (el3) { el3.textContent = pdsiVal; el3.style.color = pdsiColor(pdsiVal); }
+    var delta3 = document.querySelector('#page-drought .kpi-strip .kpi-c-gold .kpi-delta');
+    if (delta3) {
+      delta3.textContent = pdsiLabel(pdsiVal);
+      delta3.className = 'kpi-delta ' + (pdsiVal <= -3 ? 'warn' : pdsiVal <= -2 ? 'warn' : 'good');
+    }
+  }
+
+  // 90-Day Precip Deficit
+  const precipDef = kpis.precip_deficit_90day_inches;
+  if (precipDef !== null && precipDef !== undefined) {
+    var el4 = document.querySelector('#page-drought .kpi-strip .kpi-c-blue .kpi-value');
+    if (el4) el4.textContent = (precipDef > 0 ? '+' : '') + precipDef + '"';
+    var delta4 = document.querySelector('#page-drought .kpi-strip .kpi-c-blue .kpi-delta');
+    if (delta4) {
+      delta4.textContent = precipDef < 0 ? 'Inches below normal' : 'Inches above normal';
+      delta4.className = 'kpi-delta ' + (precipDef < -3 ? 'bad' : precipDef < 0 ? 'warn' : 'good');
+    }
+  }
+
+  // ── USDM week badge ────────────────────────────────────────────────────────
+  var weekEl = document.getElementById('usdmWeek');
+  if (weekEl && d.usdm_week) weekEl.textContent = d.usdm_week;
+
+  // ── Drought map — update polygon fill colors and label texts ───────────────
+  const regions = d.region_drought || {};
+  document.querySelectorAll('#usMap .map-region').forEach(function(poly) {
+    var rName = poly.getAttribute('data-region');
+    var rKey  = REGION_MAP[rName];
+    if (!rKey || !regions[rKey]) return;
+    var level = regions[rKey];
+    poly.setAttribute('fill', DROUGHT_COLORS[level] || DROUGHT_COLORS['None']);
+    poly.setAttribute('data-drought', level);
+  });
+
+  // Update SVG text labels for each region
+  var svgLabels = {
+    'southern_plains': { xi: 2, label: '🔴 ' },
+    'northern_plains': { xi: 2, label: '' },
+    'corn_belt':       { xi: 1, label: '' },
+    'mountain_west':   { xi: 2, label: '' },
+    'southeast':       { xi: 1, label: '' },
+  };
+  // Find the small sub-labels (3rd text per region group) and update
+  document.querySelectorAll('#usMap text').forEach(function(t) {
+    var content = t.textContent || '';
+    // Southern Plains sub-label
+    if (content.includes('D3–D4') || content.includes('D3-D4') || content.includes('CRITICAL')) {
+      var lvl = regions.southern_plains || 'D3-D4';
+      var lbl = DROUGHT_LABELS[lvl] || DROUGHT_LABELS['D3-D4'];
+      t.textContent = '🔴 ' + lbl.text;
+      t.setAttribute('fill', lbl.color);
+    }
+    if (content.includes('No Drought') && content.includes('NE/SD')) {
+      var lvl2 = regions.northern_plains || 'None';
+      var lbl2 = DROUGHT_LABELS[lvl2] || DROUGHT_LABELS['None'];
+      t.textContent = 'NE/SD/ND/MT · ' + lbl2.text;
+      t.setAttribute('fill', lbl2.color);
+    }
+    if (content.includes('IA/MN/MO/IL')) {
+      var lvl3 = regions.corn_belt || 'None';
+      var lbl3 = DROUGHT_LABELS[lvl3] || DROUGHT_LABELS['None'];
+      t.textContent = 'IA/MN/MO/IL · ' + lbl3.text;
+      t.setAttribute('fill', lbl3.color);
+    }
+    if (content.includes('AL/GA/FL')) {
+      var lvl4 = regions.southeast || 'D1';
+      var lbl4 = DROUGHT_LABELS[lvl4] || DROUGHT_LABELS['D1'];
+      t.textContent = 'AL/GA/FL · ' + lbl4.text;
+      t.setAttribute('fill', lbl4.color);
+    }
+  });
+
+  // ── Chart: D3+ Drought Trend ───────────────────────────────────────────────
+  var trend = d.drought_trend || {};
+  if (trend.labels && trend.labels.length && charts.droughtTrend) {
+    charts.droughtTrend.data.labels = trend.labels;
+    charts.droughtTrend.data.datasets[0].data = trend.d3_plus;
+    charts.droughtTrend.data.datasets[1].data = trend.historical_avg;
+    charts.droughtTrend.update();
+  }
+
+  // ── Chart: TX Pasture Conditions ──────────────────────────────────────────
+  var pt = d.pasture_trend || {};
+  if (pt.labels && pt.labels.length && charts.pasture) {
+    charts.pasture.data.labels = pt.labels;
+    charts.pasture.data.datasets[0].data = pt.good_excellent;
+    charts.pasture.data.datasets[1].data = pt.five_yr_avg;
+    // Threshold line stays at 30 — just extend to match new length
+    charts.pasture.data.datasets[2].data = Array(pt.labels.length).fill(30);
+    charts.pasture.update();
+  }
+
+  // ── Chart: Precip Anomaly ─────────────────────────────────────────────────
+  var pa = d.precip_anomaly || {};
+  if (pa.values && pa.values.length && charts.precip) {
+    charts.precip.data.datasets[0].data = pa.values;
+    charts.precip.data.datasets[0].backgroundColor = pa.values.map(precipColor);
+    charts.precip.update();
+  }
+
+  // ── Chart: Temp Anomaly ───────────────────────────────────────────────────
+  var ta = d.temp_anomaly || {};
+  if (ta.values && ta.values.length && charts.temp) {
+    charts.temp.data.datasets[0].data = ta.values;
+    charts.temp.data.datasets[0].backgroundColor = ta.values.map(function(v) {
+      return v > 0 ? 'rgba(200,16,46,0.5)' : 'rgba(46,168,102,0.5)';
+    });
+    charts.temp.update();
+  }
+
+  console.info('[Drought loader] ✓ Drought tab updated | USDM week:', d.usdm_week);
+})();
+
 </script>
 </body>
 </html>
