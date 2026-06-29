@@ -1,12 +1,14 @@
 {
-  "generated_at": "2026-06-26T22:24:48",
-  "report_date": "June 26, 2026",
+  "generated_at": "2026-06-29T22:23:08",
+  "report_date": "June 29, 2026",
   "sklearn_available": true,
   "min_gbm_obs": 180,
   "model_note": "Per-cut: quantile Gradient Boosting trained on real history when >= 180 observations AND beats seasonal-na\u00efve baseline on held-out walk-forward test. Otherwise parametric seasonal-drift fallback. Every cut shows its `model` tag and \u2014 if GBM \u2014 its `backtest` RMSE comparison.",
   "convention": "Best = P10 \u00b7 Base = P50 \u00b7 Worst = P90 (80% central band).",
   "cuts_on_gbm": [
+    "85CL",
     "50CL",
+    "65CL",
     "insides",
     "flats",
     "eyes",
@@ -31,11 +33,144 @@
     "turk_thigh_bs"
   ],
   "forecasts": {
+    "85CL": {
+      "name": "85CL Lean Ground Beef",
+      "source_report": "LM_XB401",
+      "anchor_cwt": 411.48,
+      "anchor_lb": 4.1148,
+      "unit": "cwt",
+      "history_points": 1221,
+      "prior_day_cwt": 409.2,
+      "prior_day_lb": 4.092,
+      "range_52w_low_cwt": 323.48,
+      "range_52w_high_cwt": 411.48,
+      "range_52w_low_lb": 3.2348,
+      "range_52w_high_lb": 4.1148,
+      "range_52w_points": 203,
+      "chart_hist_cwt": [
+        370.48,
+        385.49,
+        396.86,
+        399.97,
+        407.69,
+        411.48
+      ],
+      "chart_hist_lb": [
+        3.7048,
+        3.8549,
+        3.9686,
+        3.9997,
+        4.0769,
+        4.1148
+      ],
+      "delta_day_cwt": 2.28,
+      "delta_day_pct": 0.56,
+      "model": "quantile_gbm_v1",
+      "horizons": {
+        "1w": {
+          "p10_cwt": 383.52,
+          "p50_cwt": 395.07,
+          "p90_cwt": 403.21,
+          "p10_lb": 3.8352,
+          "p50_lb": 3.9507,
+          "p90_lb": 4.0321
+        },
+        "4w": {
+          "p10_cwt": 373.76,
+          "p50_cwt": 383.13,
+          "p90_cwt": 394.82,
+          "p10_lb": 3.7376,
+          "p50_lb": 3.8313,
+          "p90_lb": 3.9482
+        },
+        "26w": {
+          "p10_cwt": 385.46,
+          "p50_cwt": 401.09,
+          "p90_cwt": 405.97,
+          "p10_lb": 3.8546,
+          "p50_lb": 4.0109,
+          "p90_lb": 4.0597
+        }
+      },
+      "curve": [
+        {
+          "week": 0,
+          "p10_cwt": 389.33,
+          "p50_cwt": 401.43,
+          "p90_cwt": 411.22,
+          "p10_lb": 3.8933,
+          "p50_lb": 4.0143,
+          "p90_lb": 4.1122
+        },
+        {
+          "week": 4,
+          "p10_cwt": 373.76,
+          "p50_cwt": 383.13,
+          "p90_cwt": 394.82,
+          "p10_lb": 3.7376,
+          "p50_lb": 3.8313,
+          "p90_lb": 3.9482
+        },
+        {
+          "week": 17,
+          "p10_cwt": 373.6,
+          "p50_cwt": 377.17,
+          "p90_cwt": 393.15,
+          "p10_lb": 3.736,
+          "p50_lb": 3.7717,
+          "p90_lb": 3.9315
+        },
+        {
+          "week": 21,
+          "p10_cwt": 379.42,
+          "p50_cwt": 392.77,
+          "p90_cwt": 403.91,
+          "p10_lb": 3.7942,
+          "p50_lb": 3.9277,
+          "p90_lb": 4.0391
+        },
+        {
+          "week": 26,
+          "p10_cwt": 385.46,
+          "p50_cwt": 401.09,
+          "p90_cwt": 405.97,
+          "p10_lb": 3.8546,
+          "p50_lb": 4.0109,
+          "p90_lb": 4.0597
+        }
+      ],
+      "backtest": {
+        "1w": {
+          "gbm_rmse_cwt": 11.56,
+          "seasonal_naive_rmse_cwt": 52.16,
+          "gbm_beats_baseline": true,
+          "test_size": 146
+        },
+        "4w": {
+          "gbm_rmse_cwt": 23.86,
+          "seasonal_naive_rmse_cwt": 50.75,
+          "gbm_beats_baseline": true,
+          "test_size": 142
+        },
+        "13w": {
+          "gbm_rmse_cwt": 55.23,
+          "seasonal_naive_rmse_cwt": 48.87,
+          "gbm_beats_baseline": false,
+          "test_size": 129
+        },
+        "26w": {
+          "gbm_rmse_cwt": 39.08,
+          "seasonal_naive_rmse_cwt": 49.41,
+          "gbm_beats_baseline": true,
+          "test_size": 111
+        }
+      }
+    },
     "50CL": {
       "name": "50CL Fat Trim",
       "source_report": "LM_XB401",
-      "anchor_cwt": 189.51,
-      "anchor_lb": 1.8951,
+      "anchor_cwt": 177.64,
+      "anchor_lb": 1.7764,
       "unit": "cwt",
       "history_points": 1185,
       "prior_day_cwt": 180.45,
@@ -44,14 +179,14 @@
       "range_52w_high_cwt": 268.14,
       "range_52w_low_lb": 1.1919,
       "range_52w_high_lb": 2.6814,
-      "range_52w_points": 199,
+      "range_52w_points": 197,
       "chart_hist_cwt": [
         152.13,
         159.03,
         188.93,
         194.5,
         176.41,
-        189.51
+        177.64
       ],
       "chart_hist_lb": [
         1.5213,
@@ -59,114 +194,273 @@
         1.8893,
         1.945,
         1.7641,
-        1.8951
+        1.7764
       ],
-      "delta_day_cwt": 9.06,
-      "delta_day_pct": 5.02,
+      "delta_day_cwt": -2.81,
+      "delta_day_pct": -1.56,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 175.56,
-          "p50_cwt": 193.77,
-          "p90_cwt": 198.59,
-          "p10_lb": 1.7556,
-          "p50_lb": 1.9377,
-          "p90_lb": 1.9859
+          "p10_cwt": 174.92,
+          "p50_cwt": 197.3,
+          "p90_cwt": 198.19,
+          "p10_lb": 1.7492,
+          "p50_lb": 1.973,
+          "p90_lb": 1.9819
         },
         "4w": {
-          "p10_cwt": 146.33,
-          "p50_cwt": 151.03,
-          "p90_cwt": 175.09,
-          "p10_lb": 1.4633,
-          "p50_lb": 1.5103,
-          "p90_lb": 1.7509
+          "p10_cwt": 146.03,
+          "p50_cwt": 154.7,
+          "p90_cwt": 173.52,
+          "p10_lb": 1.4603,
+          "p50_lb": 1.547,
+          "p90_lb": 1.7352
         },
         "26w": {
-          "p10_cwt": 85.72,
-          "p50_cwt": 95.48,
-          "p90_cwt": 158.27,
-          "p10_lb": 0.8572,
-          "p50_lb": 0.9548,
-          "p90_lb": 1.5827
+          "p10_cwt": 88.95,
+          "p50_cwt": 95.7,
+          "p90_cwt": 160.72,
+          "p10_lb": 0.8895,
+          "p50_lb": 0.957,
+          "p90_lb": 1.6072
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 177.56,
-          "p50_cwt": 189.52,
-          "p90_cwt": 190.97,
-          "p10_lb": 1.7756,
-          "p50_lb": 1.8952,
-          "p90_lb": 1.9097
+          "p10_cwt": 176.0,
+          "p50_cwt": 179.07,
+          "p90_cwt": 189.18,
+          "p10_lb": 1.76,
+          "p50_lb": 1.7907,
+          "p90_lb": 1.8918
         },
         {
           "week": 4,
-          "p10_cwt": 146.33,
-          "p50_cwt": 151.03,
-          "p90_cwt": 175.09,
-          "p10_lb": 1.4633,
-          "p50_lb": 1.5103,
-          "p90_lb": 1.7509
+          "p10_cwt": 146.03,
+          "p50_cwt": 154.7,
+          "p90_cwt": 173.52,
+          "p10_lb": 1.4603,
+          "p50_lb": 1.547,
+          "p90_lb": 1.7352
         },
         {
           "week": 26,
-          "p10_cwt": 85.72,
-          "p50_cwt": 95.48,
-          "p90_cwt": 158.27,
-          "p10_lb": 0.8572,
-          "p50_lb": 0.9548,
-          "p90_lb": 1.5827
+          "p10_cwt": 88.95,
+          "p50_cwt": 95.7,
+          "p90_cwt": 160.72,
+          "p10_lb": 0.8895,
+          "p50_lb": 0.957,
+          "p90_lb": 1.6072
         }
       ],
       "backtest": {
         "1w": {
-          "gbm_rmse_cwt": 21.51,
-          "seasonal_naive_rmse_cwt": 65.06,
+          "gbm_rmse_cwt": 21.44,
+          "seasonal_naive_rmse_cwt": 64.9,
           "gbm_beats_baseline": true,
           "test_size": 139
         },
         "4w": {
-          "gbm_rmse_cwt": 53.22,
-          "seasonal_naive_rmse_cwt": 65.68,
+          "gbm_rmse_cwt": 53.17,
+          "seasonal_naive_rmse_cwt": 65.53,
           "gbm_beats_baseline": true,
           "test_size": 135
         },
         "13w": {
-          "gbm_rmse_cwt": 75.43,
-          "seasonal_naive_rmse_cwt": 67.62,
+          "gbm_rmse_cwt": 75.32,
+          "seasonal_naive_rmse_cwt": 67.45,
           "gbm_beats_baseline": false,
           "test_size": 123
         },
         "26w": {
-          "gbm_rmse_cwt": 53.81,
-          "seasonal_naive_rmse_cwt": 65.46,
+          "gbm_rmse_cwt": 53.68,
+          "seasonal_naive_rmse_cwt": 65.25,
           "gbm_beats_baseline": true,
           "test_size": 104
+        }
+      }
+    },
+    "65CL": {
+      "name": "65CL Lean",
+      "source_report": "LM_XB401",
+      "anchor_cwt": 251.39,
+      "anchor_lb": 2.5139,
+      "unit": "cwt",
+      "history_points": 701,
+      "prior_day_cwt": 252.87,
+      "prior_day_lb": 2.5287,
+      "range_52w_low_cwt": 160.85,
+      "range_52w_high_cwt": 301.42,
+      "range_52w_low_lb": 1.6085,
+      "range_52w_high_lb": 3.0142,
+      "range_52w_points": 139,
+      "chart_hist_cwt": [
+        201.86,
+        208.64,
+        230.28,
+        226.78,
+        238.46,
+        251.39
+      ],
+      "chart_hist_lb": [
+        2.0186,
+        2.0864,
+        2.3028,
+        2.2678,
+        2.3846,
+        2.5139
+      ],
+      "delta_day_cwt": -1.48,
+      "delta_day_pct": -0.59,
+      "model": "quantile_gbm_v1",
+      "horizons": {
+        "1w": {
+          "p10_cwt": 205.16,
+          "p50_cwt": 244.99,
+          "p90_cwt": 276.82,
+          "p10_lb": 2.0516,
+          "p50_lb": 2.4499,
+          "p90_lb": 2.7682
+        },
+        "4w": {
+          "p10_cwt": 197.63,
+          "p50_cwt": 212.68,
+          "p90_cwt": 223.45,
+          "p10_lb": 1.9763,
+          "p50_lb": 2.1268,
+          "p90_lb": 2.2345
+        },
+        "13w": {
+          "p10_cwt": 190.82,
+          "p50_cwt": 196.67,
+          "p90_cwt": 205.28,
+          "p10_lb": 1.9082,
+          "p50_lb": 1.9667,
+          "p90_lb": 2.0528
+        },
+        "26w": {
+          "p10_cwt": 207.12,
+          "p50_cwt": 226.18,
+          "p90_cwt": 227.23,
+          "p10_lb": 2.0712,
+          "p50_lb": 2.2618,
+          "p90_lb": 2.2723
+        }
+      },
+      "curve": [
+        {
+          "week": 0,
+          "p10_cwt": 219.85,
+          "p50_cwt": 251.34,
+          "p90_cwt": 274.47,
+          "p10_lb": 2.1985,
+          "p50_lb": 2.5134,
+          "p90_lb": 2.7447
+        },
+        {
+          "week": 4,
+          "p10_cwt": 197.63,
+          "p50_cwt": 212.68,
+          "p90_cwt": 223.45,
+          "p10_lb": 1.9763,
+          "p50_lb": 2.1268,
+          "p90_lb": 2.2345
+        },
+        {
+          "week": 8,
+          "p10_cwt": 199.75,
+          "p50_cwt": 212.06,
+          "p90_cwt": 220.86,
+          "p10_lb": 1.9975,
+          "p50_lb": 2.1206,
+          "p90_lb": 2.2086
+        },
+        {
+          "week": 13,
+          "p10_cwt": 190.82,
+          "p50_cwt": 196.67,
+          "p90_cwt": 205.28,
+          "p10_lb": 1.9082,
+          "p50_lb": 1.9667,
+          "p90_lb": 2.0528
+        },
+        {
+          "week": 17,
+          "p10_cwt": 209.51,
+          "p50_cwt": 217.54,
+          "p90_cwt": 237.94,
+          "p10_lb": 2.0951,
+          "p50_lb": 2.1754,
+          "p90_lb": 2.3794
+        },
+        {
+          "week": 21,
+          "p10_cwt": 187.8,
+          "p50_cwt": 221.44,
+          "p90_cwt": 246.56,
+          "p10_lb": 1.878,
+          "p50_lb": 2.2144,
+          "p90_lb": 2.4656
+        },
+        {
+          "week": 26,
+          "p10_cwt": 207.12,
+          "p50_cwt": 226.18,
+          "p90_cwt": 227.23,
+          "p10_lb": 2.0712,
+          "p50_lb": 2.2618,
+          "p90_lb": 2.2723
+        }
+      ],
+      "backtest": {
+        "1w": {
+          "gbm_rmse_cwt": 20.14,
+          "seasonal_naive_rmse_cwt": 42.57,
+          "gbm_beats_baseline": true,
+          "test_size": 73
+        },
+        "4w": {
+          "gbm_rmse_cwt": 20.16,
+          "seasonal_naive_rmse_cwt": 43.41,
+          "gbm_beats_baseline": true,
+          "test_size": 68
+        },
+        "13w": {
+          "gbm_rmse_cwt": 36.29,
+          "seasonal_naive_rmse_cwt": 40.37,
+          "gbm_beats_baseline": true,
+          "test_size": 56
+        },
+        "26w": {
+          "gbm_rmse_cwt": 18.99,
+          "seasonal_naive_rmse_cwt": 30.98,
+          "gbm_beats_baseline": true,
+          "test_size": 38
         }
       }
     },
     "insides": {
       "name": "Insides \u2014 100VL Inside Round",
       "source_report": "LM_XB405",
-      "anchor_cwt": 501.78,
-      "anchor_lb": 5.0178,
+      "anchor_cwt": 503.85,
+      "anchor_lb": 5.0385,
       "unit": "cwt",
       "history_points": 1281,
       "prior_day_cwt": 503.78,
       "prior_day_lb": 5.0378,
-      "range_52w_low_cwt": 444.69,
+      "range_52w_low_cwt": 450.11,
       "range_52w_high_cwt": 622.8,
-      "range_52w_low_lb": 4.4469,
+      "range_52w_low_lb": 4.5011,
       "range_52w_high_lb": 6.228,
-      "range_52w_points": 215,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         460.98,
         484.29,
         498.1,
         529.35,
         508.33,
-        501.78
+        503.85
       ],
       "chart_hist_lb": [
         4.6098,
@@ -174,132 +468,132 @@
         4.981,
         5.2935,
         5.0833,
-        5.0178
+        5.0385
       ],
-      "delta_day_cwt": -2.0,
-      "delta_day_pct": -0.4,
+      "delta_day_cwt": 0.07,
+      "delta_day_pct": 0.01,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 507.45,
-          "p50_cwt": 527.12,
-          "p90_cwt": 527.33,
-          "p10_lb": 5.0745,
-          "p50_lb": 5.2712,
-          "p90_lb": 5.2733
+          "p10_cwt": 509.17,
+          "p50_cwt": 527.21,
+          "p90_cwt": 527.71,
+          "p10_lb": 5.0917,
+          "p50_lb": 5.2721,
+          "p90_lb": 5.2771
         },
         "4w": {
-          "p10_cwt": 482.51,
-          "p50_cwt": 517.38,
-          "p90_cwt": 535.89,
-          "p10_lb": 4.8251,
-          "p50_lb": 5.1738,
-          "p90_lb": 5.3589
+          "p10_cwt": 482.59,
+          "p50_cwt": 517.83,
+          "p90_cwt": 536.17,
+          "p10_lb": 4.8259,
+          "p50_lb": 5.1783,
+          "p90_lb": 5.3617
         },
         "13w": {
-          "p10_cwt": 484.0,
-          "p50_cwt": 485.65,
-          "p90_cwt": 506.85,
-          "p10_lb": 4.84,
-          "p50_lb": 4.8565,
-          "p90_lb": 5.0685
+          "p10_cwt": 483.1,
+          "p50_cwt": 488.85,
+          "p90_cwt": 506.09,
+          "p10_lb": 4.831,
+          "p50_lb": 4.8885,
+          "p90_lb": 5.0609
         },
         "26w": {
-          "p10_cwt": 487.14,
-          "p50_cwt": 540.66,
-          "p90_cwt": 593.49,
-          "p10_lb": 4.8714,
-          "p50_lb": 5.4066,
-          "p90_lb": 5.9349
+          "p10_cwt": 487.16,
+          "p50_cwt": 533.77,
+          "p90_cwt": 595.31,
+          "p10_lb": 4.8716,
+          "p50_lb": 5.3377,
+          "p90_lb": 5.9531
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 501.58,
-          "p50_cwt": 501.91,
-          "p90_cwt": 502.09,
-          "p10_lb": 5.0158,
-          "p50_lb": 5.0191,
-          "p90_lb": 5.0209
+          "p10_cwt": 502.75,
+          "p50_cwt": 503.6,
+          "p90_cwt": 503.66,
+          "p10_lb": 5.0275,
+          "p50_lb": 5.036,
+          "p90_lb": 5.0366
         },
         {
           "week": 4,
-          "p10_cwt": 482.51,
-          "p50_cwt": 517.38,
-          "p90_cwt": 535.89,
-          "p10_lb": 4.8251,
-          "p50_lb": 5.1738,
-          "p90_lb": 5.3589
+          "p10_cwt": 482.59,
+          "p50_cwt": 517.83,
+          "p90_cwt": 536.17,
+          "p10_lb": 4.8259,
+          "p50_lb": 5.1783,
+          "p90_lb": 5.3617
         },
         {
           "week": 8,
-          "p10_cwt": 484.64,
-          "p50_cwt": 515.02,
-          "p90_cwt": 531.0,
-          "p10_lb": 4.8464,
-          "p50_lb": 5.1502,
-          "p90_lb": 5.31
+          "p10_cwt": 484.13,
+          "p50_cwt": 521.33,
+          "p90_cwt": 531.41,
+          "p10_lb": 4.8413,
+          "p50_lb": 5.2133,
+          "p90_lb": 5.3141
         },
         {
           "week": 13,
-          "p10_cwt": 484.0,
-          "p50_cwt": 485.65,
-          "p90_cwt": 506.85,
-          "p10_lb": 4.84,
-          "p50_lb": 4.8565,
-          "p90_lb": 5.0685
+          "p10_cwt": 483.1,
+          "p50_cwt": 488.85,
+          "p90_cwt": 506.09,
+          "p10_lb": 4.831,
+          "p50_lb": 4.8885,
+          "p90_lb": 5.0609
         },
         {
           "week": 17,
-          "p10_cwt": 474.02,
-          "p50_cwt": 480.81,
-          "p90_cwt": 481.84,
-          "p10_lb": 4.7402,
-          "p50_lb": 4.8081,
-          "p90_lb": 4.8184
+          "p10_cwt": 474.12,
+          "p50_cwt": 480.27,
+          "p90_cwt": 482.19,
+          "p10_lb": 4.7412,
+          "p50_lb": 4.8027,
+          "p90_lb": 4.8219
         },
         {
           "week": 21,
-          "p10_cwt": 474.62,
-          "p50_cwt": 497.84,
-          "p90_cwt": 544.47,
-          "p10_lb": 4.7462,
-          "p50_lb": 4.9784,
-          "p90_lb": 5.4447
+          "p10_cwt": 474.51,
+          "p50_cwt": 496.65,
+          "p90_cwt": 544.32,
+          "p10_lb": 4.7451,
+          "p50_lb": 4.9665,
+          "p90_lb": 5.4432
         },
         {
           "week": 26,
-          "p10_cwt": 487.14,
-          "p50_cwt": 540.66,
-          "p90_cwt": 593.49,
-          "p10_lb": 4.8714,
-          "p50_lb": 5.4066,
-          "p90_lb": 5.9349
+          "p10_cwt": 487.16,
+          "p50_cwt": 533.77,
+          "p90_cwt": 595.31,
+          "p10_lb": 4.8716,
+          "p50_lb": 5.3377,
+          "p90_lb": 5.9531
         }
       ],
       "backtest": {
         "1w": {
           "gbm_rmse_cwt": 31.38,
-          "seasonal_naive_rmse_cwt": 88.48,
+          "seasonal_naive_rmse_cwt": 88.49,
           "gbm_beats_baseline": true,
           "test_size": 157
         },
         "4w": {
-          "gbm_rmse_cwt": 38.53,
-          "seasonal_naive_rmse_cwt": 86.82,
+          "gbm_rmse_cwt": 38.54,
+          "seasonal_naive_rmse_cwt": 86.83,
           "gbm_beats_baseline": true,
           "test_size": 152
         },
         "13w": {
-          "gbm_rmse_cwt": 33.39,
-          "seasonal_naive_rmse_cwt": 84.88,
+          "gbm_rmse_cwt": 33.4,
+          "seasonal_naive_rmse_cwt": 84.89,
           "gbm_beats_baseline": true,
           "test_size": 140
         },
         "26w": {
-          "gbm_rmse_cwt": 44.45,
-          "seasonal_naive_rmse_cwt": 81.85,
+          "gbm_rmse_cwt": 44.47,
+          "seasonal_naive_rmse_cwt": 81.87,
           "gbm_beats_baseline": true,
           "test_size": 122
         }
@@ -308,8 +602,8 @@
     "flats": {
       "name": "Flats & Eyes Combo \u2014 100VL",
       "source_report": "LM_XB405",
-      "anchor_cwt": 499.35,
-      "anchor_lb": 4.9935,
+      "anchor_cwt": 504.2,
+      "anchor_lb": 5.042,
       "unit": "cwt",
       "history_points": 1271,
       "prior_day_cwt": 508.99,
@@ -318,14 +612,14 @@
       "range_52w_high_cwt": 525.27,
       "range_52w_low_lb": 4.2171,
       "range_52w_high_lb": 5.2527,
-      "range_52w_points": 215,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         450.5,
         480.38,
         501.62,
         503.29,
         488.24,
-        499.35
+        504.2
       ],
       "chart_hist_lb": [
         4.505,
@@ -333,132 +627,132 @@
         5.0162,
         5.0329,
         4.8824,
-        4.9935
+        5.042
       ],
-      "delta_day_cwt": -9.64,
-      "delta_day_pct": -1.89,
+      "delta_day_cwt": -4.79,
+      "delta_day_pct": -0.94,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 480.05,
-          "p50_cwt": 504.94,
-          "p90_cwt": 512.65,
-          "p10_lb": 4.8005,
-          "p50_lb": 5.0494,
-          "p90_lb": 5.1265
+          "p10_cwt": 480.63,
+          "p50_cwt": 507.2,
+          "p90_cwt": 512.62,
+          "p10_lb": 4.8063,
+          "p50_lb": 5.072,
+          "p90_lb": 5.1262
         },
         "4w": {
-          "p10_cwt": 473.48,
-          "p50_cwt": 496.31,
-          "p90_cwt": 501.36,
-          "p10_lb": 4.7348,
-          "p50_lb": 4.9631,
-          "p90_lb": 5.0136
+          "p10_cwt": 473.47,
+          "p50_cwt": 494.0,
+          "p90_cwt": 500.54,
+          "p10_lb": 4.7347,
+          "p50_lb": 4.94,
+          "p90_lb": 5.0054
         },
         "13w": {
-          "p10_cwt": 480.63,
-          "p50_cwt": 498.3,
-          "p90_cwt": 499.02,
-          "p10_lb": 4.8063,
-          "p50_lb": 4.983,
-          "p90_lb": 4.9902
+          "p10_cwt": 482.77,
+          "p50_cwt": 497.61,
+          "p90_cwt": 498.56,
+          "p10_lb": 4.8277,
+          "p50_lb": 4.9761,
+          "p90_lb": 4.9856
         },
         "26w": {
-          "p10_cwt": 474.41,
-          "p50_cwt": 504.0,
-          "p90_cwt": 516.04,
-          "p10_lb": 4.7441,
-          "p50_lb": 5.04,
-          "p90_lb": 5.1604
+          "p10_cwt": 472.19,
+          "p50_cwt": 502.02,
+          "p90_cwt": 515.58,
+          "p10_lb": 4.7219,
+          "p50_lb": 5.0202,
+          "p90_lb": 5.1558
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 489.81,
-          "p50_cwt": 504.29,
-          "p90_cwt": 512.2,
-          "p10_lb": 4.8981,
-          "p50_lb": 5.0429,
-          "p90_lb": 5.122
+          "p10_cwt": 489.93,
+          "p50_cwt": 506.22,
+          "p90_cwt": 512.22,
+          "p10_lb": 4.8993,
+          "p50_lb": 5.0622,
+          "p90_lb": 5.1222
         },
         {
           "week": 4,
-          "p10_cwt": 473.48,
-          "p50_cwt": 496.31,
-          "p90_cwt": 501.36,
-          "p10_lb": 4.7348,
-          "p50_lb": 4.9631,
-          "p90_lb": 5.0136
+          "p10_cwt": 473.47,
+          "p50_cwt": 494.0,
+          "p90_cwt": 500.54,
+          "p10_lb": 4.7347,
+          "p50_lb": 4.94,
+          "p90_lb": 5.0054
         },
         {
           "week": 8,
-          "p10_cwt": 486.62,
-          "p50_cwt": 508.48,
-          "p90_cwt": 516.55,
-          "p10_lb": 4.8662,
-          "p50_lb": 5.0848,
-          "p90_lb": 5.1655
+          "p10_cwt": 488.11,
+          "p50_cwt": 507.07,
+          "p90_cwt": 514.62,
+          "p10_lb": 4.8811,
+          "p50_lb": 5.0707,
+          "p90_lb": 5.1462
         },
         {
           "week": 13,
-          "p10_cwt": 480.63,
-          "p50_cwt": 498.3,
-          "p90_cwt": 499.02,
-          "p10_lb": 4.8063,
-          "p50_lb": 4.983,
-          "p90_lb": 4.9902
+          "p10_cwt": 482.77,
+          "p50_cwt": 497.61,
+          "p90_cwt": 498.56,
+          "p10_lb": 4.8277,
+          "p50_lb": 4.9761,
+          "p90_lb": 4.9856
         },
         {
           "week": 17,
-          "p10_cwt": 475.39,
-          "p50_cwt": 486.63,
-          "p90_cwt": 493.25,
-          "p10_lb": 4.7539,
-          "p50_lb": 4.8663,
-          "p90_lb": 4.9325
+          "p10_cwt": 475.3,
+          "p50_cwt": 487.26,
+          "p90_cwt": 490.33,
+          "p10_lb": 4.753,
+          "p50_lb": 4.8726,
+          "p90_lb": 4.9033
         },
         {
           "week": 21,
           "p10_cwt": 467.23,
-          "p50_cwt": 488.83,
-          "p90_cwt": 503.56,
+          "p50_cwt": 492.84,
+          "p90_cwt": 503.33,
           "p10_lb": 4.6723,
-          "p50_lb": 4.8883,
-          "p90_lb": 5.0356
+          "p50_lb": 4.9284,
+          "p90_lb": 5.0333
         },
         {
           "week": 26,
-          "p10_cwt": 474.41,
-          "p50_cwt": 504.0,
-          "p90_cwt": 516.04,
-          "p10_lb": 4.7441,
-          "p50_lb": 5.04,
-          "p90_lb": 5.1604
+          "p10_cwt": 472.19,
+          "p50_cwt": 502.02,
+          "p90_cwt": 515.58,
+          "p10_lb": 4.7219,
+          "p50_lb": 5.0202,
+          "p90_lb": 5.1558
         }
       ],
       "backtest": {
         "1w": {
-          "gbm_rmse_cwt": 13.44,
-          "seasonal_naive_rmse_cwt": 87.85,
+          "gbm_rmse_cwt": 13.45,
+          "seasonal_naive_rmse_cwt": 87.89,
           "gbm_beats_baseline": true,
           "test_size": 155
         },
         "4w": {
-          "gbm_rmse_cwt": 31.58,
-          "seasonal_naive_rmse_cwt": 85.92,
+          "gbm_rmse_cwt": 31.59,
+          "seasonal_naive_rmse_cwt": 85.96,
           "gbm_beats_baseline": true,
           "test_size": 150
         },
         "13w": {
-          "gbm_rmse_cwt": 61.83,
-          "seasonal_naive_rmse_cwt": 80.9,
+          "gbm_rmse_cwt": 61.86,
+          "seasonal_naive_rmse_cwt": 80.95,
           "gbm_beats_baseline": true,
           "test_size": 138
         },
         "26w": {
-          "gbm_rmse_cwt": 57.45,
-          "seasonal_naive_rmse_cwt": 76.94,
+          "gbm_rmse_cwt": 57.51,
+          "seasonal_naive_rmse_cwt": 77.0,
           "gbm_beats_baseline": true,
           "test_size": 120
         }
@@ -467,24 +761,24 @@
     "eyes": {
       "name": "Eye of Round \u2014 171C",
       "source_report": "LM_XB405",
-      "anchor_cwt": 535.05,
-      "anchor_lb": 5.3505,
+      "anchor_cwt": 534.5,
+      "anchor_lb": 5.345,
       "unit": "cwt",
       "history_points": 1281,
       "prior_day_cwt": 471.77,
       "prior_day_lb": 4.7177,
       "range_52w_low_cwt": 419.08,
-      "range_52w_high_cwt": 535.05,
+      "range_52w_high_cwt": 534.5,
       "range_52w_low_lb": 4.1908,
-      "range_52w_high_lb": 5.3505,
-      "range_52w_points": 215,
+      "range_52w_high_lb": 5.345,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         431.65,
         420.76,
         458.73,
         497.67,
         510.78,
-        535.05
+        534.5
       ],
       "chart_hist_lb": [
         4.3165,
@@ -492,132 +786,132 @@
         4.5873,
         4.9767,
         5.1078,
-        5.3505
+        5.345
       ],
-      "delta_day_cwt": 63.28,
-      "delta_day_pct": 13.41,
+      "delta_day_cwt": 62.73,
+      "delta_day_pct": 13.3,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 482.92,
-          "p50_cwt": 490.61,
-          "p90_cwt": 516.7,
-          "p10_lb": 4.8292,
-          "p50_lb": 4.9061,
-          "p90_lb": 5.167
+          "p10_cwt": 482.96,
+          "p50_cwt": 490.39,
+          "p90_cwt": 517.92,
+          "p10_lb": 4.8296,
+          "p50_lb": 4.9039,
+          "p90_lb": 5.1792
         },
         "4w": {
-          "p10_cwt": 455.66,
-          "p50_cwt": 486.14,
-          "p90_cwt": 508.97,
-          "p10_lb": 4.5566,
-          "p50_lb": 4.8614,
-          "p90_lb": 5.0897
+          "p10_cwt": 456.6,
+          "p50_cwt": 486.53,
+          "p90_cwt": 510.02,
+          "p10_lb": 4.566,
+          "p50_lb": 4.8653,
+          "p90_lb": 5.1002
         },
         "13w": {
-          "p10_cwt": 465.46,
-          "p50_cwt": 486.96,
-          "p90_cwt": 500.5,
-          "p10_lb": 4.6546,
-          "p50_lb": 4.8696,
-          "p90_lb": 5.005
+          "p10_cwt": 465.81,
+          "p50_cwt": 486.55,
+          "p90_cwt": 501.09,
+          "p10_lb": 4.6581,
+          "p50_lb": 4.8655,
+          "p90_lb": 5.0109
         },
         "26w": {
-          "p10_cwt": 452.57,
-          "p50_cwt": 467.03,
-          "p90_cwt": 501.02,
-          "p10_lb": 4.5257,
-          "p50_lb": 4.6703,
-          "p90_lb": 5.0102
+          "p10_cwt": 452.48,
+          "p50_cwt": 467.29,
+          "p90_cwt": 501.08,
+          "p10_lb": 4.5248,
+          "p50_lb": 4.6729,
+          "p90_lb": 5.0108
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 460.88,
-          "p50_cwt": 468.09,
-          "p90_cwt": 523.48,
-          "p10_lb": 4.6088,
-          "p50_lb": 4.6809,
-          "p90_lb": 5.2348
+          "p10_cwt": 459.38,
+          "p50_cwt": 468.41,
+          "p90_cwt": 524.16,
+          "p10_lb": 4.5938,
+          "p50_lb": 4.6841,
+          "p90_lb": 5.2416
         },
         {
           "week": 4,
-          "p10_cwt": 455.66,
-          "p50_cwt": 486.14,
-          "p90_cwt": 508.97,
-          "p10_lb": 4.5566,
-          "p50_lb": 4.8614,
-          "p90_lb": 5.0897
+          "p10_cwt": 456.6,
+          "p50_cwt": 486.53,
+          "p90_cwt": 510.02,
+          "p10_lb": 4.566,
+          "p50_lb": 4.8653,
+          "p90_lb": 5.1002
         },
         {
           "week": 8,
-          "p10_cwt": 476.15,
-          "p50_cwt": 504.72,
-          "p90_cwt": 516.9,
-          "p10_lb": 4.7615,
-          "p50_lb": 5.0472,
-          "p90_lb": 5.169
+          "p10_cwt": 476.17,
+          "p50_cwt": 505.69,
+          "p90_cwt": 515.82,
+          "p10_lb": 4.7617,
+          "p50_lb": 5.0569,
+          "p90_lb": 5.1582
         },
         {
           "week": 13,
-          "p10_cwt": 465.46,
-          "p50_cwt": 486.96,
-          "p90_cwt": 500.5,
-          "p10_lb": 4.6546,
-          "p50_lb": 4.8696,
-          "p90_lb": 5.005
+          "p10_cwt": 465.81,
+          "p50_cwt": 486.55,
+          "p90_cwt": 501.09,
+          "p10_lb": 4.6581,
+          "p50_lb": 4.8655,
+          "p90_lb": 5.0109
         },
         {
           "week": 17,
-          "p10_cwt": 444.55,
-          "p50_cwt": 458.11,
-          "p90_cwt": 487.85,
-          "p10_lb": 4.4455,
-          "p50_lb": 4.5811,
-          "p90_lb": 4.8785
+          "p10_cwt": 442.85,
+          "p50_cwt": 456.55,
+          "p90_cwt": 487.48,
+          "p10_lb": 4.4285,
+          "p50_lb": 4.5655,
+          "p90_lb": 4.8748
         },
         {
           "week": 21,
-          "p10_cwt": 444.04,
-          "p50_cwt": 464.27,
-          "p90_cwt": 485.71,
-          "p10_lb": 4.4404,
-          "p50_lb": 4.6427,
-          "p90_lb": 4.8571
+          "p10_cwt": 444.15,
+          "p50_cwt": 464.54,
+          "p90_cwt": 487.52,
+          "p10_lb": 4.4415,
+          "p50_lb": 4.6454,
+          "p90_lb": 4.8752
         },
         {
           "week": 26,
-          "p10_cwt": 452.57,
-          "p50_cwt": 467.03,
-          "p90_cwt": 501.02,
-          "p10_lb": 4.5257,
-          "p50_lb": 4.6703,
-          "p90_lb": 5.0102
+          "p10_cwt": 452.48,
+          "p50_cwt": 467.29,
+          "p90_cwt": 501.08,
+          "p10_lb": 4.5248,
+          "p50_lb": 4.6729,
+          "p90_lb": 5.0108
         }
       ],
       "backtest": {
         "1w": {
-          "gbm_rmse_cwt": 26.18,
-          "seasonal_naive_rmse_cwt": 90.95,
+          "gbm_rmse_cwt": 26.17,
+          "seasonal_naive_rmse_cwt": 90.94,
           "gbm_beats_baseline": true,
           "test_size": 157
         },
         "4w": {
-          "gbm_rmse_cwt": 22.04,
-          "seasonal_naive_rmse_cwt": 87.43,
+          "gbm_rmse_cwt": 22.03,
+          "seasonal_naive_rmse_cwt": 87.42,
           "gbm_beats_baseline": true,
           "test_size": 152
         },
         "13w": {
-          "gbm_rmse_cwt": 47.64,
-          "seasonal_naive_rmse_cwt": 77.63,
+          "gbm_rmse_cwt": 47.63,
+          "seasonal_naive_rmse_cwt": 77.62,
           "gbm_beats_baseline": true,
           "test_size": 140
         },
         "26w": {
-          "gbm_rmse_cwt": 35.63,
-          "seasonal_naive_rmse_cwt": 64.64,
+          "gbm_rmse_cwt": 35.62,
+          "seasonal_naive_rmse_cwt": 64.63,
           "gbm_beats_baseline": true,
           "test_size": 122
         }
@@ -626,8 +920,8 @@
     "pork_trim_72": {
       "name": "72% Pork Trim",
       "source_report": "LM_PK602",
-      "anchor_cwt": 84.73,
-      "anchor_lb": 0.8473,
+      "anchor_cwt": 84.56,
+      "anchor_lb": 0.8456,
       "unit": "cwt",
       "history_points": 1279,
       "prior_day_cwt": 105.86,
@@ -636,14 +930,14 @@
       "range_52w_high_cwt": 148.58,
       "range_52w_low_lb": 0.8013,
       "range_52w_high_lb": 1.4858,
-      "range_52w_points": 215,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         107.04,
         105.0,
         106.53,
         104.88,
         105.19,
-        84.73
+        84.56
       ],
       "chart_hist_lb": [
         1.0704,
@@ -651,108 +945,108 @@
         1.0653,
         1.0488,
         1.0519,
-        0.8473
+        0.8456
       ],
-      "delta_day_cwt": -21.13,
-      "delta_day_pct": -19.96,
+      "delta_day_cwt": -21.3,
+      "delta_day_pct": -20.12,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 86.28,
-          "p50_cwt": 108.26,
-          "p90_cwt": 126.51,
-          "p10_lb": 0.8628,
-          "p50_lb": 1.0826,
-          "p90_lb": 1.2651
+          "p10_cwt": 87.82,
+          "p50_cwt": 108.66,
+          "p90_cwt": 128.23,
+          "p10_lb": 0.8782,
+          "p50_lb": 1.0866,
+          "p90_lb": 1.2823
         },
         "4w": {
-          "p10_cwt": 107.69,
-          "p50_cwt": 129.63,
-          "p90_cwt": 131.12,
-          "p10_lb": 1.0769,
-          "p50_lb": 1.2963,
-          "p90_lb": 1.3112
+          "p10_cwt": 106.36,
+          "p50_cwt": 129.67,
+          "p90_cwt": 131.83,
+          "p10_lb": 1.0636,
+          "p50_lb": 1.2967,
+          "p90_lb": 1.3183
         },
         "13w": {
-          "p10_cwt": 93.15,
-          "p50_cwt": 103.68,
-          "p90_cwt": 113.23,
-          "p10_lb": 0.9315,
-          "p50_lb": 1.0368,
-          "p90_lb": 1.1323
+          "p10_cwt": 91.81,
+          "p50_cwt": 103.67,
+          "p90_cwt": 113.36,
+          "p10_lb": 0.9181,
+          "p50_lb": 1.0367,
+          "p90_lb": 1.1336
         },
         "26w": {
-          "p10_cwt": 102.1,
-          "p50_cwt": 109.27,
-          "p90_cwt": 112.65,
-          "p10_lb": 1.021,
-          "p50_lb": 1.0927,
-          "p90_lb": 1.1265
+          "p10_cwt": 102.17,
+          "p50_cwt": 109.08,
+          "p90_cwt": 112.55,
+          "p10_lb": 1.0217,
+          "p50_lb": 1.0908,
+          "p90_lb": 1.1255
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 85.21,
-          "p50_cwt": 103.15,
-          "p90_cwt": 110.41,
-          "p10_lb": 0.8521,
-          "p50_lb": 1.0315,
-          "p90_lb": 1.1041
+          "p10_cwt": 84.87,
+          "p50_cwt": 103.22,
+          "p90_cwt": 110.49,
+          "p10_lb": 0.8487,
+          "p50_lb": 1.0322,
+          "p90_lb": 1.1049
         },
         {
           "week": 4,
-          "p10_cwt": 107.69,
-          "p50_cwt": 129.63,
-          "p90_cwt": 131.12,
-          "p10_lb": 1.0769,
-          "p50_lb": 1.2963,
-          "p90_lb": 1.3112
+          "p10_cwt": 106.36,
+          "p50_cwt": 129.67,
+          "p90_cwt": 131.83,
+          "p10_lb": 1.0636,
+          "p50_lb": 1.2967,
+          "p90_lb": 1.3183
         },
         {
           "week": 8,
-          "p10_cwt": 100.94,
-          "p50_cwt": 124.58,
-          "p90_cwt": 124.59,
-          "p10_lb": 1.0094,
-          "p50_lb": 1.2458,
-          "p90_lb": 1.2459
+          "p10_cwt": 102.71,
+          "p50_cwt": 124.32,
+          "p90_cwt": 124.34,
+          "p10_lb": 1.0271,
+          "p50_lb": 1.2432,
+          "p90_lb": 1.2434
         },
         {
           "week": 13,
-          "p10_cwt": 93.15,
-          "p50_cwt": 103.68,
-          "p90_cwt": 113.23,
-          "p10_lb": 0.9315,
-          "p50_lb": 1.0368,
-          "p90_lb": 1.1323
+          "p10_cwt": 91.81,
+          "p50_cwt": 103.67,
+          "p90_cwt": 113.36,
+          "p10_lb": 0.9181,
+          "p50_lb": 1.0367,
+          "p90_lb": 1.1336
         },
         {
           "week": 17,
-          "p10_cwt": 85.87,
-          "p50_cwt": 93.4,
-          "p90_cwt": 106.28,
-          "p10_lb": 0.8587,
-          "p50_lb": 0.934,
-          "p90_lb": 1.0628
+          "p10_cwt": 87.65,
+          "p50_cwt": 93.35,
+          "p90_cwt": 105.7,
+          "p10_lb": 0.8765,
+          "p50_lb": 0.9335,
+          "p90_lb": 1.057
         },
         {
           "week": 21,
-          "p10_cwt": 95.64,
-          "p50_cwt": 96.6,
-          "p90_cwt": 104.07,
-          "p10_lb": 0.9564,
-          "p50_lb": 0.966,
-          "p90_lb": 1.0407
+          "p10_cwt": 95.57,
+          "p50_cwt": 96.05,
+          "p90_cwt": 104.05,
+          "p10_lb": 0.9557,
+          "p50_lb": 0.9605,
+          "p90_lb": 1.0405
         },
         {
           "week": 26,
-          "p10_cwt": 102.1,
-          "p50_cwt": 109.27,
-          "p90_cwt": 112.65,
-          "p10_lb": 1.021,
-          "p50_lb": 1.0927,
-          "p90_lb": 1.1265
+          "p10_cwt": 102.17,
+          "p50_cwt": 109.08,
+          "p90_cwt": 112.55,
+          "p10_lb": 1.0217,
+          "p50_lb": 1.0908,
+          "p90_lb": 1.1255
         }
       ],
       "backtest": {
@@ -785,8 +1079,8 @@
     "pork_trim_42": {
       "name": "42% Pork Trim",
       "source_report": "LM_PK602",
-      "anchor_cwt": 94.7,
-      "anchor_lb": 0.947,
+      "anchor_cwt": 94.78,
+      "anchor_lb": 0.9478,
       "unit": "cwt",
       "history_points": 1270,
       "prior_day_cwt": 93.2,
@@ -795,14 +1089,14 @@
       "range_52w_high_cwt": 139.36,
       "range_52w_low_lb": 0.3552,
       "range_52w_high_lb": 1.3936,
-      "range_52w_points": 211,
+      "range_52w_points": 209,
       "chart_hist_cwt": [
         55.41,
         68.97,
         77.99,
         74.3,
         62.94,
-        94.7
+        94.78
       ],
       "chart_hist_lb": [
         0.5541,
@@ -810,108 +1104,108 @@
         0.7799,
         0.743,
         0.6294,
-        0.947
+        0.9478
       ],
-      "delta_day_cwt": 1.5,
-      "delta_day_pct": 1.61,
+      "delta_day_cwt": 1.58,
+      "delta_day_pct": 1.7,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 75.13,
-          "p50_cwt": 93.31,
-          "p90_cwt": 111.02,
-          "p10_lb": 0.7513,
-          "p50_lb": 0.9331,
-          "p90_lb": 1.1102
+          "p10_cwt": 75.06,
+          "p50_cwt": 94.4,
+          "p90_cwt": 110.94,
+          "p10_lb": 0.7506,
+          "p50_lb": 0.944,
+          "p90_lb": 1.1094
         },
         "4w": {
-          "p10_cwt": 73.02,
-          "p50_cwt": 113.04,
+          "p10_cwt": 75.24,
+          "p50_cwt": 112.52,
           "p90_cwt": 129.58,
-          "p10_lb": 0.7302,
-          "p50_lb": 1.1304,
+          "p10_lb": 0.7524,
+          "p50_lb": 1.1252,
           "p90_lb": 1.2958
         },
         "13w": {
-          "p10_cwt": 67.3,
-          "p50_cwt": 79.65,
-          "p90_cwt": 79.88,
-          "p10_lb": 0.673,
-          "p50_lb": 0.7965,
-          "p90_lb": 0.7988
+          "p10_cwt": 64.98,
+          "p50_cwt": 73.61,
+          "p90_cwt": 83.77,
+          "p10_lb": 0.6498,
+          "p50_lb": 0.7361,
+          "p90_lb": 0.8377
         },
         "26w": {
-          "p10_cwt": 71.13,
-          "p50_cwt": 80.34,
-          "p90_cwt": 81.3,
-          "p10_lb": 0.7113,
-          "p50_lb": 0.8034,
-          "p90_lb": 0.813
+          "p10_cwt": 71.45,
+          "p50_cwt": 80.17,
+          "p90_cwt": 81.54,
+          "p10_lb": 0.7145,
+          "p50_lb": 0.8017,
+          "p90_lb": 0.8154
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 87.84,
-          "p50_cwt": 94.03,
-          "p90_cwt": 97.18,
-          "p10_lb": 0.8784,
-          "p50_lb": 0.9403,
-          "p90_lb": 0.9718
+          "p10_cwt": 86.78,
+          "p50_cwt": 93.44,
+          "p90_cwt": 96.59,
+          "p10_lb": 0.8678,
+          "p50_lb": 0.9344,
+          "p90_lb": 0.9659
         },
         {
           "week": 4,
-          "p10_cwt": 73.02,
-          "p50_cwt": 113.04,
+          "p10_cwt": 75.24,
+          "p50_cwt": 112.52,
           "p90_cwt": 129.58,
-          "p10_lb": 0.7302,
-          "p50_lb": 1.1304,
+          "p10_lb": 0.7524,
+          "p50_lb": 1.1252,
           "p90_lb": 1.2958
         },
         {
           "week": 8,
-          "p10_cwt": 66.24,
-          "p50_cwt": 98.73,
-          "p90_cwt": 105.89,
-          "p10_lb": 0.6624,
-          "p50_lb": 0.9873,
-          "p90_lb": 1.0589
+          "p10_cwt": 66.27,
+          "p50_cwt": 96.92,
+          "p90_cwt": 107.09,
+          "p10_lb": 0.6627,
+          "p50_lb": 0.9692,
+          "p90_lb": 1.0709
         },
         {
           "week": 13,
-          "p10_cwt": 67.3,
-          "p50_cwt": 79.65,
-          "p90_cwt": 79.88,
-          "p10_lb": 0.673,
-          "p50_lb": 0.7965,
-          "p90_lb": 0.7988
+          "p10_cwt": 64.98,
+          "p50_cwt": 73.61,
+          "p90_cwt": 83.77,
+          "p10_lb": 0.6498,
+          "p50_lb": 0.7361,
+          "p90_lb": 0.8377
         },
         {
           "week": 17,
-          "p10_cwt": 41.94,
-          "p50_cwt": 50.08,
-          "p90_cwt": 56.99,
-          "p10_lb": 0.4194,
-          "p50_lb": 0.5008,
-          "p90_lb": 0.5699
+          "p10_cwt": 41.57,
+          "p50_cwt": 49.73,
+          "p90_cwt": 55.7,
+          "p10_lb": 0.4157,
+          "p50_lb": 0.4973,
+          "p90_lb": 0.557
         },
         {
           "week": 21,
-          "p10_cwt": 40.75,
-          "p50_cwt": 52.28,
-          "p90_cwt": 58.77,
-          "p10_lb": 0.4075,
-          "p50_lb": 0.5228,
-          "p90_lb": 0.5877
+          "p10_cwt": 40.82,
+          "p50_cwt": 52.24,
+          "p90_cwt": 59.27,
+          "p10_lb": 0.4082,
+          "p50_lb": 0.5224,
+          "p90_lb": 0.5927
         },
         {
           "week": 26,
-          "p10_cwt": 71.13,
-          "p50_cwt": 80.34,
-          "p90_cwt": 81.3,
-          "p10_lb": 0.7113,
-          "p50_lb": 0.8034,
-          "p90_lb": 0.813
+          "p10_cwt": 71.45,
+          "p50_cwt": 80.17,
+          "p90_cwt": 81.54,
+          "p10_lb": 0.7145,
+          "p50_lb": 0.8017,
+          "p90_lb": 0.8154
         }
       ],
       "backtest": {
@@ -928,7 +1222,7 @@
           "test_size": 150
         },
         "13w": {
-          "gbm_rmse_cwt": 13.74,
+          "gbm_rmse_cwt": 13.75,
           "seasonal_naive_rmse_cwt": 18.78,
           "gbm_beats_baseline": true,
           "test_size": 138
@@ -944,8 +1238,8 @@
     "pork_belly_13_17": {
       "name": "Pork Belly Derind 13-17#",
       "source_report": "LM_PK602",
-      "anchor_cwt": 132.66,
-      "anchor_lb": 1.3266,
+      "anchor_cwt": 144.6,
+      "anchor_lb": 1.446,
       "unit": "cwt",
       "history_points": 1261,
       "prior_day_cwt": 153.29,
@@ -954,14 +1248,14 @@
       "range_52w_high_cwt": 286.32,
       "range_52w_low_lb": 1.2955,
       "range_52w_high_lb": 2.8632,
-      "range_52w_points": 215,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         192.33,
         216.42,
         183.67,
         165.37,
         136.89,
-        132.66
+        144.6
       ],
       "chart_hist_lb": [
         1.9233,
@@ -969,106 +1263,106 @@
         1.8367,
         1.6537,
         1.3689,
-        1.3266
+        1.446
       ],
-      "delta_day_cwt": -20.63,
-      "delta_day_pct": -13.46,
+      "delta_day_cwt": -8.69,
+      "delta_day_pct": -5.67,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 152.1,
-          "p50_cwt": 156.72,
-          "p90_cwt": 177.94,
-          "p10_lb": 1.521,
-          "p50_lb": 1.5672,
-          "p90_lb": 1.7794
+          "p10_cwt": 152.54,
+          "p50_cwt": 156.68,
+          "p90_cwt": 176.52,
+          "p10_lb": 1.5254,
+          "p50_lb": 1.5668,
+          "p90_lb": 1.7652
         },
         "13w": {
-          "p10_cwt": 170.6,
-          "p50_cwt": 188.22,
-          "p90_cwt": 202.05,
-          "p10_lb": 1.706,
-          "p50_lb": 1.8822,
-          "p90_lb": 2.0205
+          "p10_cwt": 167.38,
+          "p50_cwt": 187.65,
+          "p90_cwt": 203.25,
+          "p10_lb": 1.6738,
+          "p50_lb": 1.8765,
+          "p90_lb": 2.0325
         },
         "26w": {
-          "p10_cwt": 163.31,
-          "p50_cwt": 175.57,
-          "p90_cwt": 209.38,
-          "p10_lb": 1.6331,
-          "p50_lb": 1.7557,
-          "p90_lb": 2.0938
+          "p10_cwt": 161.92,
+          "p50_cwt": 175.41,
+          "p90_cwt": 205.89,
+          "p10_lb": 1.6192,
+          "p50_lb": 1.7541,
+          "p90_lb": 2.0589
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 132.64,
-          "p50_cwt": 150.97,
-          "p90_cwt": 176.3,
-          "p10_lb": 1.3264,
-          "p50_lb": 1.5097,
-          "p90_lb": 1.763
+          "p10_cwt": 144.29,
+          "p50_cwt": 146.54,
+          "p90_cwt": 166.8,
+          "p10_lb": 1.4429,
+          "p50_lb": 1.4654,
+          "p90_lb": 1.668
         },
         {
           "week": 13,
-          "p10_cwt": 170.6,
-          "p50_cwt": 188.22,
-          "p90_cwt": 202.05,
-          "p10_lb": 1.706,
-          "p50_lb": 1.8822,
-          "p90_lb": 2.0205
+          "p10_cwt": 167.38,
+          "p50_cwt": 187.65,
+          "p90_cwt": 203.25,
+          "p10_lb": 1.6738,
+          "p50_lb": 1.8765,
+          "p90_lb": 2.0325
         },
         {
           "week": 17,
-          "p10_cwt": 151.11,
-          "p50_cwt": 164.95,
-          "p90_cwt": 199.3,
-          "p10_lb": 1.5111,
-          "p50_lb": 1.6495,
-          "p90_lb": 1.993
+          "p10_cwt": 149.74,
+          "p50_cwt": 163.92,
+          "p90_cwt": 198.85,
+          "p10_lb": 1.4974,
+          "p50_lb": 1.6392,
+          "p90_lb": 1.9885
         },
         {
           "week": 21,
-          "p10_cwt": 157.25,
-          "p50_cwt": 170.6,
-          "p90_cwt": 185.33,
-          "p10_lb": 1.5725,
-          "p50_lb": 1.706,
-          "p90_lb": 1.8533
+          "p10_cwt": 157.38,
+          "p50_cwt": 171.11,
+          "p90_cwt": 184.69,
+          "p10_lb": 1.5738,
+          "p50_lb": 1.7111,
+          "p90_lb": 1.8469
         },
         {
           "week": 26,
-          "p10_cwt": 163.31,
-          "p50_cwt": 175.57,
-          "p90_cwt": 209.38,
-          "p10_lb": 1.6331,
-          "p50_lb": 1.7557,
-          "p90_lb": 2.0938
+          "p10_cwt": 161.92,
+          "p50_cwt": 175.41,
+          "p90_cwt": 205.89,
+          "p10_lb": 1.6192,
+          "p50_lb": 1.7541,
+          "p90_lb": 2.0589
         }
       ],
       "backtest": {
         "1w": {
-          "gbm_rmse_cwt": 21.13,
-          "seasonal_naive_rmse_cwt": 29.52,
+          "gbm_rmse_cwt": 21.04,
+          "seasonal_naive_rmse_cwt": 29.45,
           "gbm_beats_baseline": true,
           "test_size": 156
         },
         "4w": {
-          "gbm_rmse_cwt": 28.56,
-          "seasonal_naive_rmse_cwt": 28.46,
+          "gbm_rmse_cwt": 28.49,
+          "seasonal_naive_rmse_cwt": 28.38,
           "gbm_beats_baseline": false,
           "test_size": 151
         },
         "13w": {
-          "gbm_rmse_cwt": 20.29,
-          "seasonal_naive_rmse_cwt": 26.99,
+          "gbm_rmse_cwt": 20.12,
+          "seasonal_naive_rmse_cwt": 26.91,
           "gbm_beats_baseline": true,
           "test_size": 139
         },
         "26w": {
-          "gbm_rmse_cwt": 24.27,
-          "seasonal_naive_rmse_cwt": 27.19,
+          "gbm_rmse_cwt": 24.21,
+          "seasonal_naive_rmse_cwt": 27.09,
           "gbm_beats_baseline": true,
           "test_size": 121
         }
@@ -1077,8 +1371,8 @@
     "pork_loin": {
       "name": "Pork Loin Primal",
       "source_report": "LM_PK602",
-      "anchor_cwt": 93.42,
-      "anchor_lb": 0.9342,
+      "anchor_cwt": 94.22,
+      "anchor_lb": 0.9422,
       "unit": "cwt",
       "history_points": 1281,
       "prior_day_cwt": 92.52,
@@ -1087,14 +1381,14 @@
       "range_52w_high_cwt": 102.39,
       "range_52w_low_lb": 0.8058,
       "range_52w_high_lb": 1.0239,
-      "range_52w_points": 215,
+      "range_52w_points": 213,
       "chart_hist_cwt": [
         91.68,
         93.99,
         89.82,
         88.15,
         89.85,
-        93.42
+        94.22
       ],
       "chart_hist_lb": [
         0.9168,
@@ -1102,113 +1396,113 @@
         0.8982,
         0.8815,
         0.8985,
-        0.9342
+        0.9422
       ],
-      "delta_day_cwt": 0.9,
-      "delta_day_pct": 0.97,
+      "delta_day_cwt": 1.7,
+      "delta_day_pct": 1.84,
       "model": "quantile_gbm_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 91.36,
-          "p50_cwt": 93.74,
-          "p90_cwt": 96.85,
-          "p10_lb": 0.9136,
-          "p50_lb": 0.9374,
-          "p90_lb": 0.9685
+          "p10_cwt": 91.6,
+          "p50_cwt": 93.68,
+          "p90_cwt": 97.04,
+          "p10_lb": 0.916,
+          "p50_lb": 0.9368,
+          "p90_lb": 0.9704
         },
         "4w": {
-          "p10_cwt": 95.24,
-          "p50_cwt": 99.16,
-          "p90_cwt": 99.42,
-          "p10_lb": 0.9524,
-          "p50_lb": 0.9916,
-          "p90_lb": 0.9942
+          "p10_cwt": 95.16,
+          "p50_cwt": 98.97,
+          "p90_cwt": 99.24,
+          "p10_lb": 0.9516,
+          "p50_lb": 0.9897,
+          "p90_lb": 0.9924
         },
         "13w": {
-          "p10_cwt": 87.38,
-          "p50_cwt": 88.48,
-          "p90_cwt": 92.34,
-          "p10_lb": 0.8738,
-          "p50_lb": 0.8848,
-          "p90_lb": 0.9234
+          "p10_cwt": 87.36,
+          "p50_cwt": 88.65,
+          "p90_cwt": 92.74,
+          "p10_lb": 0.8736,
+          "p50_lb": 0.8865,
+          "p90_lb": 0.9274
         },
         "26w": {
-          "p10_cwt": 90.29,
-          "p50_cwt": 91.99,
-          "p90_cwt": 93.91,
-          "p10_lb": 0.9029,
-          "p50_lb": 0.9199,
-          "p90_lb": 0.9391
+          "p10_cwt": 90.23,
+          "p50_cwt": 91.94,
+          "p90_cwt": 94.28,
+          "p10_lb": 0.9023,
+          "p50_lb": 0.9194,
+          "p90_lb": 0.9428
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 90.37,
-          "p50_cwt": 93.13,
-          "p90_cwt": 93.43,
-          "p10_lb": 0.9037,
-          "p50_lb": 0.9313,
-          "p90_lb": 0.9343
+          "p10_cwt": 89.89,
+          "p50_cwt": 92.24,
+          "p90_cwt": 94.23,
+          "p10_lb": 0.8989,
+          "p50_lb": 0.9224,
+          "p90_lb": 0.9423
         },
         {
           "week": 4,
-          "p10_cwt": 95.24,
-          "p50_cwt": 99.16,
-          "p90_cwt": 99.42,
-          "p10_lb": 0.9524,
-          "p50_lb": 0.9916,
-          "p90_lb": 0.9942
+          "p10_cwt": 95.16,
+          "p50_cwt": 98.97,
+          "p90_cwt": 99.24,
+          "p10_lb": 0.9516,
+          "p50_lb": 0.9897,
+          "p90_lb": 0.9924
         },
         {
           "week": 8,
-          "p10_cwt": 94.83,
-          "p50_cwt": 96.98,
-          "p90_cwt": 97.99,
-          "p10_lb": 0.9483,
-          "p50_lb": 0.9698,
-          "p90_lb": 0.9799
+          "p10_cwt": 95.06,
+          "p50_cwt": 97.23,
+          "p90_cwt": 99.08,
+          "p10_lb": 0.9506,
+          "p50_lb": 0.9723,
+          "p90_lb": 0.9908
         },
         {
           "week": 13,
-          "p10_cwt": 87.38,
-          "p50_cwt": 88.48,
-          "p90_cwt": 92.34,
-          "p10_lb": 0.8738,
-          "p50_lb": 0.8848,
-          "p90_lb": 0.9234
+          "p10_cwt": 87.36,
+          "p50_cwt": 88.65,
+          "p90_cwt": 92.74,
+          "p10_lb": 0.8736,
+          "p50_lb": 0.8865,
+          "p90_lb": 0.9274
         },
         {
           "week": 17,
-          "p10_cwt": 82.76,
-          "p50_cwt": 84.15,
-          "p90_cwt": 86.7,
-          "p10_lb": 0.8276,
-          "p50_lb": 0.8415,
-          "p90_lb": 0.867
+          "p10_cwt": 82.89,
+          "p50_cwt": 84.68,
+          "p90_cwt": 86.98,
+          "p10_lb": 0.8289,
+          "p50_lb": 0.8468,
+          "p90_lb": 0.8698
         },
         {
           "week": 21,
-          "p10_cwt": 85.32,
-          "p50_cwt": 87.31,
-          "p90_cwt": 88.48,
-          "p10_lb": 0.8532,
-          "p50_lb": 0.8731,
-          "p90_lb": 0.8848
+          "p10_cwt": 85.15,
+          "p50_cwt": 87.12,
+          "p90_cwt": 88.47,
+          "p10_lb": 0.8515,
+          "p50_lb": 0.8712,
+          "p90_lb": 0.8847
         },
         {
           "week": 26,
-          "p10_cwt": 90.29,
-          "p50_cwt": 91.99,
-          "p90_cwt": 93.91,
-          "p10_lb": 0.9029,
-          "p50_lb": 0.9199,
-          "p90_lb": 0.9391
+          "p10_cwt": 90.23,
+          "p50_cwt": 91.94,
+          "p90_cwt": 94.28,
+          "p10_lb": 0.9023,
+          "p50_lb": 0.9194,
+          "p90_lb": 0.9428
         }
       ],
       "backtest": {
         "1w": {
-          "gbm_rmse_cwt": 2.59,
+          "gbm_rmse_cwt": 2.58,
           "seasonal_naive_rmse_cwt": 8.68,
           "gbm_beats_baseline": true,
           "test_size": 157
@@ -1236,8 +1530,8 @@
     "pork_ham_insides": {
       "name": "Pork Ham Insides",
       "source_report": "LM_PK602",
-      "anchor_cwt": 134.51,
-      "anchor_lb": 1.3451,
+      "anchor_cwt": 144.35,
+      "anchor_lb": 1.4435,
       "unit": "cwt",
       "history_points": 6,
       "prior_day_cwt": 142.25,
@@ -1253,7 +1547,7 @@
         null,
         135.62,
         132.18,
-        134.51
+        144.35
       ],
       "chart_hist_lb": [
         null,
@@ -1261,108 +1555,108 @@
         null,
         1.3562,
         1.3218,
-        1.3451
+        1.4435
       ],
-      "delta_day_cwt": -7.74,
-      "delta_day_pct": -5.44,
+      "delta_day_cwt": 2.1,
+      "delta_day_pct": 1.48,
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 129.36,
-          "p50_cwt": 133.49,
-          "p90_cwt": 137.62,
-          "p10_lb": 1.2936,
-          "p50_lb": 1.3349,
-          "p90_lb": 1.3762
+          "p10_cwt": 138.78,
+          "p50_cwt": 143.22,
+          "p90_cwt": 147.65,
+          "p10_lb": 1.3878,
+          "p50_lb": 1.4322,
+          "p90_lb": 1.4765
         },
         "4w": {
-          "p10_cwt": 122.03,
-          "p50_cwt": 130.09,
-          "p90_cwt": 138.14,
-          "p10_lb": 1.2203,
-          "p50_lb": 1.3009,
-          "p90_lb": 1.3814
+          "p10_cwt": 130.86,
+          "p50_cwt": 139.5,
+          "p90_cwt": 148.13,
+          "p10_lb": 1.3086,
+          "p50_lb": 1.395,
+          "p90_lb": 1.4813
         },
         "13w": {
-          "p10_cwt": 107.35,
-          "p50_cwt": 120.84,
-          "p90_cwt": 134.32,
-          "p10_lb": 1.0735,
-          "p50_lb": 1.2084,
-          "p90_lb": 1.3432
+          "p10_cwt": 115.32,
+          "p50_cwt": 129.8,
+          "p90_cwt": 144.29,
+          "p10_lb": 1.1532,
+          "p50_lb": 1.298,
+          "p90_lb": 1.4429
         },
         "26w": {
-          "p10_cwt": 104.6,
-          "p50_cwt": 124.2,
-          "p90_cwt": 143.8,
-          "p10_lb": 1.046,
-          "p50_lb": 1.242,
-          "p90_lb": 1.438
+          "p10_cwt": 113.03,
+          "p50_cwt": 134.22,
+          "p90_cwt": 155.4,
+          "p10_lb": 1.1303,
+          "p50_lb": 1.3422,
+          "p90_lb": 1.554
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 132.94,
-          "p50_cwt": 134.51,
-          "p90_cwt": 136.08,
-          "p10_lb": 1.3294,
-          "p50_lb": 1.3451,
-          "p90_lb": 1.3608
+          "p10_cwt": 142.66,
+          "p50_cwt": 144.35,
+          "p90_cwt": 146.04,
+          "p10_lb": 1.4266,
+          "p50_lb": 1.4435,
+          "p90_lb": 1.4604
         },
         {
           "week": 4,
-          "p10_cwt": 122.03,
-          "p50_cwt": 130.09,
-          "p90_cwt": 138.14,
-          "p10_lb": 1.2203,
-          "p50_lb": 1.3009,
-          "p90_lb": 1.3814
+          "p10_cwt": 130.86,
+          "p50_cwt": 139.5,
+          "p90_cwt": 148.13,
+          "p10_lb": 1.3086,
+          "p50_lb": 1.395,
+          "p90_lb": 1.4813
         },
         {
           "week": 8,
-          "p10_cwt": 114.42,
-          "p50_cwt": 125.39,
-          "p90_cwt": 136.37,
-          "p10_lb": 1.1442,
-          "p50_lb": 1.2539,
-          "p90_lb": 1.3637
+          "p10_cwt": 122.71,
+          "p50_cwt": 134.49,
+          "p90_cwt": 146.26,
+          "p10_lb": 1.2271,
+          "p50_lb": 1.3449,
+          "p90_lb": 1.4626
         },
         {
           "week": 13,
-          "p10_cwt": 107.35,
-          "p50_cwt": 120.84,
-          "p90_cwt": 134.32,
-          "p10_lb": 1.0735,
-          "p50_lb": 1.2084,
-          "p90_lb": 1.3432
+          "p10_cwt": 115.32,
+          "p50_cwt": 129.8,
+          "p90_cwt": 144.29,
+          "p10_lb": 1.1532,
+          "p50_lb": 1.298,
+          "p90_lb": 1.4429
         },
         {
           "week": 17,
-          "p10_cwt": 104.08,
-          "p50_cwt": 119.31,
-          "p90_cwt": 134.54,
-          "p10_lb": 1.0408,
-          "p50_lb": 1.1931,
-          "p90_lb": 1.3454
+          "p10_cwt": 112.03,
+          "p50_cwt": 128.42,
+          "p90_cwt": 144.81,
+          "p10_lb": 1.1203,
+          "p50_lb": 1.2842,
+          "p90_lb": 1.4481
         },
         {
           "week": 21,
-          "p10_cwt": 103.09,
-          "p50_cwt": 120.13,
-          "p90_cwt": 137.17,
-          "p10_lb": 1.0309,
-          "p50_lb": 1.2013,
-          "p90_lb": 1.3717
+          "p10_cwt": 111.19,
+          "p50_cwt": 129.57,
+          "p90_cwt": 147.95,
+          "p10_lb": 1.1119,
+          "p50_lb": 1.2957,
+          "p90_lb": 1.4795
         },
         {
           "week": 26,
-          "p10_cwt": 104.6,
-          "p50_cwt": 124.2,
-          "p90_cwt": 143.8,
-          "p10_lb": 1.046,
-          "p50_lb": 1.242,
-          "p90_lb": 1.438
+          "p10_cwt": 113.03,
+          "p50_cwt": 134.22,
+          "p90_cwt": 155.4,
+          "p10_lb": 1.1303,
+          "p50_lb": 1.3422,
+          "p90_lb": 1.554
         }
       ],
       "priors": {
@@ -1375,16 +1669,16 @@
     "pork_ham_knuckles": {
       "name": "Pork Ham Knuckles",
       "source_report": "LM_PK602",
-      "anchor_cwt": 184.6,
-      "anchor_lb": 1.846,
+      "anchor_cwt": 161.23,
+      "anchor_lb": 1.6123,
       "unit": "cwt",
       "history_points": 6,
       "prior_day_cwt": 151.55,
       "prior_day_lb": 1.5155,
       "range_52w_low_cwt": 138.64,
-      "range_52w_high_cwt": 184.6,
+      "range_52w_high_cwt": 162.07,
       "range_52w_low_lb": 1.3864,
-      "range_52w_high_lb": 1.846,
+      "range_52w_high_lb": 1.6207,
       "range_52w_points": 6,
       "chart_hist_cwt": [
         null,
@@ -1392,7 +1686,7 @@
         null,
         147.11,
         138.64,
-        184.6
+        161.23
       ],
       "chart_hist_lb": [
         null,
@@ -1400,108 +1694,108 @@
         null,
         1.4711,
         1.3864,
-        1.846
+        1.6123
       ],
-      "delta_day_cwt": 33.05,
-      "delta_day_pct": 21.81,
+      "delta_day_cwt": 9.68,
+      "delta_day_pct": 6.39,
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 177.53,
-          "p50_cwt": 183.2,
-          "p90_cwt": 188.87,
-          "p10_lb": 1.7753,
-          "p50_lb": 1.832,
-          "p90_lb": 1.8887
+          "p10_cwt": 155.01,
+          "p50_cwt": 159.97,
+          "p90_cwt": 164.92,
+          "p10_lb": 1.5501,
+          "p50_lb": 1.5997,
+          "p90_lb": 1.6492
         },
         "4w": {
-          "p10_cwt": 167.48,
-          "p50_cwt": 178.53,
-          "p90_cwt": 189.58,
-          "p10_lb": 1.6748,
-          "p50_lb": 1.7853,
-          "p90_lb": 1.8958
+          "p10_cwt": 146.16,
+          "p50_cwt": 155.81,
+          "p90_cwt": 165.46,
+          "p10_lb": 1.4616,
+          "p50_lb": 1.5581,
+          "p90_lb": 1.6546
         },
         "13w": {
-          "p10_cwt": 147.33,
-          "p50_cwt": 165.84,
-          "p90_cwt": 184.34,
-          "p10_lb": 1.4733,
-          "p50_lb": 1.6584,
-          "p90_lb": 1.8434
+          "p10_cwt": 128.8,
+          "p50_cwt": 144.98,
+          "p90_cwt": 161.16,
+          "p10_lb": 1.288,
+          "p50_lb": 1.4498,
+          "p90_lb": 1.6116
         },
         "26w": {
-          "p10_cwt": 143.55,
-          "p50_cwt": 170.45,
-          "p90_cwt": 197.35,
-          "p10_lb": 1.4355,
-          "p50_lb": 1.7045,
-          "p90_lb": 1.9735
+          "p10_cwt": 126.25,
+          "p50_cwt": 149.91,
+          "p90_cwt": 173.57,
+          "p10_lb": 1.2625,
+          "p50_lb": 1.4991,
+          "p90_lb": 1.7357
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 182.44,
-          "p50_cwt": 184.6,
-          "p90_cwt": 186.76,
-          "p10_lb": 1.8244,
-          "p50_lb": 1.846,
-          "p90_lb": 1.8676
+          "p10_cwt": 159.34,
+          "p50_cwt": 161.23,
+          "p90_cwt": 163.12,
+          "p10_lb": 1.5934,
+          "p50_lb": 1.6123,
+          "p90_lb": 1.6312
         },
         {
           "week": 4,
-          "p10_cwt": 167.48,
-          "p50_cwt": 178.53,
-          "p90_cwt": 189.58,
-          "p10_lb": 1.6748,
-          "p50_lb": 1.7853,
-          "p90_lb": 1.8958
+          "p10_cwt": 146.16,
+          "p50_cwt": 155.81,
+          "p90_cwt": 165.46,
+          "p10_lb": 1.4616,
+          "p50_lb": 1.5581,
+          "p90_lb": 1.6546
         },
         {
           "week": 8,
-          "p10_cwt": 157.02,
-          "p50_cwt": 172.09,
-          "p90_cwt": 187.16,
-          "p10_lb": 1.5702,
-          "p50_lb": 1.7209,
-          "p90_lb": 1.8716
+          "p10_cwt": 137.06,
+          "p50_cwt": 150.22,
+          "p90_cwt": 163.37,
+          "p10_lb": 1.3706,
+          "p50_lb": 1.5022,
+          "p90_lb": 1.6337
         },
         {
           "week": 13,
-          "p10_cwt": 147.33,
-          "p50_cwt": 165.84,
-          "p90_cwt": 184.34,
-          "p10_lb": 1.4733,
-          "p50_lb": 1.6584,
-          "p90_lb": 1.8434
+          "p10_cwt": 128.8,
+          "p50_cwt": 144.98,
+          "p90_cwt": 161.16,
+          "p10_lb": 1.288,
+          "p50_lb": 1.4498,
+          "p90_lb": 1.6116
         },
         {
           "week": 17,
-          "p10_cwt": 142.84,
-          "p50_cwt": 163.74,
-          "p90_cwt": 184.64,
-          "p10_lb": 1.4284,
-          "p50_lb": 1.6374,
-          "p90_lb": 1.8464
+          "p10_cwt": 125.13,
+          "p50_cwt": 143.44,
+          "p90_cwt": 161.74,
+          "p10_lb": 1.2513,
+          "p50_lb": 1.4344,
+          "p90_lb": 1.6174
         },
         {
           "week": 21,
-          "p10_cwt": 141.48,
-          "p50_cwt": 164.87,
-          "p90_cwt": 188.25,
-          "p10_lb": 1.4148,
-          "p50_lb": 1.6487,
-          "p90_lb": 1.8825
+          "p10_cwt": 124.2,
+          "p50_cwt": 144.73,
+          "p90_cwt": 165.25,
+          "p10_lb": 1.242,
+          "p50_lb": 1.4473,
+          "p90_lb": 1.6525
         },
         {
           "week": 26,
-          "p10_cwt": 143.55,
-          "p50_cwt": 170.45,
-          "p90_cwt": 197.35,
-          "p10_lb": 1.4355,
-          "p50_lb": 1.7045,
-          "p90_lb": 1.9735
+          "p10_cwt": 126.25,
+          "p50_cwt": 149.91,
+          "p90_cwt": 173.57,
+          "p10_lb": 1.2625,
+          "p50_lb": 1.4991,
+          "p90_lb": 1.7357
         }
       ],
       "priors": {
@@ -1514,8 +1808,8 @@
     "pork_ham_outsides": {
       "name": "Pork Ham Outsides",
       "source_report": "LM_PK602",
-      "anchor_cwt": 132.11,
-      "anchor_lb": 1.3211,
+      "anchor_cwt": 140.4,
+      "anchor_lb": 1.404,
       "unit": "cwt",
       "history_points": 5,
       "prior_day_cwt": 129.11,
@@ -1531,7 +1825,7 @@
         null,
         136.02,
         131.41,
-        132.11
+        140.4
       ],
       "chart_hist_lb": [
         null,
@@ -1539,108 +1833,108 @@
         null,
         1.3602,
         1.3141,
-        1.3211
+        1.404
       ],
-      "delta_day_cwt": 3.0,
-      "delta_day_pct": 2.32,
+      "delta_day_cwt": 11.29,
+      "delta_day_pct": 8.74,
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 127.05,
-          "p50_cwt": 131.11,
-          "p90_cwt": 135.17,
-          "p10_lb": 1.2705,
-          "p50_lb": 1.3111,
-          "p90_lb": 1.3517
+          "p10_cwt": 134.99,
+          "p50_cwt": 139.3,
+          "p90_cwt": 143.61,
+          "p10_lb": 1.3499,
+          "p50_lb": 1.393,
+          "p90_lb": 1.4361
         },
         "4w": {
-          "p10_cwt": 119.85,
-          "p50_cwt": 127.76,
-          "p90_cwt": 135.67,
-          "p10_lb": 1.1985,
-          "p50_lb": 1.2776,
-          "p90_lb": 1.3567
+          "p10_cwt": 127.28,
+          "p50_cwt": 135.68,
+          "p90_cwt": 144.08,
+          "p10_lb": 1.2728,
+          "p50_lb": 1.3568,
+          "p90_lb": 1.4408
         },
         "13w": {
-          "p10_cwt": 105.44,
-          "p50_cwt": 118.68,
-          "p90_cwt": 131.93,
-          "p10_lb": 1.0544,
-          "p50_lb": 1.1868,
-          "p90_lb": 1.3193
+          "p10_cwt": 112.16,
+          "p50_cwt": 126.25,
+          "p90_cwt": 140.34,
+          "p10_lb": 1.1216,
+          "p50_lb": 1.2625,
+          "p90_lb": 1.4034
         },
         "26w": {
-          "p10_cwt": 102.73,
-          "p50_cwt": 121.98,
-          "p90_cwt": 141.24,
-          "p10_lb": 1.0273,
-          "p50_lb": 1.2198,
-          "p90_lb": 1.4124
+          "p10_cwt": 109.94,
+          "p50_cwt": 130.55,
+          "p90_cwt": 151.15,
+          "p10_lb": 1.0994,
+          "p50_lb": 1.3055,
+          "p90_lb": 1.5115
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 130.56,
-          "p50_cwt": 132.11,
-          "p90_cwt": 133.66,
-          "p10_lb": 1.3056,
-          "p50_lb": 1.3211,
-          "p90_lb": 1.3366
+          "p10_cwt": 138.76,
+          "p50_cwt": 140.4,
+          "p90_cwt": 142.04,
+          "p10_lb": 1.3876,
+          "p50_lb": 1.404,
+          "p90_lb": 1.4204
         },
         {
           "week": 4,
-          "p10_cwt": 119.85,
-          "p50_cwt": 127.76,
-          "p90_cwt": 135.67,
-          "p10_lb": 1.1985,
-          "p50_lb": 1.2776,
-          "p90_lb": 1.3567
+          "p10_cwt": 127.28,
+          "p50_cwt": 135.68,
+          "p90_cwt": 144.08,
+          "p10_lb": 1.2728,
+          "p50_lb": 1.3568,
+          "p90_lb": 1.4408
         },
         {
           "week": 8,
-          "p10_cwt": 112.37,
-          "p50_cwt": 123.16,
-          "p90_cwt": 133.94,
-          "p10_lb": 1.1237,
-          "p50_lb": 1.2316,
-          "p90_lb": 1.3394
+          "p10_cwt": 119.36,
+          "p50_cwt": 130.81,
+          "p90_cwt": 142.26,
+          "p10_lb": 1.1936,
+          "p50_lb": 1.3081,
+          "p90_lb": 1.4226
         },
         {
           "week": 13,
-          "p10_cwt": 105.44,
-          "p50_cwt": 118.68,
-          "p90_cwt": 131.93,
-          "p10_lb": 1.0544,
-          "p50_lb": 1.1868,
-          "p90_lb": 1.3193
+          "p10_cwt": 112.16,
+          "p50_cwt": 126.25,
+          "p90_cwt": 140.34,
+          "p10_lb": 1.1216,
+          "p50_lb": 1.2625,
+          "p90_lb": 1.4034
         },
         {
           "week": 17,
-          "p10_cwt": 102.23,
-          "p50_cwt": 117.18,
-          "p90_cwt": 132.14,
-          "p10_lb": 1.0223,
-          "p50_lb": 1.1718,
-          "p90_lb": 1.3214
+          "p10_cwt": 108.96,
+          "p50_cwt": 124.9,
+          "p90_cwt": 140.85,
+          "p10_lb": 1.0896,
+          "p50_lb": 1.249,
+          "p90_lb": 1.4085
         },
         {
           "week": 21,
-          "p10_cwt": 101.25,
-          "p50_cwt": 117.99,
-          "p90_cwt": 134.72,
-          "p10_lb": 1.0125,
-          "p50_lb": 1.1799,
-          "p90_lb": 1.3472
+          "p10_cwt": 108.15,
+          "p50_cwt": 126.03,
+          "p90_cwt": 143.9,
+          "p10_lb": 1.0815,
+          "p50_lb": 1.2603,
+          "p90_lb": 1.439
         },
         {
           "week": 26,
-          "p10_cwt": 102.73,
-          "p50_cwt": 121.98,
-          "p90_cwt": 141.24,
-          "p10_lb": 1.0273,
-          "p50_lb": 1.2198,
-          "p90_lb": 1.4124
+          "p10_cwt": 109.94,
+          "p50_cwt": 130.55,
+          "p90_cwt": 151.15,
+          "p10_lb": 1.0994,
+          "p50_lb": 1.3055,
+          "p90_lb": 1.5115
         }
       ],
       "priors": {
@@ -1685,36 +1979,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 111.02,
-          "p50_cwt": 115.3,
-          "p90_cwt": 119.59,
-          "p10_lb": 1.1102,
-          "p50_lb": 1.153,
-          "p90_lb": 1.1959
+          "p10_cwt": 110.96,
+          "p50_cwt": 115.24,
+          "p90_cwt": 119.52,
+          "p10_lb": 1.1096,
+          "p50_lb": 1.1524,
+          "p90_lb": 1.1952
         },
         "4w": {
-          "p10_cwt": 106.0,
-          "p50_cwt": 114.5,
-          "p90_cwt": 123.01,
-          "p10_lb": 1.06,
-          "p50_lb": 1.145,
-          "p90_lb": 1.2301
+          "p10_cwt": 105.76,
+          "p50_cwt": 114.25,
+          "p90_cwt": 122.74,
+          "p10_lb": 1.0576,
+          "p50_lb": 1.1425,
+          "p90_lb": 1.2274
         },
         "13w": {
-          "p10_cwt": 91.73,
-          "p50_cwt": 105.91,
-          "p90_cwt": 120.1,
-          "p10_lb": 0.9173,
-          "p50_lb": 1.0591,
-          "p90_lb": 1.201
+          "p10_cwt": 91.24,
+          "p50_cwt": 105.35,
+          "p90_cwt": 119.46,
+          "p10_lb": 0.9124,
+          "p50_lb": 1.0535,
+          "p90_lb": 1.1946
         },
         "26w": {
-          "p10_cwt": 77.23,
-          "p50_cwt": 95.28,
-          "p90_cwt": 113.32,
-          "p10_lb": 0.7723,
-          "p50_lb": 0.9528,
-          "p90_lb": 1.1332
+          "p10_cwt": 77.21,
+          "p50_cwt": 95.25,
+          "p90_cwt": 113.29,
+          "p10_lb": 0.7721,
+          "p50_lb": 0.9525,
+          "p90_lb": 1.1329
         }
       },
       "curve": [
@@ -1729,57 +2023,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 106.0,
-          "p50_cwt": 114.5,
-          "p90_cwt": 123.01,
-          "p10_lb": 1.06,
-          "p50_lb": 1.145,
-          "p90_lb": 1.2301
+          "p10_cwt": 105.76,
+          "p50_cwt": 114.25,
+          "p90_cwt": 122.74,
+          "p10_lb": 1.0576,
+          "p50_lb": 1.1425,
+          "p90_lb": 1.2274
         },
         {
           "week": 8,
-          "p10_cwt": 99.83,
-          "p50_cwt": 111.55,
-          "p90_cwt": 123.27,
-          "p10_lb": 0.9983,
-          "p50_lb": 1.1155,
-          "p90_lb": 1.2327
+          "p10_cwt": 99.43,
+          "p50_cwt": 111.1,
+          "p90_cwt": 122.78,
+          "p10_lb": 0.9943,
+          "p50_lb": 1.111,
+          "p90_lb": 1.2278
         },
         {
           "week": 13,
-          "p10_cwt": 91.73,
-          "p50_cwt": 105.91,
-          "p90_cwt": 120.1,
-          "p10_lb": 0.9173,
-          "p50_lb": 1.0591,
-          "p90_lb": 1.201
+          "p10_cwt": 91.24,
+          "p50_cwt": 105.35,
+          "p90_cwt": 119.46,
+          "p10_lb": 0.9124,
+          "p50_lb": 1.0535,
+          "p90_lb": 1.1946
         },
         {
           "week": 17,
-          "p10_cwt": 85.64,
-          "p50_cwt": 101.12,
-          "p90_cwt": 116.61,
-          "p10_lb": 0.8564,
-          "p50_lb": 1.0112,
-          "p90_lb": 1.1661
+          "p10_cwt": 85.21,
+          "p50_cwt": 100.62,
+          "p90_cwt": 116.03,
+          "p10_lb": 0.8521,
+          "p50_lb": 1.0062,
+          "p90_lb": 1.1603
         },
         {
           "week": 21,
-          "p10_cwt": 80.75,
-          "p50_cwt": 97.31,
-          "p90_cwt": 113.88,
-          "p10_lb": 0.8075,
-          "p50_lb": 0.9731,
-          "p90_lb": 1.1388
+          "p10_cwt": 80.47,
+          "p50_cwt": 96.98,
+          "p90_cwt": 113.49,
+          "p10_lb": 0.8047,
+          "p50_lb": 0.9698,
+          "p90_lb": 1.1349
         },
         {
           "week": 26,
-          "p10_cwt": 77.23,
-          "p50_cwt": 95.28,
-          "p90_cwt": 113.32,
-          "p10_lb": 0.7723,
-          "p50_lb": 0.9528,
-          "p90_lb": 1.1332
+          "p10_cwt": 77.21,
+          "p50_cwt": 95.25,
+          "p90_cwt": 113.29,
+          "p10_lb": 0.7721,
+          "p50_lb": 0.9525,
+          "p90_lb": 1.1329
         }
       ],
       "priors": {
@@ -1824,36 +2118,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 101.57,
-          "p50_cwt": 106.86,
-          "p90_cwt": 112.15,
-          "p10_lb": 1.0157,
-          "p50_lb": 1.0686,
-          "p90_lb": 1.1215
+          "p10_cwt": 101.51,
+          "p50_cwt": 106.8,
+          "p90_cwt": 112.09,
+          "p10_lb": 1.0151,
+          "p50_lb": 1.068,
+          "p90_lb": 1.1209
         },
         "4w": {
-          "p10_cwt": 95.61,
-          "p50_cwt": 106.12,
-          "p90_cwt": 116.63,
-          "p10_lb": 0.9561,
-          "p50_lb": 1.0612,
-          "p90_lb": 1.1663
+          "p10_cwt": 95.4,
+          "p50_cwt": 105.88,
+          "p90_cwt": 116.37,
+          "p10_lb": 0.954,
+          "p50_lb": 1.0588,
+          "p90_lb": 1.1637
         },
         "13w": {
-          "p10_cwt": 80.63,
-          "p50_cwt": 98.16,
-          "p90_cwt": 115.68,
-          "p10_lb": 0.8063,
-          "p50_lb": 0.9816,
-          "p90_lb": 1.1568
+          "p10_cwt": 80.21,
+          "p50_cwt": 97.64,
+          "p90_cwt": 115.08,
+          "p10_lb": 0.8021,
+          "p50_lb": 0.9764,
+          "p90_lb": 1.1508
         },
         "26w": {
-          "p10_cwt": 66.0,
-          "p50_cwt": 88.3,
-          "p90_cwt": 110.6,
-          "p10_lb": 0.66,
-          "p50_lb": 0.883,
-          "p90_lb": 1.106
+          "p10_cwt": 65.98,
+          "p50_cwt": 88.27,
+          "p90_cwt": 110.57,
+          "p10_lb": 0.6598,
+          "p50_lb": 0.8827,
+          "p90_lb": 1.1057
         }
       },
       "curve": [
@@ -1868,57 +2162,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 95.61,
-          "p50_cwt": 106.12,
-          "p90_cwt": 116.63,
-          "p10_lb": 0.9561,
-          "p50_lb": 1.0612,
-          "p90_lb": 1.1663
+          "p10_cwt": 95.4,
+          "p50_cwt": 105.88,
+          "p90_cwt": 116.37,
+          "p10_lb": 0.954,
+          "p50_lb": 1.0588,
+          "p90_lb": 1.1637
         },
         {
           "week": 8,
-          "p10_cwt": 88.9,
-          "p50_cwt": 103.39,
-          "p90_cwt": 117.87,
-          "p10_lb": 0.889,
-          "p50_lb": 1.0339,
-          "p90_lb": 1.1787
+          "p10_cwt": 88.54,
+          "p50_cwt": 102.97,
+          "p90_cwt": 117.39,
+          "p10_lb": 0.8854,
+          "p50_lb": 1.0297,
+          "p90_lb": 1.1739
         },
         {
           "week": 13,
-          "p10_cwt": 80.63,
-          "p50_cwt": 98.16,
-          "p90_cwt": 115.68,
-          "p10_lb": 0.8063,
-          "p50_lb": 0.9816,
-          "p90_lb": 1.1568
+          "p10_cwt": 80.21,
+          "p50_cwt": 97.64,
+          "p90_cwt": 115.08,
+          "p10_lb": 0.8021,
+          "p50_lb": 0.9764,
+          "p90_lb": 1.1508
         },
         {
           "week": 17,
-          "p10_cwt": 74.58,
-          "p50_cwt": 93.72,
-          "p90_cwt": 112.86,
-          "p10_lb": 0.7458,
-          "p50_lb": 0.9372,
-          "p90_lb": 1.1286
+          "p10_cwt": 74.21,
+          "p50_cwt": 93.25,
+          "p90_cwt": 112.3,
+          "p10_lb": 0.7421,
+          "p50_lb": 0.9325,
+          "p90_lb": 1.123
         },
         {
           "week": 21,
-          "p10_cwt": 69.72,
-          "p50_cwt": 90.19,
-          "p90_cwt": 110.66,
-          "p10_lb": 0.6972,
-          "p50_lb": 0.9019,
-          "p90_lb": 1.1066
+          "p10_cwt": 69.48,
+          "p50_cwt": 89.88,
+          "p90_cwt": 110.28,
+          "p10_lb": 0.6948,
+          "p50_lb": 0.8988,
+          "p90_lb": 1.1028
         },
         {
           "week": 26,
-          "p10_cwt": 66.0,
-          "p50_cwt": 88.3,
-          "p90_cwt": 110.6,
-          "p10_lb": 0.66,
-          "p50_lb": 0.883,
-          "p90_lb": 1.106
+          "p10_cwt": 65.98,
+          "p50_cwt": 88.27,
+          "p90_cwt": 110.57,
+          "p10_lb": 0.6598,
+          "p50_lb": 0.8827,
+          "p90_lb": 1.1057
         }
       ],
       "priors": {
@@ -1931,8 +2225,8 @@
     "beef_knuckle": {
       "name": "Beef Knuckle Peeled 167A (100VL)",
       "source_report": "LM_XB405",
-      "anchor_cwt": 475.73,
-      "anchor_lb": 4.7573,
+      "anchor_cwt": 471.96,
+      "anchor_lb": 4.7196,
       "unit": "cwt",
       "history_points": 6,
       "prior_day_cwt": 466.86,
@@ -1948,7 +2242,7 @@
         null,
         488.67,
         490.65,
-        475.73
+        471.96
       ],
       "chart_hist_lb": [
         null,
@@ -1956,108 +2250,108 @@
         null,
         4.8867,
         4.9065,
-        4.7573
+        4.7196
       ],
-      "delta_day_cwt": 8.87,
-      "delta_day_pct": 1.9,
+      "delta_day_cwt": 5.1,
+      "delta_day_pct": 1.09,
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 463.13,
-          "p50_cwt": 474.89,
-          "p90_cwt": 486.65,
-          "p10_lb": 4.6313,
-          "p50_lb": 4.7489,
-          "p90_lb": 4.8665
+          "p10_cwt": 459.34,
+          "p50_cwt": 471.0,
+          "p90_cwt": 482.66,
+          "p10_lb": 4.5934,
+          "p50_lb": 4.71,
+          "p90_lb": 4.8266
         },
         "4w": {
-          "p10_cwt": 447.46,
-          "p50_cwt": 470.78,
-          "p90_cwt": 494.09,
-          "p10_lb": 4.4746,
-          "p50_lb": 4.7078,
-          "p90_lb": 4.9409
+          "p10_cwt": 443.51,
+          "p50_cwt": 466.62,
+          "p90_cwt": 489.73,
+          "p10_lb": 4.4351,
+          "p50_lb": 4.6662,
+          "p90_lb": 4.8973
         },
         "13w": {
-          "p10_cwt": 411.43,
-          "p50_cwt": 451.77,
-          "p90_cwt": 492.11,
-          "p10_lb": 4.1143,
-          "p50_lb": 4.5177,
-          "p90_lb": 4.9211
+          "p10_cwt": 407.7,
+          "p50_cwt": 447.66,
+          "p90_cwt": 487.63,
+          "p10_lb": 4.077,
+          "p50_lb": 4.4766,
+          "p90_lb": 4.8763
         },
         "26w": {
-          "p10_cwt": 391.21,
-          "p50_cwt": 447.75,
-          "p90_cwt": 504.28,
-          "p10_lb": 3.9121,
-          "p50_lb": 4.4775,
-          "p90_lb": 5.0428
+          "p10_cwt": 389.05,
+          "p50_cwt": 445.28,
+          "p90_cwt": 501.5,
+          "p10_lb": 3.8905,
+          "p50_lb": 4.4528,
+          "p90_lb": 5.015
         }
       },
       "curve": [
         {
           "week": 0,
-          "p10_cwt": 471.28,
-          "p50_cwt": 475.73,
-          "p90_cwt": 480.18,
-          "p10_lb": 4.7128,
-          "p50_lb": 4.7573,
-          "p90_lb": 4.8018
+          "p10_cwt": 467.54,
+          "p50_cwt": 471.96,
+          "p90_cwt": 476.38,
+          "p10_lb": 4.6754,
+          "p50_lb": 4.7196,
+          "p90_lb": 4.7638
         },
         {
           "week": 4,
-          "p10_cwt": 447.46,
-          "p50_cwt": 470.78,
-          "p90_cwt": 494.09,
-          "p10_lb": 4.4746,
-          "p50_lb": 4.7078,
-          "p90_lb": 4.9409
+          "p10_cwt": 443.51,
+          "p50_cwt": 466.62,
+          "p90_cwt": 489.73,
+          "p10_lb": 4.4351,
+          "p50_lb": 4.6662,
+          "p90_lb": 4.8973
         },
         {
           "week": 8,
-          "p10_cwt": 430.31,
-          "p50_cwt": 462.71,
-          "p90_cwt": 495.12,
-          "p10_lb": 4.3031,
-          "p50_lb": 4.6271,
-          "p90_lb": 4.9512
+          "p10_cwt": 426.31,
+          "p50_cwt": 458.41,
+          "p90_cwt": 490.52,
+          "p10_lb": 4.2631,
+          "p50_lb": 4.5841,
+          "p90_lb": 4.9052
         },
         {
           "week": 13,
-          "p10_cwt": 411.43,
-          "p50_cwt": 451.77,
-          "p90_cwt": 492.11,
-          "p10_lb": 4.1143,
-          "p50_lb": 4.5177,
-          "p90_lb": 4.9211
+          "p10_cwt": 407.7,
+          "p50_cwt": 447.66,
+          "p90_cwt": 487.63,
+          "p10_lb": 4.077,
+          "p50_lb": 4.4766,
+          "p90_lb": 4.8763
         },
         {
           "week": 17,
-          "p10_cwt": 399.86,
-          "p50_cwt": 445.33,
-          "p90_cwt": 490.8,
-          "p10_lb": 3.9986,
-          "p50_lb": 4.4533,
-          "p90_lb": 4.908
+          "p10_cwt": 396.55,
+          "p50_cwt": 441.64,
+          "p90_cwt": 486.73,
+          "p10_lb": 3.9655,
+          "p50_lb": 4.4164,
+          "p90_lb": 4.8673
         },
         {
           "week": 21,
-          "p10_cwt": 392.84,
-          "p50_cwt": 443.12,
-          "p90_cwt": 493.41,
-          "p10_lb": 3.9284,
-          "p50_lb": 4.4312,
-          "p90_lb": 4.9341
+          "p10_cwt": 390.05,
+          "p50_cwt": 439.98,
+          "p90_cwt": 489.91,
+          "p10_lb": 3.9005,
+          "p50_lb": 4.3998,
+          "p90_lb": 4.8991
         },
         {
           "week": 26,
-          "p10_cwt": 391.21,
-          "p50_cwt": 447.75,
-          "p90_cwt": 504.28,
-          "p10_lb": 3.9121,
-          "p50_lb": 4.4775,
-          "p90_lb": 5.0428
+          "p10_cwt": 389.05,
+          "p50_cwt": 445.28,
+          "p90_cwt": 501.5,
+          "p10_lb": 3.8905,
+          "p50_lb": 4.4528,
+          "p90_lb": 5.015
         }
       ],
       "priors": {
@@ -2102,36 +2396,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 123.76,
-          "p50_cwt": 131.07,
-          "p90_cwt": 138.37,
-          "p10_lb": 1.2376,
-          "p50_lb": 1.3107,
-          "p90_lb": 1.3837
+          "p10_cwt": 123.67,
+          "p50_cwt": 130.96,
+          "p90_cwt": 138.26,
+          "p10_lb": 1.2367,
+          "p50_lb": 1.3096,
+          "p90_lb": 1.3826
         },
         "4w": {
-          "p10_cwt": 114.48,
-          "p50_cwt": 128.83,
-          "p90_cwt": 143.19,
-          "p10_lb": 1.1448,
-          "p50_lb": 1.2883,
-          "p90_lb": 1.4319
+          "p10_cwt": 114.12,
+          "p50_cwt": 128.44,
+          "p90_cwt": 142.75,
+          "p10_lb": 1.1412,
+          "p50_lb": 1.2844,
+          "p90_lb": 1.4275
         },
         "13w": {
-          "p10_cwt": 90.64,
-          "p50_cwt": 113.43,
-          "p90_cwt": 136.22,
-          "p10_lb": 0.9064,
-          "p50_lb": 1.1343,
-          "p90_lb": 1.3622
+          "p10_cwt": 90.03,
+          "p50_cwt": 112.66,
+          "p90_cwt": 135.29,
+          "p10_lb": 0.9003,
+          "p50_lb": 1.1266,
+          "p90_lb": 1.3529
         },
         "26w": {
-          "p10_cwt": 71.01,
-          "p50_cwt": 99.2,
-          "p90_cwt": 127.38,
-          "p10_lb": 0.7101,
-          "p50_lb": 0.992,
-          "p90_lb": 1.2738
+          "p10_cwt": 71.17,
+          "p50_cwt": 99.42,
+          "p90_cwt": 127.66,
+          "p10_lb": 0.7117,
+          "p50_lb": 0.9942,
+          "p90_lb": 1.2766
         }
       },
       "curve": [
@@ -2146,57 +2440,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 114.48,
-          "p50_cwt": 128.83,
-          "p90_cwt": 143.19,
-          "p10_lb": 1.1448,
-          "p50_lb": 1.2883,
-          "p90_lb": 1.4319
+          "p10_cwt": 114.12,
+          "p50_cwt": 128.44,
+          "p90_cwt": 142.75,
+          "p10_lb": 1.1412,
+          "p50_lb": 1.2844,
+          "p90_lb": 1.4275
         },
         {
           "week": 8,
-          "p10_cwt": 103.67,
-          "p50_cwt": 123.07,
-          "p90_cwt": 142.46,
-          "p10_lb": 1.0367,
-          "p50_lb": 1.2307,
-          "p90_lb": 1.4246
+          "p10_cwt": 103.1,
+          "p50_cwt": 122.39,
+          "p90_cwt": 141.68,
+          "p10_lb": 1.031,
+          "p50_lb": 1.2239,
+          "p90_lb": 1.4168
         },
         {
           "week": 13,
-          "p10_cwt": 90.64,
-          "p50_cwt": 113.43,
-          "p90_cwt": 136.22,
-          "p10_lb": 0.9064,
-          "p50_lb": 1.1343,
-          "p90_lb": 1.3622
+          "p10_cwt": 90.03,
+          "p50_cwt": 112.66,
+          "p90_cwt": 135.29,
+          "p10_lb": 0.9003,
+          "p50_lb": 1.1266,
+          "p90_lb": 1.3529
         },
         {
           "week": 17,
-          "p10_cwt": 81.65,
-          "p50_cwt": 106.01,
-          "p90_cwt": 130.36,
-          "p10_lb": 0.8165,
-          "p50_lb": 1.0601,
-          "p90_lb": 1.3036
+          "p10_cwt": 81.17,
+          "p50_cwt": 105.38,
+          "p90_cwt": 129.59,
+          "p10_lb": 0.8117,
+          "p50_lb": 1.0538,
+          "p90_lb": 1.2959
         },
         {
           "week": 21,
-          "p10_cwt": 75.04,
-          "p50_cwt": 100.77,
-          "p90_cwt": 126.5,
-          "p10_lb": 0.7504,
-          "p50_lb": 1.0077,
-          "p90_lb": 1.265
+          "p10_cwt": 74.81,
+          "p50_cwt": 100.47,
+          "p90_cwt": 126.12,
+          "p10_lb": 0.7481,
+          "p50_lb": 1.0047,
+          "p90_lb": 1.2612
         },
         {
           "week": 26,
-          "p10_cwt": 71.01,
-          "p50_cwt": 99.2,
-          "p90_cwt": 127.38,
-          "p10_lb": 0.7101,
-          "p50_lb": 0.992,
-          "p90_lb": 1.2738
+          "p10_cwt": 71.17,
+          "p50_cwt": 99.42,
+          "p90_cwt": 127.66,
+          "p10_lb": 0.7117,
+          "p50_lb": 0.9942,
+          "p90_lb": 1.2766
         }
       ],
       "priors": {
@@ -2241,36 +2535,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 181.91,
-          "p50_cwt": 191.39,
-          "p90_cwt": 200.87,
-          "p10_lb": 1.8191,
-          "p50_lb": 1.9139,
-          "p90_lb": 2.0087
+          "p10_cwt": 181.79,
+          "p50_cwt": 191.26,
+          "p90_cwt": 200.73,
+          "p10_lb": 1.8179,
+          "p50_lb": 1.9126,
+          "p90_lb": 2.0073
         },
         "4w": {
-          "p10_cwt": 171.08,
-          "p50_cwt": 189.89,
-          "p90_cwt": 208.7,
-          "p10_lb": 1.7108,
-          "p50_lb": 1.8989,
-          "p90_lb": 2.087
+          "p10_cwt": 170.63,
+          "p50_cwt": 189.39,
+          "p90_cwt": 208.15,
+          "p10_lb": 1.7063,
+          "p50_lb": 1.8939,
+          "p90_lb": 2.0815
         },
         "13w": {
-          "p10_cwt": 142.31,
-          "p50_cwt": 173.25,
-          "p90_cwt": 204.18,
-          "p10_lb": 1.4231,
-          "p50_lb": 1.7325,
-          "p90_lb": 2.0418
+          "p10_cwt": 141.41,
+          "p50_cwt": 172.15,
+          "p90_cwt": 202.9,
+          "p10_lb": 1.4141,
+          "p50_lb": 1.7215,
+          "p90_lb": 2.029
         },
         "26w": {
-          "p10_cwt": 114.06,
-          "p50_cwt": 152.6,
-          "p90_cwt": 191.13,
-          "p10_lb": 1.1406,
-          "p50_lb": 1.526,
-          "p90_lb": 1.9113
+          "p10_cwt": 114.02,
+          "p50_cwt": 152.54,
+          "p90_cwt": 191.06,
+          "p10_lb": 1.1402,
+          "p50_lb": 1.5254,
+          "p90_lb": 1.9106
         }
       },
       "curve": [
@@ -2285,57 +2579,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 171.08,
-          "p50_cwt": 189.89,
-          "p90_cwt": 208.7,
-          "p10_lb": 1.7108,
-          "p50_lb": 1.8989,
-          "p90_lb": 2.087
+          "p10_cwt": 170.63,
+          "p50_cwt": 189.39,
+          "p90_cwt": 208.15,
+          "p10_lb": 1.7063,
+          "p50_lb": 1.8939,
+          "p90_lb": 2.0815
         },
         {
           "week": 8,
-          "p10_cwt": 158.4,
-          "p50_cwt": 184.2,
-          "p90_cwt": 210.01,
-          "p10_lb": 1.584,
-          "p50_lb": 1.842,
-          "p90_lb": 2.1001
+          "p10_cwt": 157.64,
+          "p50_cwt": 183.32,
+          "p90_cwt": 209.0,
+          "p10_lb": 1.5764,
+          "p50_lb": 1.8332,
+          "p90_lb": 2.09
         },
         {
           "week": 13,
-          "p10_cwt": 142.31,
-          "p50_cwt": 173.25,
-          "p90_cwt": 204.18,
-          "p10_lb": 1.4231,
-          "p50_lb": 1.7325,
-          "p90_lb": 2.0418
+          "p10_cwt": 141.41,
+          "p50_cwt": 172.15,
+          "p90_cwt": 202.9,
+          "p10_lb": 1.4141,
+          "p50_lb": 1.7215,
+          "p90_lb": 2.029
         },
         {
           "week": 17,
-          "p10_cwt": 130.45,
-          "p50_cwt": 163.93,
-          "p90_cwt": 197.4,
-          "p10_lb": 1.3045,
-          "p50_lb": 1.6393,
-          "p90_lb": 1.974
+          "p10_cwt": 129.67,
+          "p50_cwt": 162.94,
+          "p90_cwt": 196.22,
+          "p10_lb": 1.2967,
+          "p50_lb": 1.6294,
+          "p90_lb": 1.9622
         },
         {
           "week": 21,
-          "p10_cwt": 121.0,
-          "p50_cwt": 156.52,
-          "p90_cwt": 192.04,
-          "p10_lb": 1.21,
-          "p50_lb": 1.5652,
-          "p90_lb": 1.9204
+          "p10_cwt": 120.49,
+          "p50_cwt": 155.86,
+          "p90_cwt": 191.23,
+          "p10_lb": 1.2049,
+          "p50_lb": 1.5586,
+          "p90_lb": 1.9123
         },
         {
           "week": 26,
-          "p10_cwt": 114.06,
-          "p50_cwt": 152.6,
-          "p90_cwt": 191.13,
-          "p10_lb": 1.1406,
-          "p50_lb": 1.526,
-          "p90_lb": 1.9113
+          "p10_cwt": 114.02,
+          "p50_cwt": 152.54,
+          "p90_cwt": 191.06,
+          "p10_lb": 1.1402,
+          "p50_lb": 1.5254,
+          "p90_lb": 1.9106
         }
       ],
       "priors": {
@@ -2380,36 +2674,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 78.94,
-          "p50_cwt": 83.06,
-          "p90_cwt": 87.17,
-          "p10_lb": 0.7894,
-          "p50_lb": 0.8306,
-          "p90_lb": 0.8717
+          "p10_cwt": 78.89,
+          "p50_cwt": 83.0,
+          "p90_cwt": 87.11,
+          "p10_lb": 0.7889,
+          "p50_lb": 0.83,
+          "p90_lb": 0.8711
         },
         "4w": {
-          "p10_cwt": 74.24,
-          "p50_cwt": 82.41,
-          "p90_cwt": 90.57,
-          "p10_lb": 0.7424,
-          "p50_lb": 0.8241,
-          "p90_lb": 0.9057
+          "p10_cwt": 74.05,
+          "p50_cwt": 82.19,
+          "p90_cwt": 90.33,
+          "p10_lb": 0.7405,
+          "p50_lb": 0.8219,
+          "p90_lb": 0.9033
         },
         "13w": {
-          "p10_cwt": 61.76,
-          "p50_cwt": 75.18,
-          "p90_cwt": 88.61,
-          "p10_lb": 0.6176,
-          "p50_lb": 0.7518,
-          "p90_lb": 0.8861
+          "p10_cwt": 61.37,
+          "p50_cwt": 74.71,
+          "p90_cwt": 88.05,
+          "p10_lb": 0.6137,
+          "p50_lb": 0.7471,
+          "p90_lb": 0.8805
         },
         "26w": {
-          "p10_cwt": 49.5,
-          "p50_cwt": 66.22,
-          "p90_cwt": 82.95,
-          "p10_lb": 0.495,
-          "p50_lb": 0.6622,
-          "p90_lb": 0.8295
+          "p10_cwt": 49.48,
+          "p50_cwt": 66.2,
+          "p90_cwt": 82.92,
+          "p10_lb": 0.4948,
+          "p50_lb": 0.662,
+          "p90_lb": 0.8292
         }
       },
       "curve": [
@@ -2424,57 +2718,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 74.24,
-          "p50_cwt": 82.41,
-          "p90_cwt": 90.57,
-          "p10_lb": 0.7424,
-          "p50_lb": 0.8241,
-          "p90_lb": 0.9057
+          "p10_cwt": 74.05,
+          "p50_cwt": 82.19,
+          "p90_cwt": 90.33,
+          "p10_lb": 0.7405,
+          "p50_lb": 0.8219,
+          "p90_lb": 0.9033
         },
         {
           "week": 8,
-          "p10_cwt": 68.74,
-          "p50_cwt": 79.94,
-          "p90_cwt": 91.14,
-          "p10_lb": 0.6874,
-          "p50_lb": 0.7994,
-          "p90_lb": 0.9114
+          "p10_cwt": 68.41,
+          "p50_cwt": 79.56,
+          "p90_cwt": 90.7,
+          "p10_lb": 0.6841,
+          "p50_lb": 0.7956,
+          "p90_lb": 0.907
         },
         {
           "week": 13,
-          "p10_cwt": 61.76,
-          "p50_cwt": 75.18,
-          "p90_cwt": 88.61,
-          "p10_lb": 0.6176,
-          "p50_lb": 0.7518,
-          "p90_lb": 0.8861
+          "p10_cwt": 61.37,
+          "p50_cwt": 74.71,
+          "p90_cwt": 88.05,
+          "p10_lb": 0.6137,
+          "p50_lb": 0.7471,
+          "p90_lb": 0.8805
         },
         {
           "week": 17,
-          "p10_cwt": 56.61,
-          "p50_cwt": 71.14,
-          "p90_cwt": 85.67,
-          "p10_lb": 0.5661,
-          "p50_lb": 0.7114,
-          "p90_lb": 0.8567
+          "p10_cwt": 56.27,
+          "p50_cwt": 70.71,
+          "p90_cwt": 85.15,
+          "p10_lb": 0.5627,
+          "p50_lb": 0.7071,
+          "p90_lb": 0.8515
         },
         {
           "week": 21,
-          "p10_cwt": 52.51,
-          "p50_cwt": 67.93,
-          "p90_cwt": 83.34,
-          "p10_lb": 0.5251,
-          "p50_lb": 0.6793,
-          "p90_lb": 0.8334
+          "p10_cwt": 52.29,
+          "p50_cwt": 67.64,
+          "p90_cwt": 82.99,
+          "p10_lb": 0.5229,
+          "p50_lb": 0.6764,
+          "p90_lb": 0.8299
         },
         {
           "week": 26,
-          "p10_cwt": 49.5,
-          "p50_cwt": 66.22,
-          "p90_cwt": 82.95,
-          "p10_lb": 0.495,
-          "p50_lb": 0.6622,
-          "p90_lb": 0.8295
+          "p10_cwt": 49.48,
+          "p50_cwt": 66.2,
+          "p90_cwt": 82.92,
+          "p10_lb": 0.4948,
+          "p50_lb": 0.662,
+          "p90_lb": 0.8292
         }
       ],
       "priors": {
@@ -2519,36 +2813,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 56.47,
-          "p50_cwt": 59.81,
-          "p90_cwt": 63.14,
-          "p10_lb": 0.5647,
-          "p50_lb": 0.5981,
-          "p90_lb": 0.6314
+          "p10_cwt": 56.44,
+          "p50_cwt": 59.77,
+          "p90_cwt": 63.1,
+          "p10_lb": 0.5644,
+          "p50_lb": 0.5977,
+          "p90_lb": 0.631
         },
         "4w": {
-          "p10_cwt": 52.7,
-          "p50_cwt": 59.3,
-          "p90_cwt": 65.91,
-          "p10_lb": 0.527,
-          "p50_lb": 0.593,
-          "p90_lb": 0.6591
+          "p10_cwt": 52.56,
+          "p50_cwt": 59.15,
+          "p90_cwt": 65.74,
+          "p10_lb": 0.5256,
+          "p50_lb": 0.5915,
+          "p90_lb": 0.6574
         },
         "13w": {
-          "p10_cwt": 43.16,
-          "p50_cwt": 54.02,
-          "p90_cwt": 64.87,
-          "p10_lb": 0.4316,
-          "p50_lb": 0.5402,
-          "p90_lb": 0.6487
+          "p10_cwt": 42.89,
+          "p50_cwt": 53.68,
+          "p90_cwt": 64.46,
+          "p10_lb": 0.4289,
+          "p50_lb": 0.5368,
+          "p90_lb": 0.6446
         },
         "26w": {
-          "p10_cwt": 33.98,
-          "p50_cwt": 47.46,
-          "p90_cwt": 60.95,
-          "p10_lb": 0.3398,
-          "p50_lb": 0.4746,
-          "p90_lb": 0.6095
+          "p10_cwt": 33.97,
+          "p50_cwt": 47.44,
+          "p90_cwt": 60.92,
+          "p10_lb": 0.3397,
+          "p50_lb": 0.4744,
+          "p90_lb": 0.6092
         }
       },
       "curve": [
@@ -2563,57 +2857,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 52.7,
-          "p50_cwt": 59.3,
-          "p90_cwt": 65.91,
-          "p10_lb": 0.527,
-          "p50_lb": 0.593,
-          "p90_lb": 0.6591
+          "p10_cwt": 52.56,
+          "p50_cwt": 59.15,
+          "p90_cwt": 65.74,
+          "p10_lb": 0.5256,
+          "p50_lb": 0.5915,
+          "p90_lb": 0.6574
         },
         {
           "week": 8,
-          "p10_cwt": 48.43,
-          "p50_cwt": 57.49,
-          "p90_cwt": 66.55,
-          "p10_lb": 0.4843,
-          "p50_lb": 0.5749,
-          "p90_lb": 0.6655
+          "p10_cwt": 48.19,
+          "p50_cwt": 57.21,
+          "p90_cwt": 66.23,
+          "p10_lb": 0.4819,
+          "p50_lb": 0.5721,
+          "p90_lb": 0.6623
         },
         {
           "week": 13,
-          "p10_cwt": 43.16,
-          "p50_cwt": 54.02,
-          "p90_cwt": 64.87,
-          "p10_lb": 0.4316,
-          "p50_lb": 0.5402,
-          "p90_lb": 0.6487
+          "p10_cwt": 42.89,
+          "p50_cwt": 53.68,
+          "p90_cwt": 64.46,
+          "p10_lb": 0.4289,
+          "p50_lb": 0.5368,
+          "p90_lb": 0.6446
         },
         {
           "week": 17,
-          "p10_cwt": 39.34,
-          "p50_cwt": 51.07,
-          "p90_cwt": 62.8,
-          "p10_lb": 0.3934,
-          "p50_lb": 0.5107,
-          "p90_lb": 0.628
+          "p10_cwt": 39.1,
+          "p50_cwt": 50.77,
+          "p90_cwt": 62.43,
+          "p10_lb": 0.391,
+          "p50_lb": 0.5077,
+          "p90_lb": 0.6243
         },
         {
           "week": 21,
-          "p10_cwt": 36.29,
-          "p50_cwt": 48.73,
-          "p90_cwt": 61.17,
-          "p10_lb": 0.3629,
-          "p50_lb": 0.4873,
-          "p90_lb": 0.6117
+          "p10_cwt": 36.13,
+          "p50_cwt": 48.52,
+          "p90_cwt": 60.91,
+          "p10_lb": 0.3613,
+          "p50_lb": 0.4852,
+          "p90_lb": 0.6091
         },
         {
           "week": 26,
-          "p10_cwt": 33.98,
-          "p50_cwt": 47.46,
-          "p90_cwt": 60.95,
-          "p10_lb": 0.3398,
-          "p50_lb": 0.4746,
-          "p90_lb": 0.6095
+          "p10_cwt": 33.97,
+          "p50_cwt": 47.44,
+          "p90_cwt": 60.92,
+          "p10_lb": 0.3397,
+          "p50_lb": 0.4744,
+          "p90_lb": 0.6092
         }
       ],
       "priors": {
@@ -2658,36 +2952,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 22.96,
-          "p50_cwt": 24.47,
-          "p90_cwt": 25.99,
-          "p10_lb": 0.2296,
-          "p50_lb": 0.2447,
-          "p90_lb": 0.2599
+          "p10_cwt": 22.94,
+          "p50_cwt": 24.46,
+          "p90_cwt": 25.97,
+          "p10_lb": 0.2294,
+          "p50_lb": 0.2446,
+          "p90_lb": 0.2597
         },
         "4w": {
-          "p10_cwt": 21.28,
-          "p50_cwt": 24.29,
-          "p90_cwt": 27.3,
-          "p10_lb": 0.2128,
-          "p50_lb": 0.2429,
-          "p90_lb": 0.273
+          "p10_cwt": 21.23,
+          "p50_cwt": 24.24,
+          "p90_cwt": 27.24,
+          "p10_lb": 0.2123,
+          "p50_lb": 0.2424,
+          "p90_lb": 0.2724
         },
         "13w": {
-          "p10_cwt": 17.42,
-          "p50_cwt": 22.43,
-          "p90_cwt": 27.43,
-          "p10_lb": 0.1742,
-          "p50_lb": 0.2243,
-          "p90_lb": 0.2743
+          "p10_cwt": 17.33,
+          "p50_cwt": 22.31,
+          "p90_cwt": 27.29,
+          "p10_lb": 0.1733,
+          "p50_lb": 0.2231,
+          "p90_lb": 0.2729
         },
         "26w": {
           "p10_cwt": 13.77,
-          "p50_cwt": 20.13,
-          "p90_cwt": 26.48,
+          "p50_cwt": 20.12,
+          "p90_cwt": 26.47,
           "p10_lb": 0.1377,
-          "p50_lb": 0.2013,
-          "p90_lb": 0.2648
+          "p50_lb": 0.2012,
+          "p90_lb": 0.2647
         }
       },
       "curve": [
@@ -2702,57 +2996,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 21.28,
-          "p50_cwt": 24.29,
-          "p90_cwt": 27.3,
-          "p10_lb": 0.2128,
-          "p50_lb": 0.2429,
-          "p90_lb": 0.273
+          "p10_cwt": 21.23,
+          "p50_cwt": 24.24,
+          "p90_cwt": 27.24,
+          "p10_lb": 0.2123,
+          "p50_lb": 0.2424,
+          "p90_lb": 0.2724
         },
         {
           "week": 8,
-          "p10_cwt": 19.51,
-          "p50_cwt": 23.65,
-          "p90_cwt": 27.79,
-          "p10_lb": 0.1951,
-          "p50_lb": 0.2365,
-          "p90_lb": 0.2779
+          "p10_cwt": 19.43,
+          "p50_cwt": 23.55,
+          "p90_cwt": 27.67,
+          "p10_lb": 0.1943,
+          "p50_lb": 0.2355,
+          "p90_lb": 0.2767
         },
         {
           "week": 13,
-          "p10_cwt": 17.42,
-          "p50_cwt": 22.43,
-          "p90_cwt": 27.43,
-          "p10_lb": 0.1742,
-          "p50_lb": 0.2243,
-          "p90_lb": 0.2743
+          "p10_cwt": 17.33,
+          "p50_cwt": 22.31,
+          "p90_cwt": 27.29,
+          "p10_lb": 0.1733,
+          "p50_lb": 0.2231,
+          "p90_lb": 0.2729
         },
         {
           "week": 17,
-          "p10_cwt": 15.94,
-          "p50_cwt": 21.4,
-          "p90_cwt": 26.86,
-          "p10_lb": 0.1594,
-          "p50_lb": 0.214,
-          "p90_lb": 0.2686
+          "p10_cwt": 15.86,
+          "p50_cwt": 21.29,
+          "p90_cwt": 26.73,
+          "p10_lb": 0.1586,
+          "p50_lb": 0.2129,
+          "p90_lb": 0.2673
         },
         {
           "week": 21,
-          "p10_cwt": 14.74,
-          "p50_cwt": 20.58,
-          "p90_cwt": 26.41,
-          "p10_lb": 0.1474,
-          "p50_lb": 0.2058,
-          "p90_lb": 0.2641
+          "p10_cwt": 14.69,
+          "p50_cwt": 20.51,
+          "p90_cwt": 26.32,
+          "p10_lb": 0.1469,
+          "p50_lb": 0.2051,
+          "p90_lb": 0.2632
         },
         {
           "week": 26,
           "p10_cwt": 13.77,
-          "p50_cwt": 20.13,
-          "p90_cwt": 26.48,
+          "p50_cwt": 20.12,
+          "p90_cwt": 26.47,
           "p10_lb": 0.1377,
-          "p50_lb": 0.2013,
-          "p90_lb": 0.2648
+          "p50_lb": 0.2012,
+          "p90_lb": 0.2647
         }
       ],
       "priors": {
@@ -2797,36 +3091,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 324.49,
-          "p50_cwt": 339.19,
-          "p90_cwt": 353.89,
-          "p10_lb": 3.2449,
-          "p50_lb": 3.3919,
-          "p90_lb": 3.5389
+          "p10_cwt": 324.65,
+          "p50_cwt": 339.36,
+          "p90_cwt": 354.07,
+          "p10_lb": 3.2465,
+          "p50_lb": 3.3936,
+          "p90_lb": 3.5407
         },
         "4w": {
-          "p10_cwt": 333.9,
-          "p50_cwt": 365.59,
-          "p90_cwt": 397.27,
-          "p10_lb": 3.339,
-          "p50_lb": 3.6559,
-          "p90_lb": 3.9727
+          "p10_cwt": 334.21,
+          "p50_cwt": 365.93,
+          "p90_cwt": 397.64,
+          "p10_lb": 3.3421,
+          "p50_lb": 3.6593,
+          "p90_lb": 3.9764
         },
         "13w": {
-          "p10_cwt": 371.64,
-          "p50_cwt": 440.47,
-          "p90_cwt": 509.29,
-          "p10_lb": 3.7164,
-          "p50_lb": 4.4047,
-          "p90_lb": 5.0929
+          "p10_cwt": 369.98,
+          "p50_cwt": 438.5,
+          "p90_cwt": 507.01,
+          "p10_lb": 3.6998,
+          "p50_lb": 4.385,
+          "p90_lb": 5.0701
         },
         "26w": {
-          "p10_cwt": 334.22,
-          "p50_cwt": 429.02,
-          "p90_cwt": 523.82,
-          "p10_lb": 3.3422,
-          "p50_lb": 4.2902,
-          "p90_lb": 5.2382
+          "p10_cwt": 328.55,
+          "p50_cwt": 421.73,
+          "p90_cwt": 514.92,
+          "p10_lb": 3.2855,
+          "p50_lb": 4.2173,
+          "p90_lb": 5.1492
         }
       },
       "curve": [
@@ -2841,57 +3135,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 333.9,
-          "p50_cwt": 365.59,
-          "p90_cwt": 397.27,
-          "p10_lb": 3.339,
-          "p50_lb": 3.6559,
-          "p90_lb": 3.9727
+          "p10_cwt": 334.21,
+          "p50_cwt": 365.93,
+          "p90_cwt": 397.64,
+          "p10_lb": 3.3421,
+          "p50_lb": 3.6593,
+          "p90_lb": 3.9764
         },
         {
           "week": 8,
-          "p10_cwt": 353.28,
-          "p50_cwt": 402.63,
-          "p90_cwt": 451.98,
-          "p10_lb": 3.5328,
-          "p50_lb": 4.0263,
-          "p90_lb": 4.5198
+          "p10_cwt": 353.09,
+          "p50_cwt": 402.42,
+          "p90_cwt": 451.74,
+          "p10_lb": 3.5309,
+          "p50_lb": 4.0242,
+          "p90_lb": 4.5174
         },
         {
           "week": 13,
-          "p10_cwt": 371.64,
-          "p50_cwt": 440.47,
-          "p90_cwt": 509.29,
-          "p10_lb": 3.7164,
-          "p50_lb": 4.4047,
-          "p90_lb": 5.0929
+          "p10_cwt": 369.98,
+          "p50_cwt": 438.5,
+          "p90_cwt": 507.01,
+          "p10_lb": 3.6998,
+          "p50_lb": 4.385,
+          "p90_lb": 5.0701
         },
         {
           "week": 17,
-          "p10_cwt": 374.36,
-          "p50_cwt": 455.81,
-          "p90_cwt": 537.25,
-          "p10_lb": 3.7436,
-          "p50_lb": 4.5581,
-          "p90_lb": 5.3725
+          "p10_cwt": 371.21,
+          "p50_cwt": 451.96,
+          "p90_cwt": 532.72,
+          "p10_lb": 3.7121,
+          "p50_lb": 4.5196,
+          "p90_lb": 5.3272
         },
         {
           "week": 21,
-          "p10_cwt": 363.88,
-          "p50_cwt": 454.04,
-          "p90_cwt": 544.21,
-          "p10_lb": 3.6388,
-          "p50_lb": 4.5404,
-          "p90_lb": 5.4421
+          "p10_cwt": 359.33,
+          "p50_cwt": 448.37,
+          "p90_cwt": 537.41,
+          "p10_lb": 3.5933,
+          "p50_lb": 4.4837,
+          "p90_lb": 5.3741
         },
         {
           "week": 26,
-          "p10_cwt": 334.22,
-          "p50_cwt": 429.02,
-          "p90_cwt": 523.82,
-          "p10_lb": 3.3422,
-          "p50_lb": 4.2902,
-          "p90_lb": 5.2382
+          "p10_cwt": 328.55,
+          "p50_cwt": 421.73,
+          "p90_cwt": 514.92,
+          "p10_lb": 3.2855,
+          "p50_lb": 4.2173,
+          "p90_lb": 5.1492
         }
       ],
       "priors": {
@@ -2936,36 +3230,36 @@
       "model": "parametric_seasonal_drift_v1",
       "horizons": {
         "1w": {
-          "p10_cwt": 221.8,
-          "p50_cwt": 233.35,
-          "p90_cwt": 244.91,
-          "p10_lb": 2.218,
-          "p50_lb": 2.3335,
-          "p90_lb": 2.4491
+          "p10_cwt": 221.89,
+          "p50_cwt": 233.45,
+          "p90_cwt": 245.01,
+          "p10_lb": 2.2189,
+          "p50_lb": 2.3345,
+          "p90_lb": 2.4501
         },
         "4w": {
-          "p10_cwt": 222.19,
-          "p50_cwt": 246.62,
-          "p90_cwt": 271.05,
-          "p10_lb": 2.2219,
-          "p50_lb": 2.4662,
-          "p90_lb": 2.7105
+          "p10_cwt": 222.38,
+          "p50_cwt": 246.83,
+          "p90_cwt": 271.28,
+          "p10_lb": 2.2238,
+          "p50_lb": 2.4683,
+          "p90_lb": 2.7128
         },
         "13w": {
-          "p10_cwt": 233.42,
-          "p50_cwt": 284.17,
-          "p90_cwt": 334.91,
-          "p10_lb": 2.3342,
-          "p50_lb": 2.8417,
-          "p90_lb": 3.3491
+          "p10_cwt": 232.72,
+          "p50_cwt": 283.31,
+          "p90_cwt": 333.91,
+          "p10_lb": 2.3272,
+          "p50_lb": 2.8331,
+          "p90_lb": 3.3391
         },
         "26w": {
-          "p10_cwt": 208.08,
-          "p50_cwt": 278.38,
-          "p90_cwt": 348.68,
-          "p10_lb": 2.0808,
-          "p50_lb": 2.7838,
-          "p90_lb": 3.4868
+          "p10_cwt": 205.44,
+          "p50_cwt": 274.85,
+          "p90_cwt": 344.26,
+          "p10_lb": 2.0544,
+          "p50_lb": 2.7485,
+          "p90_lb": 3.4426
         }
       },
       "curve": [
@@ -2980,57 +3274,57 @@
         },
         {
           "week": 4,
-          "p10_cwt": 222.19,
-          "p50_cwt": 246.62,
-          "p90_cwt": 271.05,
-          "p10_lb": 2.2219,
-          "p50_lb": 2.4662,
-          "p90_lb": 2.7105
+          "p10_cwt": 222.38,
+          "p50_cwt": 246.83,
+          "p90_cwt": 271.28,
+          "p10_lb": 2.2238,
+          "p50_lb": 2.4683,
+          "p90_lb": 2.7128
         },
         {
           "week": 8,
-          "p10_cwt": 228.06,
-          "p50_cwt": 265.21,
-          "p90_cwt": 302.36,
-          "p10_lb": 2.2806,
-          "p50_lb": 2.6521,
-          "p90_lb": 3.0236
+          "p10_cwt": 228.04,
+          "p50_cwt": 265.19,
+          "p90_cwt": 302.34,
+          "p10_lb": 2.2804,
+          "p50_lb": 2.6519,
+          "p90_lb": 3.0234
         },
         {
           "week": 13,
-          "p10_cwt": 233.42,
-          "p50_cwt": 284.17,
-          "p90_cwt": 334.91,
-          "p10_lb": 2.3342,
-          "p50_lb": 2.8417,
-          "p90_lb": 3.3491
+          "p10_cwt": 232.72,
+          "p50_cwt": 283.31,
+          "p90_cwt": 333.91,
+          "p10_lb": 2.3272,
+          "p50_lb": 2.8331,
+          "p90_lb": 3.3391
         },
         {
           "week": 17,
-          "p10_cwt": 232.24,
-          "p50_cwt": 291.83,
-          "p90_cwt": 351.42,
-          "p10_lb": 2.3224,
-          "p50_lb": 2.9183,
-          "p90_lb": 3.5142
+          "p10_cwt": 230.83,
+          "p50_cwt": 290.06,
+          "p90_cwt": 349.29,
+          "p10_lb": 2.3083,
+          "p50_lb": 2.9006,
+          "p90_lb": 3.4929
         },
         {
           "week": 21,
-          "p10_cwt": 224.9,
-          "p50_cwt": 290.92,
-          "p90_cwt": 356.95,
-          "p10_lb": 2.249,
-          "p50_lb": 2.9092,
-          "p90_lb": 3.5695
+          "p10_cwt": 222.81,
+          "p50_cwt": 288.23,
+          "p90_cwt": 353.64,
+          "p10_lb": 2.2281,
+          "p50_lb": 2.8823,
+          "p90_lb": 3.5364
         },
         {
           "week": 26,
-          "p10_cwt": 208.08,
-          "p50_cwt": 278.38,
-          "p90_cwt": 348.68,
-          "p10_lb": 2.0808,
-          "p50_lb": 2.7838,
-          "p90_lb": 3.4868
+          "p10_cwt": 205.44,
+          "p50_cwt": 274.85,
+          "p90_cwt": 344.26,
+          "p10_lb": 2.0544,
+          "p50_lb": 2.7485,
+          "p90_lb": 3.4426
         }
       ],
       "priors": {
@@ -3041,8 +3335,5 @@
       }
     }
   },
-  "skipped": [
-    "85CL",
-    "65CL"
-  ]
+  "skipped": []
 }
